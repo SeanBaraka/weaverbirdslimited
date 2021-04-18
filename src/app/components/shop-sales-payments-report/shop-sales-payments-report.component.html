@@ -1,0 +1,33 @@
+<div class="app-container" style="padding: 0;">
+    <app-search-print-filter></app-search-print-filter>
+    <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">Date</div>
+          <div class="bold">Receipt No.</div>
+          <div class="bold">Mode of Payment</div>
+          <div class="bold">Sale Amount</div>
+          <div class="bold">Items</div>
+          <div>Actions</div>
+        </div>
+    </div>
+    <div *ngIf="salesPayments.length > 0;else noitems" class="card-list">
+        <div class="card-list-item data-set" *ngFor="let paymentMethod of salesPayments; let index = index">
+          <div><span class="">{{paymentMethod.date}}</span></div>
+          <div>{{paymentMethod.shop.name}}</div>
+          <div><span class="">{{paymentMethod.receiptNumber}}</span></div>
+          <div><span>Ksh. {{paymentMethod.saleAmount.toLocaleString()}}</span></div>
+          <div><span class="">Ksh. {{paymentMethod.balance.toLocaleString()}}</span></div>
+          <div class="smallest bold" (click)="reprintReceipt(paymentMethod.id)"><a>Reprint</a></div>
+        </div>
+    </div>
+    <div class="card-list">
+        <ng-template #noitems>
+            <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+              <div class="content placeholder-text">
+                <h5 class="opaque">Its empty here</h5>
+                <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no sales have been made yet.</p>
+              </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

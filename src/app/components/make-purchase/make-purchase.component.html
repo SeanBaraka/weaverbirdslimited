@@ -1,0 +1,88 @@
+<div class="container">
+  <h5 class="sub-heading mgy-1">Purchase Order Number: #234321</h5>
+  <div class="mgy-1">
+    <form [formGroup]="searchProduct">
+      <div *ngIf="!supplierAvailable">
+        <div class="form-controls mgy-1" formGroupName="supplier">
+          <div class="flexed mgy-1">
+            <div class="form-controls">
+              <label>Supplier Name</label>
+              <div class="form-input">
+                <input type="text" id="supplierName" formControlName="name" placeholder="EABL Wines">
+              </div>
+            </div>
+            <div class="form-controls mgl-1">
+              <label>Telephone</label>
+              <div class="form-input">
+                <input type="tel" id="supplierTelephone" formControlName="telephone" placeholder="+254 712345">
+              </div>
+            </div>
+          </div>
+          <div class="flexed mgy-1">
+            <div class="form-controls">
+              <label>Email Address</label>
+              <div class="form-input">
+                <input type="email" id="supplierName" formControlName="email" placeholder="sales@beannsofts.com">
+              </div>
+            </div>
+          </div>
+          <div class="proceed-button mgy-2">
+            <button class="button button-text" [disabled]="productForm.get('supplier').invalid" *ngIf="!supplierAvailable" (click)="proceedToAdd()">Continue</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-controls" *ngIf="supplierAvailable">
+        <input type="text" list="products" placeholder="Enter product code" id="code" formControlName="serialNumber" (change)="productSearch()">
+        <datalist id="products">
+          <option value="{{product.name}}" *ngFor="let product of availableProducts">{{product.name}}</option>
+        </datalist>
+      </div>
+    </form>
+  </div>
+  <div class="">
+    <div class="sale-items-container">
+      <div class="card-list mgy-2">
+        <div class="card-list-item table-header">
+          <div class="bold">Product</div>
+          <div class="bold">Qty</div>
+          <div class="bold">@</div>
+          <div class="bold">Total</div>
+        </div>
+      </div>
+      <div class="table-data" style="height: 230px;max-height: 230px">
+        <div class="card-list-item table-header padded-list-item" *ngFor="let purchaseItem of purchaseItems;let index">
+          <div class="item">{{purchaseItem.name}}</div>
+          <div class="item" contenteditable="true">
+            <input (input)="changeQuantity(purchaseItem.id,$event.target.value)" [class.hidden]="!changingQuantity" class="sm-input shorter" name="changeQty" [value]="purchaseItem.quantity">
+            <span [class.hidden]="changingQuantity">{{purchaseItem.quantity}}</span>
+          </div>
+          <div class="item" contenteditable="true">
+            <input [class.hidden]="!changingPrice" [value]="purchaseItem.buyingPrice" class="sm-input shorter" (input)="changePrice(purchaseItem.id, $event.target.value)">
+            <span [class.hidden]="changingPrice">{{purchaseItem.buyingPrice}}</span>
+          </div>
+          <div class="item">{{purchaseItem.buyingPrice * purchaseItem.quantity}}</div>
+          <div class="item remove last" (click)="removeItemByIndex(index)">
+            <img src="assets/minus.svg" width="16" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="sub-totals">
+        <table style="text-align: left">
+          <tbody>
+          <tr>
+            <th class="small" style="font-size: 15px;">TOTAL</th>
+            <td class="small">:</td>
+            <td><h4 style="font-size: 24px;">Ksh. {{purchaseTotal}}</h4></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mgy-2">
+        <div class="flexed flexed-column mgy-1">
+          <button class="button button-tertiary" (click)="finalizePurchase()" [class.disabled]="purchaseForm.invalid" mat-dialog-close="true">Make Purchase Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

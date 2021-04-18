@@ -1,0 +1,75 @@
+<div class="body-container">
+    <h3 class="main-heading">System Configuration and settings</h3>
+
+    <div class="settings-container">
+        <h4 class="mgy-2">Server Configuration</h4>
+        <div class="server-config-cont" style="width: 50%;min-width:500px">
+            <div class="flexed flexed-justify-between flexed-align-center mgy-1">
+                <h5 class="smallest">Server Name</h5>
+                <div class="valued mgl-2">
+                    <p class="smallest">Weaverbirds Supplies Limited</p>
+                </div>
+            </div>
+            <div class="flexed flexed-justify-between flexed-align-center mgy-1">
+                <h5 class="smallest">Server url</h5>
+                <div class="valued mgl-2 last">
+                    <p class="smallest">{{serverUrl}}</p>
+                </div>
+            </div>
+            <div class="flexed flexed-justify-between flexed-align-center mgy-1">
+                <h6 class="smallest">Application Network Status</h6>
+                <div class="valued mgl-2" style="justify-self: end;">
+                    <p class="smallest">{{connectionStatus}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="alerts-cont" style="width: 50%;min-width:540px">
+            <h4 class="mgy-2">Alerts and Notifications</h4>
+            <div class="flexed flexed-justify-between flexed-align-center">
+                <div class="smallest">
+                    Shop Open/Close Alerts
+                </div>
+                <div class="mgl-2">
+                    <div class="weaver-switch">
+                        <input type="checkbox" id="switch-open-shop">
+                        <label class="switch-label smallest" for="switch-open-shop">Turn On</label>
+                    </div>
+                </div>
+            </div>
+            <div class="flexed flexed-justify-between flexed-align-center">
+                <div class="smallest">
+                    Periodic Sales Alerts
+                </div>
+                <div class="mgl-2">
+                    <div class="weaver-switch">
+                        <input type="checkbox" id="switch-periodic">
+                        <label class="switch-label smallest" for="switch-periodic">Turn On</label>
+                    </div>
+                </div>
+            </div>
+            <div class="flexed flexed-justify-between flexed-align-center">
+                <div class="smallest">
+                    Vehicle Dispatch Alerts
+                </div>
+                <div class="mgl-2">
+                    <div class="weaver-switch">
+                        <input type="checkbox" id="switch-vehicle-dispatch">
+                        <label class="switch-label smallest" for="switch-vehicle-dispatch">Turn On</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-manage" style="width: 50%; max-width: 540px">
+            <h4 class="mgy-2">System User Management</h4>
+            <div class="flexed flexed-justify-between flexed-align-center">
+                <div class="smallest">
+                    Create User
+                </div>
+                <div class="mgl-2">
+                    <button class="button button-text text-info bordered" (click)="addUserDialog()">Add new user</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

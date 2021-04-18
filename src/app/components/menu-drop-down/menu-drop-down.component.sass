@@ -1,0 +1,59 @@
+.menu-drop
+    width: 320px
+    height: 0px
+    position: fixed
+    z-index: 20
+    top: 2em
+    .trigger
+        position: relative
+        width: auto
+        max-width: 30px
+        margin: 0
+        cursor: pointer
+        &:hover, &:active , &:active, &.active ~ .menu-content
+            display: block
+        &.active ~ .menu-content
+            height: 350px
+            
+    .menu-content
+        display: none
+        width: 100%
+        max-height: 450px
+        height: 75%
+        position: relative
+        top:  1em
+        right: 20.5em
+        padding: .5em 1em
+        box-sizing: border-box
+        background: #fff
+        box-shadow: 0 0em 2.5em rgba(0,0,0,.2)
+        border-radius: 20px 0 20px 20px
+        z-index: 2000
+        .grid 
+            width: 200px
+            gap: 2.5em
+            grid-template-columns: 60px 60px 60px
+            place-items: center
+            &-item
+                width: 20px
+                &.card-round
+                    width: 20px
+                    border-radius: 15px
+                    height: 20px
+                    position: relative
+                    padding: 1.2em
+                    text-align: center
+                    h5 
+                        font-size: 1.5em
+                        text-align: center
+                    .desc 
+                        position: relative
+                        bottom: -1em
+                        color: #000
+                        left: -3.5em
+                        width: 100px
+                        font-weight: 700
+            &-centered
+                width: 90%
+                margin: 2em auto
+                max-width: 740px

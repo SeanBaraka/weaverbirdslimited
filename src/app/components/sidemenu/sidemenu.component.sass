@@ -1,0 +1,51 @@
+@import './src/variables'
+
+.nav-container
+  margin: auto 0
+  height: 96vh
+  .nav-menu
+    h5
+      font-size: 10px
+      color: #888888
+      font-weight: 600
+      margin: 2em 0 0
+    &-heading
+      font-size: 0.825em
+      margin: 1.25em 0
+    &-links
+      list-style-type: none
+      &-item
+        margin: .95em 1.5em
+        padding: .5em 0
+        font-size: 12px
+        font-weight: 600
+        &.active
+          background: $blue-violet
+          color: #ffffff
+          border-top-right-radius: 20px
+          border-bottom-right-radius: 20px
+          padding: .5em 2.5em
+          margin: .95em -2.5em
+          width: 85%
+
+          img
+            filter: invert(100%)
+        a
+          text-decoration: none
+          color: inherit
+
+  .nav-footer
+      font-size: 11px
+      font-weight: 500
+      position: absolute
+      bottom: 0
+      .nav-menu-links-item 
+        margin: .95em 0
+
+details 
+  summary 
+    font-weight: 600
+    color: #888888
+    &:active,&::selection,&:enabled
+      outline: none
+      border: none

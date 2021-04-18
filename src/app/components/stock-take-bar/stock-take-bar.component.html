@@ -1,0 +1,114 @@
+<div class="body-container">
+    <h3 class="main-heading">Stock Management</h3>
+    <div class="padded">
+        <div class="text">
+           Search for the shop you wish to operate
+        </div>
+        <form [formGroup]="shopSearch" class="inline" (ngSubmit)="getShop()">
+            <div class="form-controls flexed">
+                <div class="form-input">
+                    <input type="text" list="shops" formControlName="shopName" placeholder="Enter shop name here">
+                    <datalist id="shops">
+                      <option value="{{shop.name}}" *ngFor="let shop of shops"></option>
+                    </datalist>
+                </div>
+                <div class="form-button">
+                    <button class="btn search">
+                        <span>Search</span>
+                        <span>
+                            <img src="assets/loupe.svg" width="10" alt="">
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="shop-details-container">
+      <table>
+        <tbody>
+        <tr>
+          <th class="small">Selected Shop</th>
+          <td class="small">:</td>
+          <td class="smallest" *ngIf="shopName;else no_shop">
+            <span>{{shopName}}</span>
+            <span class="mgl-1"><img src="assets/information.svg" alt="" width="12"></span>
+            <span class="smallest" [class.text-success]="shopOpen" [class.text-danger]="!shopOpen" style="margin-left: .5em" *ngIf="shopOpen;else notOpen">
+              shop is open
+            </span>
+            <ng-template #notOpen>shop is closed</ng-template>
+          </td>
+          <ng-template #no_shop> N/A </ng-template>
+        </tr>
+        <tr>
+          <th class="small">Opening Stock</th>
+          <td class="small">:</td>
+          <td class="smallest" *ngIf="openingStock;else no_stock">{{openingStock}} - items, <span class="bold">Ksh. {{amount.toLocaleString()}}</span></td>
+          <ng-template #no_stock>N/A</ng-template>
+        </tr>
+        <tr>
+          <th class="small">Added Stock</th>
+          <td class="small">:</td>
+          <td class="smallest"><span class="bold" *ngIf="openingStock;else no_stock">Ksh. {{(getStockTotalAmount() - amount).toLocaleString()}}</span>
+            <div *ngIf="shopOpen" (click)="openShopModal()" style="cursor: pointer;display: inline-block;margin-left: 1em;text-decoration: underline;color: #540d6e">
+              <small class="small" style="font-size: 11px!important;">Receive New Stock</small>
+              <img src="assets/edit.svg" width="12" alt="" class="mgl-1">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="small">Closing Stock</th>
+          <td class="small">:</td>
+          <td class="smallest">pending</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Shop action buttons -->
+    <div class="action-buttons">
+        <div class="flexed">
+            <button [class.disabled]="!shopClosed" class="button-primary" (click)="openShopModal()">
+                <span>Open Shop</span>
+                <span><img src="assets/open.svg" width="15" alt=""></span>
+            </button>
+            <button [class.disabled]="!shopOpen" class="button-secondary" (click)="closeShopModal()">
+                <span>Close Shop</span>
+                <span><img src="assets/closed.svg" width="15" alt=""></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Items in stock -->
+    <div class="stock-items-container">
+      <h5 class="sub-heading">Opening Stock Information summary</h5>
+      <table class="app-table" id="scroll-table" *ngIf="stockProducts">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="table-data">
+        <div class="table-data-item flexed" *ngFor="let prod of stockProducts">
+          <div class="item">{{prod.productName}}</div>
+          <div class="item">{{prod.unitPrice}}</div>
+          <div class="item">{{prod.openingUnits + prod.addedUnits}}</div>
+          <div class="item">{{(prod.unitPrice * (prod.openingUnits + prod.addedUnits)).toLocaleString()}}</div>
+        </div>
+      </div>
+      <table class="app-table">
+        <tbody>
+          <tr>
+            <td></td>
+            <th>Total</th>
+            <th>{{getStockTotal().toLocaleString()}}</th>
+            <th>Ksh. {{getStockTotalAmount().toLocaleString()}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

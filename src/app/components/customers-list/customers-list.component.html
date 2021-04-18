@@ -1,0 +1,44 @@
+<div class="app-container">
+  <h3 class="main-heading">Weaverbirds / Customers</h3>
+
+  <div class="body-container">
+    <div class="search-add-customer">
+      <div class="flexed flexed-end" style="margin: 1rem 0">
+        <div class="search-input">
+          <label for="search-field" style="font-size: 13px">Search</label>
+          <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterSalesControl($event.target.value)">
+        </div>
+        <div class="export-options mgl-2">
+          <button class="button button-tertiary rounded button-img" (click)="addCustomerModalOpen()">
+            <span>Add Customer</span>
+          </button>
+          <button class="button button-text button-img mgl-2">
+        <span>
+          <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
+        </span>
+            <span>Print List</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="customer-list">
+      <div class="customer-record bold smallest">
+        <span class="smallest">#</span>
+        <span class="smallest">Customer Name</span>
+        <span class="smallest">Location</span>
+        <span class="smallest">Telephone</span>
+        <span class="smallest">Sale Records</span>
+      </div>
+
+      <div class="customer-record" *ngFor="let customer of customers">
+        <span class="smallest">{{customer.id}}</span>
+        <span class="smallest">{{customer.name}}</span>
+        <span class="smallest">{{customer.location}}</span>
+        <span class="smallest">{{customer.telephone}}</span>
+        <span class="smallest">{{customer.saleRecords}}</span>
+      </div>
+
+    </div>
+  </div>
+</div>

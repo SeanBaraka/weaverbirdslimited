@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="form-container mgy-1">
+    <div *ngIf="successMessage">
+      <div class="alert alert-success">
+        {{successMessage}}
+      </div>
+    </div>
+    <div class="product-add-form">
+      <form [formGroup]="productForm" (submit)="addProduct($event)" class="form">
+        <div *ngIf="!supplierAvailable">
+          <div class="form-controls mgy-1" formGroupName="supplier">
+            <div class="flexed mgy-1">
+              <div class="form-controls">
+                <label>Supplier Name</label>
+                <div class="form-input">
+                  <input type="text" id="supplierName" formControlName="name" placeholder="EABL Wines">
+                </div>
+              </div>
+              <div class="form-controls mgl-1">
+                <label>Telephone</label>
+                <div class="form-input">
+                  <input type="tel" id="supplierTelephone" formControlName="telephone" placeholder="+254 712345">
+                </div>
+              </div>
+            </div>
+            <div class="flexed mgy-1">
+              <div class="form-controls">
+                <label>Email Address</label>
+                <div class="form-input">
+                  <input type="email" id="supplierName" formControlName="email" placeholder="sales@beannsofts.com">
+                </div>
+              </div>
+            </div>
+            <div class="proceed-button mgy-2">
+              <button class="button button-text" [disabled]="productForm.get('supplier').invalid" *ngIf="!supplierAvailable" (click)="proceedToAdd()">Continue</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-controls mgy-1" *ngIf="supplierAvailable">
+          <h4 class="sub-heading">Add Product to Inventory</h4>
+          <div class="flexed mgy-1">
+            <div class="form-controls">
+              <label for="serial">Serial Number</label>
+              <div class="form-input">
+                <input type="text" id="serial" #serialNumber formControlName="serialNumber" placeholder="612345432">
+              </div>
+            </div>
+            <div class="form-controls mgl-1">
+              <label for="pname">Product Name</label>
+              <div class="form-input">
+                <input type="text" id="pname" formControlName="name" placeholder="Trace 200ml">
+              </div>
+            </div>
+          </div>
+          <div class="flexed mgy-1" style="width: 50%">
+            <div class="form-input">
+               <label for="costprice">Cost Price</label>
+               <input type="text" class="short" formControlName="costPrice" placeholder="345" id="costprice">
+            </div>
+            <div class="form-input mgl-1">
+               <label for="minPrice">Min Price</label>
+               <input type="text" class="short" formControlName="minPrice" placeholder="345" id="minPrice">
+            </div>
+            <div class="form-input mgl-1">
+               <label for="maxPrice">Max Price</label>
+               <input type="text" class="short" formControlName="maxPrice" placeholder="380" id="maxPrice">
+            </div>
+            <div class="form-input mgl-1">
+               <label for="sellingPrice">Selling Price</label>
+               <input type="text" class="short" formControlName="sellingPrice" placeholder="360" id="sellingPrice">
+            </div>
+            <div class="form-input mgl-1">
+               <label for="qty">Quantity</label>
+                <input type="number" min="1" class="shorter" formControlName="qty" placeholder="2" id="qty">
+            </div>
+          </div>
+          <div class="form-button mgy-2 flexed">
+            <button class="btn button-primary" [class.disabled]="productForm.invalid">
+              <div class="flexed">
+                <span>Add Product</span>
+                <span>
+                  <img src="assets/add.svg" width="16" alt="">
+                </span>
+              </div>
+            </button>
+            <button class="btn button-text mgl-1" mat-dialog-close="true">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

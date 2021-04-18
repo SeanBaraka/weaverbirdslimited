@@ -1,0 +1,56 @@
+<div class="main-grid">
+    <div class="img-bg">
+      <img src="assets/bg.svg" alt="">
+    </div>
+    <div class="container" *ngIf="!loading && !errorConnecting">
+      <div class="mgy-1">
+        <img src="assets/Logo.png" width="150" alt="">
+      </div>
+      <div class="form mgy-2">
+        <form [formGroup]="authLogin" class="form" (submit)="loginAttempt()">
+          <div class="flexed input-icon-box flexed-align-center">
+            <span class="icon">
+              <img src="assets/avatar.svg" width="25" alt="">
+            </span>
+            <div class="input-box mgl-1">
+              <input type="text" formControlName="username" placeholder="Username / Email" id="username">
+            </div>
+          </div>
+          <div class="flexed input-icon-box mgy-2 flexed-align-center">
+            <span class="icon">
+              <img src="assets/padlock.svg" width="25" alt="">
+            </span>
+            <div class="input-box mgl-1">
+              <input type="password" formControlName="password" placeholder="Your password" id="password">
+            </div>
+          </div>
+          <div class="mgy-1 smallest text-danger center" *ngIf="errorLogin">
+            <span>{{errorLogin.error}}</span>
+          </div>
+          <div class="form-input mgy-2 center">
+            <button class="button-sec short button-small rounded">Sign in</button>
+          </div>
+          <div class="form-input mgy-2 center" *ngIf="adminPresent == false">
+            <a class="button button-text smallest" [routerLink]="['/auth/register']">Create Admin</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container" *ngIf="loading">
+      <div class="grid">
+        <div class="loader">
+          <img src="assets/loader.svg" width="70" alt="">
+          <h4 class="opaque">Loading... please wait</h4>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngIf="errorConnecting">
+      <div class="grid grid-center">
+        <div class="error-connecting" style="text-align: center;">
+          <img src="assets/warning.svg" width="40" style="filter: invert(50%)" alt="">
+          <h4 class="opaque">There seems to be a problem connecting to the server</h4>
+          <button class="mgy-1 button button-text text-danger" (click)="retryEntry()">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>

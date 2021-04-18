@@ -1,0 +1,457 @@
+// global font Montserrat. Thanks google fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap')
+
+@import "variables"
+
+::-webkit-scrollbar
+  width: 2px
+  &-thumb
+    background: darkgrey
+    border-radius: 100px
+*
+  margin: 0
+  padding: 0
+  border-box: box-sizing
+
+body
+  font-family: 'Montserrat', sans-serif
+  color: $primary-color
+  max-width: 1060px !important
+
+.app-container
+  width: 95%
+  margin: 0 auto
+  max-width: 1000px
+  overflow: hidden
+
+.flexed
+  display: flex
+  &-column
+    flex-flow: column
+    &-start
+      align-items: flex-start
+  &-justify-between
+    justify-content: space-between
+  &-inline
+    flex-flow: row
+    img
+      margin-right: 1em
+  &-align-center
+    align-items: center
+  &-end
+    justify-content: end
+
+a.button-text
+  text-decoration: none
+  color: inherit
+  font-weight: 700
+
+button
+  font-family: inherit
+  border: 1px solid $inactive-color
+  padding: .7em 1.5em
+  cursor: pointer
+  max-width: 220px
+  display: inline-block
+  &:disabled
+    cursor: not-allowed
+    opacity: 50% !important
+    background-color: #4e4e4e !important
+    color: initial !important
+  &.button-sec
+    max-width: 300px
+    width: 150px
+  &.button-primary,&.button-secondary,&.button-text,&.button-info,&.button-tertiary,&.button-sec
+    //background: $success-color
+    font-weight: 700
+    color: #ffffff
+    padding: .78em 1.8em
+    border: none
+    text-decoration: none
+    &:focus
+      outline: none
+    span
+      display: inline-block
+      margin: 0 .5em
+      img
+        filter: invert(100)
+  &.button-primary
+    background: $success-color
+  &.button-secondary
+    background: $danger-color
+  &.button-info
+    background: $tufts-blue
+    color: $dark-color
+  &.button-tertiary
+    background-color: $blue-violet
+  &.button-image
+    width: 25px
+    height: 25px
+    padding: 3px
+    background: none
+    border: none
+    &:hover
+      background: #a9a9a950
+      border-radius: 100%
+  &.button-sec
+    background: $active-color
+  &.rounded
+    border-radius: 7px
+
+  &.button-text
+    background: transparent
+    color: $primary-color
+    font-weight: 600
+    &.text-success
+      color: $success-color
+    &.text-danger
+      color: $danger-color
+    &.text-info
+      color: $tufts-blue
+    &.bordered
+      border: 1px solid $tufts-blue
+      border-radius: 50px
+
+
+  &.disabled
+    background: $inactive-color
+    color: $primary-color
+    cursor: not-allowed
+    pointer-events: none
+    border: none
+    opacity: 25%
+    span
+      img
+        filter: none
+
+.opaque
+  opacity: 45%
+
+.placeholder
+  padding: 1em
+  text-align: center
+  opacity: 45%
+  pointer-events: none
+  img
+    filter: invert(50%)
+
+.small
+  font-size: 90%
+.smallest
+  font-size: 75%
+
+.mgl-7
+  margin-left: 5em
+.mgl-1
+  margin-left: 1em
+.mgl-2
+  margin: 0 2em
+
+.mgl-x
+  margin: 0 .5em 0 5em
+.mgy-1
+  margin: .5em 0
+.mgy-2
+  margin: 1.2em 0
+
+.center
+  text-align: center
+
+.text
+  &-success
+    color: $success-color
+  &-danger
+    color: $danger-color
+
+//application table layout
+.app-table
+  border-collapse: collapse
+  margin-top: .75em
+  font-size: 12px
+  width: 100%
+  position: relative
+  @media print
+    font-size: 10px
+  text-align: left
+  th,td
+    padding: .75em 1.5em
+    width: 130px
+    @media print
+      border: none
+      padding: .5em 2em
+    &.bordered
+      border: 1px solid $primary-color
+      font-weight: 700
+      font-style: italic
+      text-align: right
+
+  thead
+    background: #d7d7d7
+    @media print
+      background: none !important
+    th
+      font-size: 12px
+      padding: 1em 1.5em
+
+// Headings
+.main-heading
+  position: fixed
+  top: 0
+  padding: 1.35em 0
+  background: #ffffff
+  width: 100%
+  margin-left: -1.5em
+
+// card layout
+.card
+  padding: 1em 2em
+  border-radius: .5em
+  background: #ffffff
+  box-shadow: 0 0 .25em rgba(0,0,0,.15)
+  &-flat
+    box-shadow: none
+  &.actionable
+    cursor: pointer
+    &:hover
+      box-shadow: 0 0 .5em rgba(0,0,0,.15)
+  &-color
+    border-radius: 0
+    padding: 1.5em
+    &-pri
+      background: $blue-violet
+      color: #ffffff
+    &-main
+      background: $active-color
+      color: #ffffff
+    &-sec
+      background: $blanched-almond
+      color: $dark-color
+      box-shadow: none
+    .desc
+      font-size: 12px
+
+// card list component
+.card-list
+  font-size: 12px
+  padding: .5em
+  &-item
+    background: #ffffff
+    box-shadow: 0 0 1em rgba(0,0,0, .1)
+    padding: 1.4em
+    border-radius: 10px
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(95px, 1fr))
+    align-items: center
+    margin: 0 0 1.5em
+    gap: 1em
+    &.table-header
+      box-shadow: none
+      margin: 0
+      padding: 0 1.4em
+    .last
+      justify-self: end
+      padding: 0 3em
+    .small
+      max-width: 50px
+    a
+      cursor: pointer
+      text-decoration: none
+      color: $blue-violet
+      font-weight: 700
+      padding: .5em 2em
+      text-transform: uppercase
+      font-size: 9px
+
+// Grid layout
+.grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+  gap: 1em
+  &-center
+    place-items: center
+  &-column
+    grid-template-columns: auto
+
+// Custom table data Idea from binance
+.table-data
+  width: 100%
+  position: relative
+  font-size: 12px
+  max-height: 160px
+  overflow: auto
+  overflow-x: hidden
+  &-item
+    width: 100%
+    justify-content: space-between
+    padding: .65em 1.5em
+    .item
+      width: 25%
+      text-align: left
+
+// Width layout settings
+.wd
+  &.sm
+    width: 5px
+    display: inline-block
+  &-20
+    width: 20px !important
+  &-75
+    width: 75px !important
+
+// Main body layout settings
+.body-container
+  padding: 3em .5em 1em
+  width: 100%
+
+.bold
+  font-weight: 700
+
+// application forms general styles
+.form
+  label
+    font-weight: 700
+    font-size: 12px
+    display: block
+    margin: .25em 0
+form
+  &.inline
+    display: inline
+
+.input-box
+  background: #ffffff50
+  box-shadow: 0 0 1em rgba(0 , 0, 0, 0.15)
+  padding: .5em
+  border-radius: 10px
+  input, input::selection, input:active, input:focus
+    border: none
+    outline: none
+    background: none
+  input[type='password']
+    -webkit-text-security: disc
+
+
+input
+  font-family: inherit
+  padding: .7em 1.5em
+  border: 1px solid $inactive-color
+  border-radius: 0
+  &:focus
+    outline: none
+  &.short
+    width: 70px
+  &.shorter
+    width: 55px
+
+// fieldset and legends, VIKINGS..
+fieldset
+  border: .5px solid #727272
+  legend
+    padding: 0 .5em
+
+
+// modal global settings
+.dialog-footer
+  width: 45%
+
+// by default hide the logo
+#printLogo
+  display: none
+  @media print
+    display: block
+
+
+
+// Doing something with the span
+span
+  &.block
+    display: block
+    margin: 3px 0
+
+
+
+// Alert..! Alerts are cool
+.alert
+  padding: 1em
+  border-radius: 3px
+  pointer-events: none
+  user-focus: none
+  font-size: 12px
+  &-success
+    background-color: #426A5A70
+    color: $dark-color
+    font-weight: 500
+
+.padded-list-item
+  padding: 0.5em 0 !important
+
+
+
+// custom switch button
+.weaver-switch
+    display: block
+    position: relative
+    line-height: 2em
+    input[type="checkbox"]
+      position: absolute
+      opacity: 0
+      width: 0
+      height: 0
+      &:checked~.switch-label::after
+        left: calc( 2.75rem - 0.8rem - 0.275rem )
+      &:checked~.switch-label::before
+        background-color: #540d6e
+
+    .switch-label
+      display: inline-block
+      cursor: pointer
+      user-select: none
+      padding-left: calc(3.2rem + 0.8rem)
+      margin-bottom: 0
+      &::before, &::after
+        position: absolute
+        content: ''
+        top: 0.3rem
+        left: 0
+        display: inline-block
+      &::before
+        width: 2.75rem
+        height: 1.25rem
+        border-radius: 2rem
+        background-color: #cccccc
+      &::after
+        width: 12px
+        height: 12px
+        background-color: #ececec
+        border-radius: 100%
+        top: .5275rem
+        left: .4rem
+        transition: all .35s
+
+.app-container
+  padding: 1em 1.75em
+
+
+.user-logged-in
+  position: fixed
+  right: 2em
+  font-size: 13px
+  z-index: 2
+  width: 350px
+  background: #ffffff
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.placeholder-text
+  opacity: .95
+  pointer-events: none
+  user-select: none
+
+
+.hidden
+  display: none
+
+
+
+
+

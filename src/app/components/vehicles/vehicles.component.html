@@ -1,0 +1,60 @@
+<div class="body-container">
+   <h3 class="main-heading">Vehicles Management</h3>
+  <div class="product-add-form">
+    <form [formGroup]="vehicleForm" (ngSubmit)="addVehicle()" class="form">
+      <div class="form-controls mgy-1">
+        <div class="flexed" style="width: 50%">
+          <div class="form-input">
+            <label for="plateNumber">Vehicle Plate Number</label>
+            <input type="text" id="plateNumber" formControlName="plateNumber" placeholder="KCA 345D">
+          </div>
+          <div class="mgl-1">
+            <div class="form-input">
+               <label for="model">Model Type</label>
+               <input type="text" class="" formControlName="modelType" placeholder="Toyota probox" id="model">
+            </div>
+          </div>
+        </div>
+        <div class="form-button mgy-2">
+          <button class="btn button-primary" type="submit" [class.disabled]="vehicleForm.invalid">
+            <div class="flexed">
+              <span>Add Vehicle</span>
+              <span>
+                <img src="assets/add.svg" width="16" alt="">
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="vehicle-list">
+    <h5 class="sub-heading">Available Vehicles</h5>
+    <div class="vehicles grid">
+      <div class="vehicle grid-item"  *ngFor="let vehicle of vehicles;let index = index" (click)="assignRouteDriver(vehicle.plateNumber)">
+        <div class="card actionable card-color" [class.card-color-pri]="index == 0" [class.card-color-main]="index == 1" [class.card-color-sec]="index == 2">
+          <h5 class="sub-heading">{{vehicle.plateNumber}}</h5>
+          <p class="mgy-1 smallest">{{vehicle.modelType}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="in-route-vehicles mgy-2">
+    <h5>Vehicles In Various Routes</h5>
+    <div class="vehicles-routes-summary mgy-1 table-data" style="max-height: 250px;overflow: auto">
+      <div *ngIf="inRouteVehicles.length > 0" class="card-list">
+        <div class="card-list-item" *ngFor="let vehicleInfo of inRouteVehicles; let index = index">
+<!--          <div class="small">{{vehicleInfo.date}}</div>-->
+          <div><span class="bold">{{vehicleInfo.vehicle}}</span></div>
+          <div><span class="small">Driver</span> - <span class="bold">{{vehicleInfo.driver}}</span></div>
+          <div><span class="small">route - </span>{{vehicleInfo.route}}</div>
+          <div class="small last" (click)="printReport(vehicleInfo.id)"><a>Details</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

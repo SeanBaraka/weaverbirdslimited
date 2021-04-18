@@ -1,0 +1,104 @@
+<div class="body-containerk">
+  <div class="padded">
+    <h3 class="sub-heading">Vehicle Number: {{data.plateNumber}}</h3>
+    <div class="mgy-2">
+      <form [formGroup]="driverRouteStockForm" (ngSubmit)="addDriverVehicleRoute()" class="form">
+        <div class="form-controls mgy-1">
+          <div class="flexed mgy-1" style="width: 50%">
+            <div class="form-input">
+              <label for="driver">Driver Name</label>
+              <input type="text" list="drivers" id="driver" [readOnly]="vehicleAssignedDriver" formControlName="driver" placeholder="Name of Driver">
+              <datalist id="drivers">
+                <option value="{{driver.firstName + ' ' + driver.lastName}}" *ngFor="let driver of drivers"></option>
+              </datalist>
+            </div>
+            <div class="form-input mgl-1">
+               <label for="route">Select Route</label>
+               <input type="text" class="" list="routes" [readOnly]="vehicleAssignedDriver" formControlName="route" placeholder="Machakos - Nairobi" id="route">
+                <datalist id="routes">
+                  <option value="{{route.name}}" *ngFor="let route of vroutes"></option>
+                </datalist>
+            </div>
+          </div>
+          <div class="form-button mgy-2" [hidden]="vehicleAssignedDriver">
+            <button class="btn button-primary" type="submit" [class.disabled]="driverRouteStockForm.invalid">
+              <div class="flexed">
+                <span>Add Stock</span>
+                <span>
+                  <img src="assets/add.svg" width="16" alt="">
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="vehicle-stock-entry" [hidden]="!vehicleAssignedDriver">
+      <div class="stock-add-form mgy-1">
+        <form (submit)="updateStock()" [formGroup]="addStockForm" class="form">
+          <div class="stock-inline-form">
+            <div class="form-input">
+              <label for="name">Product Name</label>
+              <input id="name" style="width: 150px" type="text" formControlName="name" list="products" placeholder="Enter Product Name">
+              <datalist id="products">
+                <option *ngFor="let prod of availableProducts" value="{{prod.name}}"></option>
+              </datalist>
+            </div>
+            <div class="form-input mgl-1">
+              <label for="price">Unit Price</label>
+              <input type="text" id="price" formControlName="unitPrice" class="shorter" placeholder="140">
+            </div>
+            <div class="form-input mgl-1">
+              <label for="qty">Quantity</label>
+              <input type="number" min="1" id="qty" class="shorter" formControlName="availableUnits" placeholder="20">
+            </div>
+            <div class="mgl-1 cent-btn">
+              <label></label>
+              <button type="submit" [class.disabled]="addStockForm.invalid" class="btn button-text text-success">Add Item</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="stock-list" style="margin-bottom: 1em;border-bottom: 1px solid #d7d7d7">
+        <table class="app-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Sub Total</th>
+            </tr>
+          </thead>
+        </table>
+        <div class="table-data" style="max-height: 50vh">
+           <div class="table-data-item flexed" *ngFor="let prod of stockProducts">
+              <div class="item">{{prod.name}}</div>
+              <div class="item">{{prod.unitPrice}}</div>
+              <div class="item">{{prod.availableUnits}}</div>
+              <div class="item">Ksh. {{(prod.unitPrice * prod.availableUnits).toLocaleString()}}</div>
+            </div>
+        </div>
+      </div>
+
+      <div class="dialog-footer flexed flexed-justify-between mgy-2">
+        <button class="btn button-primary" [class.disabled]="stockProducts.length < 1" (click)="dispatchVehicle()">
+          <div class="flexed">
+            <span>Dispatch Vehicle</span>
+            <span><img src="assets/accept.svg" width="14" alt=""></span>
+          </div>
+        </button>
+        <button class="btn button-text mgl-1" mat-dialog-close="true">
+          <div class="flexed">
+            <span>Cancel</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="mat-dialog-footer">
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+  <h4 class="sub-heading">Transfer product</h4>
+  <div class="product-transfer-details mgy-1">
+    <div class="form-data">
+      <div class="alert alert-success" *ngIf="outputMessage">
+        {{outputMessage}}
+      </div>
+      <form [formGroup]="transferForm" (submit)="completeTransfer()">
+        <div class="form-controls mgy-1">
+          <div class="form-controls">
+            <label for="pname" class="small bold mgy-1">Transfer ---> {{transferData.product.name}}</label>
+            <div class="form-input">
+              <input type="hidden" id="pname" value="{{transferData.product.id}}"  formControlName="productId" readonly>
+            </div>
+          </div>
+          <div class="flexed mgy-1">
+            <div class="form-controls">
+              <label for="qty" class="small">No. of Pieces</label>
+              <div class="form-input">
+                <input type="number" min="1" class="shorter" id="qty" formControlName="quantity" placeholder="2">
+              </div>
+            </div>
+            <div class="form-controls mgl-1">
+              <label for="shopName" class="small">Destination Shop</label>
+              <div class="form-input">
+                <input type="text" id="shopName" formControlName="shopName" placeholder="Umoja" list="shops" (change)="updateShopId($event.target.value)">
+                <datalist id="shops">
+                  <option *ngFor="let shop of availableShops" value="{{shop.name}}"></option>
+                </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="mgy-2">
+            <button class="button button-primary" type="submit" [disabled]="transferForm.invalid">Complete Transfer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

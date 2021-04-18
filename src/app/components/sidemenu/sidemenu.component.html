@@ -1,0 +1,150 @@
+<div class="nav-container">
+    <div class="logo">
+        <img src="assets/beannlogo.jpg" alt="">
+    </div>
+    <div class="nav-menu">
+        <ul class="nav-menu-links">
+           <li class="nav-menu-links-item" routerLinkActive="active">
+               <a [routerLink]="['summaries']">
+                <div class="flexed flexed-inline">
+                    <img src="assets/dashboard.svg" width="15" alt="">
+                    <span>Dashboard</span>
+                </div>
+               </a>
+            </li>
+        </ul>
+
+        <h5 class="nav-menu-heading">System Applications</h5>
+
+        <details open>
+            <summary class="nav-menu-heading">Shops & Stock Management</summary>
+            <ul class="nav-menu-links">
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a [routerLink]="['products']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/delivery-box.svg" width="19" alt="">
+                            <span>Products</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a [routerLink]="['stock-bar']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/stock.svg" width="19" alt="">
+                            <span>Daily Stock</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a [routerLink]="['shops']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/store.svg" width="19" alt="">
+                            <span>Available Shops</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </details>
+        
+        <details open>
+            <summary class="nav-menu-heading">Fleet Management</summary>
+            <ul class="nav-menu-links">
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['vehicles']">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/truck.svg" width="19" alt="">
+                        <span>Vehicles</span>
+                    </div>
+                </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a [routerLink]="['personnel']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/hired.svg" width="19" alt="">
+                            <span>Drivers & Personnel</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a [routerLink]="['routes']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/destination.svg" width="19" alt="">
+                            <span>Routes</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </details>
+        
+        <details>
+            <summary class="nav-menu-heading">HR Management</summary>
+            <ul class="nav-menu-links">
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a>
+                        <div class="flexed flexed-inline">
+                            <img src="assets/group.svg" width="19" alt="">
+                            <span>Employees</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a>
+                        <div class="flexed flexed-inline">
+                            <img src="assets/salary.svg" width="19" alt="">
+                            <span>Payroll</span>
+                        </div>
+                    </a>
+                </li>
+
+            </ul>
+        </details>
+
+        <details>
+            <summary class="nav-menu-heading">Finance</summary>
+            <ul class="nav-menu-links">
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a [routerLink]="['finance']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/group.svg" width="19" alt="">
+                            <span>Summaries</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a>
+                        <div class="flexed flexed-inline">
+                            <img src="assets/salary.svg" width="19" alt="">
+                            <span>Bank & Mobile</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-menu-links-item" routerLinkActive="active">
+                    <a>
+                        <div class="flexed flexed-inline">
+                            <img src="assets/salary.svg" width="19" alt="">
+                            <span>Cash</span>
+                        </div>
+                    </a>
+                </li>
+
+            </ul>
+        </details>
+    </div>
+    <div class="nav-footer">
+        <div class="config-settings nav-menu">
+            <ul class="nav-menu-links">
+                <li class="nav-menu-links-item">
+                    <a [routerLink]="['settings']">
+                        <div class="flexed flexed-inline">
+                            <img src="assets/settings.svg" width="16" alt="">
+                            <span>Settings</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="copyright">
+            Beannsofts copyright &copy; {{todayYear}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="body-containerk">
+  <div class="stock-list mgy-2" style="margin-bottom: 1em;border-bottom: 1px solid #d7d7d7" id="content" #content>
+    <h4 class="sub-heading">Shop :  {{data.shopName}}</h4>
+    <h5 class="sub-heading mgy-1">Closing Stock Data</h5>
+    <table class="app-table mgy-1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Unit Price</th>
+          <th>Opening Stock</th>
+          <th>Added Stock</th>
+          <th>Closing Stock</th>
+          <th>Sold Items</th>
+          <th>Sub Total (sold)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of dayStockProducts; let index = index">
+          <td>{{product.productName}}</td>
+          <td>Ksh. {{product.unitPrice}}</td>
+          <td>{{product.openingUnits}}</td>
+          <td>{{product.addedUnits}}</td>
+          <td contenteditable="true" class="bordered" (input)="updateStockRecord(index, $event.target.innerHTML)">{{product.closingUnits}}</td>
+          <td>{{(product.openingUnits + product.addedUnits) - product.closingUnits}}</td>
+          <td class="bold">Ksh. {{(product.unitPrice * ((product.openingUnits + product.addedUnits) - product.closingUnits)).toLocaleString()}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <table class="app-table mgy-2">
+        <tbody>
+          <tr>
+            <th class="wd-75">Items Sold</th>
+            <th class="wd-20">:</th>
+            <th>{{getStockTotal().toLocaleString()}}</th>
+          </tr>
+          <tr>
+            <th class="wd-75">Total Sales</th>
+            <th class="wd-20">:</th>
+            <th>Ksh. {{getStockTotalAmount().toLocaleString()}}</th>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <div class="dialog-footer flexed flexed-justify-between mgy-2">
+    <button class="btn button-primary" [class.disabled]="finished" (click)="closeShop()">
+      <div class="flexed">
+        <span>Proceed</span>
+        <span><img src="assets/accept.svg" width="14" alt=""></span>
+      </div>
+    </button>
+    <button class="btn button-text" mat-dialog-close="true">
+      <div class="flexed">
+        <span>Cancel</span>
+      </div>
+    </button>
+  </div>
+
+</div>

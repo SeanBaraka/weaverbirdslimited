@@ -1,0 +1,51 @@
+<div class="body-container">
+   <!-- <h3 class="main-heading">Available Shops</h3> -->
+  <div class="product-add-form">
+    <form [formGroup]="shopForm" (ngSubmit)="addShop()" class="form">
+      <div class="form-controls mgy-1">
+        <div class="flexed">
+          <div>
+            <label for="shopName">Enter the Name of the Shop</label>
+            <div class="form-input">
+              <input type="text" id="shopName" formControlName="name" placeholder="E.g. Umoja">
+            </div>
+          </div>
+          <div class="mgl-1">
+            <label for="shopCategory">Shop Category</label>
+            <div class="form-input">
+              <input type="text" list="shopCategories" id="shopCategory" formControlName="shopCategory" placeholder="E.g. Wholesale">
+              <datalist id="shopCategories">
+                <option *ngFor="let cat of shopCategories" value="{{cat.name}}"></option>
+              </datalist>
+            </div>
+          </div>
+        </div>
+        <div class="flexed mgy-1" style="width: 50%">
+          <div class="form-input">
+             <label for="model">Short Description (optional)</label>
+             <input type="text" class="" formControlName="desc" placeholder="Description" id="model">
+          </div>
+          <!-- <div class="form-input mgl-1">
+            <label for="model">Available Departments</label>
+            <div class="deps flexed" *ngIf="departments.length > 0"> 
+              <div class="checkbox-group flexed" *ngFor="let department of departments">
+                <input id="{{department.name}}" type="checkbox" value="{{department.id}}" (change)="selectDepartment($event)">
+                <label for="{{department.name}}">{{department.name}}</label>
+              </div>
+            </div>
+         </div> -->
+        </div>
+        <div class="form-button mgy-2">
+          <button class="btn button-primary" type="submit" [class.disabled]="shopForm.invalid">
+            <div class="flexed">
+              <span>Save Shop</span>
+              <span>
+                <img src="assets/add.svg" width="16" alt="">
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

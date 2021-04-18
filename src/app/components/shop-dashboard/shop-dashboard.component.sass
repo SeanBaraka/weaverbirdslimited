@@ -1,0 +1,32 @@
+.grid 
+    gap: 4em
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr))
+    place-items: center
+    &-item
+        &.card-round
+            width: 20px
+            border-radius: 15px
+            height: 20px
+            position: relative
+            padding: 1.2em
+            text-align: center
+            h5 
+                font-size: 1.5em
+                text-align: center
+            .desc 
+                position: relative
+                bottom: -1em
+                color: #000
+                left: -3.5em
+                width: 100px
+                font-weight: 700
+    &-centered
+        width: 90%
+        margin: 2em auto
+        max-width: 740px
+
+.app-container 
+    height: 90vh
+    padding: 1em .75em
+h3 
+  left: 4.5em

@@ -1,0 +1,21 @@
+<div class="menu-drop">
+    <div class="trigger" (click)="toggleMenu()" [class.active]="menuShown">
+        <div class="icon flexed flexed-align-center">
+            <span class="smallest">Menu</span>
+            <img src="assets/dashboard.svg" width="20" style="margin-left: .5em;" alt="">
+        </div>
+    </div>
+    <div class="menu-content">
+        <div class="grid grid-centered mgy-2">
+            <div class="grid-item card card-round card-color actionable" (click)="navigateToDestination(item)" [class.card-color-pri]="index % 3 == 1" [class.card-color-main]="index % 3 == 0" [class.card-color-sec]="index % 3 == 2" *ngFor="let item of items;let index = index">
+                <!-- <h5>{{item.title.split('')[0]}}</h5> -->
+                <div class="img-icon-round">
+                    <img src="assets/{{item.image}}" width="25" alt="">
+                </div>
+                <div class="desc mgy-1">
+                    <p>{{item.title}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

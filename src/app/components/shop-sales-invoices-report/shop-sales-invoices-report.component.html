@@ -1,0 +1,43 @@
+<div class="app-container" style="padding: 0;">
+    <app-search-print-filter></app-search-print-filter>
+    <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">Date</div>
+          <div class="bold">Invoice No.</div>
+          <div class="bold">Customer Name</div>
+          <div class="bold">Sale Items</div>
+          <div class="bold">Sale Amount</div>
+          <div class="">Actions</div>
+        </div>
+    </div>
+    <div *ngIf="shopInvoices.length > 0;else noitems" class="card-list">
+        <div class="card-list-item data-set" *ngFor="let invoice of shopInvoices; let index = index">
+          <div><span class="">{{invoice.date}}</span></div>
+          <div>{{invoice.shop.name}}</div>
+          <div><span class="">{{invoice.receiptNumber}}</span></div>
+          <div><span>Ksh. {{invoice.saleAmount.toLocaleString()}}</span></div>
+          <div><span class="">Ksh. {{invoice.balance.toLocaleString()}}</span></div>
+          <div class="flexed">
+            <span>Clear</span>
+            <span class="mgl-2">
+              <button class="button button-text">
+                <span>
+                  <img src="assets/download.svg" width="10" alt="" style="filter: invert(0)">
+                </span>
+                <span>Reprint</span>
+              </button>
+            </span>
+          </div>
+        </div>
+    </div>
+    <div class="card-list">
+        <ng-template #noitems>
+            <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+              <div class="content placeholder-text">
+                <h5 class="opaque">Its empty here</h5>
+                <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no invoice sales have been made yet.</p>
+              </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

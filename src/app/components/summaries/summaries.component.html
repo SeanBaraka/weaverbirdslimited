@@ -1,0 +1,75 @@
+<div class="body-container">
+  <h3 class="main-heading">Summaries and Reports</h3>
+  <!--  shops info-->
+  <div class="shops-info mgy-2">
+    <h5>Your Shops</h5>
+    <div class="grid shops-summary mgy-1">
+      <div class="grid-item card card-color actionable" (click)="goToShop(shop)" [class.card-color-pri]="index % 3 == 1" [class.card-color-main]="index % 3 == 0" [class.card-color-sec]="index % 3 == 2" *ngFor="let shop of shops;let index = index">
+        <h5>{{shop.name}}</h5>
+        <div class="desc mgy-1">
+          <p>{{shop.category.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stock Reports -->
+  <div class="vehicles-in-route mgy-2">
+    <h5>Stock Reports</h5>
+    <div class="vehicles-routes-summary mgy-1" style="max-height: 330px;overflow: auto">
+      <div class="flexed flexed-end" style="margin: 1rem 0">
+        <div class="search-input">
+          <label for="search-field" style="font-size: 13px">Search</label>
+          <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterStock($event.target.value)">
+        </div>
+      </div>
+      <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">Date</div>
+          <div class="bold">Shop</div>
+          <div class="bold">Opening</div>
+          <div class="bold">Added</div>
+          <div class="bold">Closing</div>
+          <div class="bold">Sales</div>
+          <div>Actions</div>
+        </div>
+      </div>
+      <div *ngIf="stockReports.length > 0;else noitems" class="card-list">
+        <div class="card-list-item data-set" *ngFor="let stockInfo of stockReports; let index = index">
+          <div><span class="">{{stockInfo.date}}</span></div>
+          <div>{{stockInfo.shop}}</div>
+          <div><span class="">Ksh. {{stockInfo.openingStockAmount.toLocaleString()}}</span></div>
+          <div><span>Ksh. {{stockInfo.addedStockAmount.toLocaleString()}}</span></div>
+           <div><span class="">Ksh. {{stockInfo.closingStockAmount.toLocaleString()}}</span></div>
+          <div><span class="bold">Ksh. {{stockInfo.soldStockAmount.toLocaleString()}}</span></div>
+          <div class="smallest bold" (click)="printDayReport(stockInfo.id)"><a>View Full</a></div>
+        </div>
+      </div>
+      <ng-template #noitems>
+        <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+          <div class="content" style="opacity: .35">
+            <h5 class="opaque">Its empty here</h5>
+            <p class="opaque mgy-1" style="font-size: 80%">First open a shop, then close, for you to have something here</p>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!--  vehicles in route-->
+  <div class="vehicles-in-route mgy-2">
+    <h5>Vehicles in various routes</h5>
+    <div class="vehicles-routes-summary mgy-1" style="max-height: 250px;overflow: auto">
+      <div *ngIf="vehiclesInRoute.length > 0" class="card-list">
+        <h6 style="margin: 0;padding: 0 .5em;font-size: 90%">{{dateToday}}</h6>
+        <div class="card-list-item" *ngFor="let vehicleInfo of vehiclesInRoute; let index = index">
+<!--          <div class="small">{{vehicleInfo.date}}</div>-->
+          <div><span class="small">Vehicle</span> -  <span class="bold">{{vehicleInfo.vehicle}}</span></div>
+          <div><span class="small">Driver</span> - <span class="bold">{{vehicleInfo.driver}}</span></div>
+          <div><span class="small">route - </span>{{vehicleInfo.route}}</div>
+          <div class="small last"><a>Details</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

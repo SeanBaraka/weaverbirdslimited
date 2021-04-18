@@ -1,0 +1,47 @@
+<div class="app-container">
+  <h3 class="main-heading">Weaverbirds / Purchases</h3>
+
+  <div class="body-container">
+    <div class="search-add-purchase">
+      <div class="flexed flexed-end" style="margin: 1rem 0">
+        <div class="search-input">
+          <label for="search-field" style="font-size: 13px">Search</label>
+          <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterPurchases($event.target.value)">
+        </div>
+        <div class="export-options mgl-2">
+          <button class="button button-tertiary rounded button-img" (click)="makePurchase()">
+            <span>Make Purchase</span>
+          </button>
+          <button class="button button-text button-img mgl-2">
+            <span>
+              <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
+            </span>
+            <span>Print List</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="purchases-list">
+      <div class="purchase-record-header bold">
+        <span class="smallest">#</span>
+        <span class="smallest">Date</span>
+        <span class="smallest">Supplier</span>
+        <span class="smallest">Items</span>
+        <span class="smallest">Items Total</span>
+        <span class="smallest">Delivered</span>
+        <span class="smallest">Notes</span>
+      </div>
+
+      <div class="purchase-record" *ngFor="let purchase of purchases">
+        <span class="smallest">{{purchase.date}}</span>
+        <span class="smallest">{{purchase.supplier.name}}</span>
+        <span class="smallest">{{purchase.items}}</span>
+        <span class="smallest">{{purchase.orderTotal}}</span>
+        <span class="smallest">{{purchase.deliveryStatus}}</span>
+        <span class="smallest">{{purchase.notes}}</span>
+      </div>
+
+    </div>
+  </div>
+</div>

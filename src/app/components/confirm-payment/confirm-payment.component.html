@@ -1,0 +1,25 @@
+<div class="container">
+  <h5 class="sub-heading">Confirm Payment</h5>
+  <div class="payment-details mgy-2">
+    <div class="text flexed mgy-1">
+      <span class="small">Transaction Code: </span>
+      <h5 class="bold mgl-1">{{transaction.transactionID}}</h5>
+    </div>
+    <div class="text flexed mgy-1">
+      <span class="small">Customer Name: </span>
+      <h5 class="bold mgl-1">{{transaction.firstName + ' ' + transaction.lastName}}</h5>
+    </div>
+    <div class="text flexed mgy-1">
+      <span class="small">Amount Paid: </span>
+      <h5 class="bold mgl-1">Ksh. {{transaction.amount}}</h5>
+    </div>
+  </div>
+  <div class="flexed mgy-2">
+    <div class="confirm">
+      <button class="button-text bordered" (click)="confirmedPayment(transaction.amount)">Confirm</button>
+    </div>
+    <div class="cancel mgl-1">
+      <button class="button-text" mat-dialog-close="true">Cancel</button>
+    </div>
+  </div>
+</div>

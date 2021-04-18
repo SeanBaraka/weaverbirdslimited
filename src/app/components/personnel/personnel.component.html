@@ -1,0 +1,61 @@
+<div class="body-container">
+   <h3 class="main-heading">Driver and Personnel Management</h3>
+  <div class="product-add-form">
+    <form [formGroup]="personnelForm" (ngSubmit)="addPersonnel()" class="form">
+      <div class="form-controls mgy-1">
+        <label for="firstName">Personal Details</label>
+        <div class="flexed mgy-1" style="width: 70%">
+           <div class="form-input">
+             <label for="idNumber">National Identification Number</label>
+             <input type="text" class="" formControlName="idNumber" placeholder="12345676" id="idNumber">
+          </div>
+        </div>
+        <div class="flexed mgy-1">
+           <div class="form-input">
+             <label for="firstName">First Name</label>
+             <input type="text" class="" formControlName="firstName" placeholder="First Name" id="firstName">
+          </div>
+           <div class="form-input mgl-1">
+             <label for="lastName">Surname</label>
+             <input type="text" class="" formControlName="lastName" placeholder="First Name" id="lastName">
+          </div>
+          <div class="form-input mgl-1">
+            <label for="role">Select Personnel Role</label>
+              <input type="text" class="" list="roles" formControlName="role" placeholder="driver/turnboy" id="role">
+              <datalist id="roles">
+                <option value="driver">Driver</option>
+                <option value="dassistant">Turn Boy/Driver Assistant</option>
+              </datalist>
+          </div>
+        </div>
+        <div class="form-button mgy-2">
+          <button class="btn button-primary" type="submit" [class.disabled]="personnelForm.invalid">
+            <div class="flexed">
+              <span>Hire Personnel</span>
+              <span>
+                <img src="assets/add.svg" width="16" alt="">
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="vehicle-list" style="max-width: 640px">
+    <h5 class="sub-heading">Available Personnel</h5>
+    <div class="vehicles-routes-summary mgy-1" style="max-height: 750px;overflow: auto">
+      <div *ngIf="personnel.length > 0" class="card-list">
+        <div class="card-list-item" *ngFor="let person of personnel; let index = index">
+          <div><span class="block smallest">ID Number.</span><span class="bold">{{person.idNumber}}</span></div>
+          <div><span class="block smallest">First Name</span><span class="bold">{{person.firstName}}</span></div>
+          <div><span class="block smallest">Last Name</span><span class="bold">{{person.lastName}}</span></div>
+          <div><span class="smallest block">Position</span><span class="bold">{{person.role}}</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

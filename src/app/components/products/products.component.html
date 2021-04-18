@@ -1,0 +1,71 @@
+<div class="body-container">
+  <h3 class="main-heading">Products Management</h3>
+  <div class="flexed flexed-justify-between">
+    <div class="product-add-form">
+      <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="form">
+        <div class="form-controls mgy-1">
+          <label for="pname">Product Name</label>
+          <div class="form-input">
+            <input type="text" id="pname" formControlName="name" placeholder="Trace 200ml">
+          </div>
+          <div class="flexed mgy-1" style="width: 50%">
+            <div class="form-input">
+               <label for="price">Unit Price</label>
+               <input type="text" class="short" formControlName="unitPrice" placeholder="2,345" id="price">
+            </div>
+            <div class="form-input mgl-1">
+               <label for="qty">Quantity</label>
+                <input type="number" min="1" class="shorter" formControlName="qty" placeholder="2" id="qty">
+            </div>
+          </div>
+          <div class="form-button mgy-2">
+            <button class="btn button-primary" type="submit" [class.disabled]="productForm.invalid">
+              <div class="flexed">
+                <span>Add Product</span>
+                <span>
+                  <img src="assets/add.svg" width="16" alt="">
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="sec-desc" style="padding: 1.5em 4em;opacity: 30%">
+      <img src="assets/delivery-box.svg" width="156" alt="">
+    </div>
+  </div>
+
+<!--  Products Inventory section-->
+  <div class="products-list">
+    <h5 class="sub-heading">Available Products</h5>
+    <table class="app-table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Unit Price</th>
+          <th>Qty</th>
+          <th>Sub Total</th>
+        </tr>
+      </thead>
+    </table>
+    <div class="table-data" style="max-height: 230px">
+       <div class="table-data-item flexed" *ngFor="let prod of products">
+          <div class="item">{{prod.name}}</div>
+          <div class="item">{{prod.unitPrice.toLocaleString()}}</div>
+          <div class="item">{{prod.availableUnits}}</div>
+          <div class="item">{{(prod.unitPrice * prod.availableUnits).toLocaleString()}}</div>
+        </div>
+    </div>
+    <table class="app-table">
+        <tbody>
+          <tr>
+            <td></td>
+            <th>Total</th>
+            <th>{{getStockTotal().toLocaleString()}}</th>
+            <th>Ksh. {{getStockTotalAmount().toLocaleString()}}</th>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

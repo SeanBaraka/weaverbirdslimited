@@ -1,0 +1,16 @@
+<div class="cont flexed flexed-align-center">
+  <div class="user">
+    <div>
+      <span class="bold small">Logged In as:</span>
+      <span class="mgl-1">
+        <img src="assets/user.svg" width="12" alt="">
+      </span>
+      <span class="mgl-1">{{userLoggedIn.toLocaleUpperCase()}}</span>
+    </div>
+  </div>
+  <div class="login">
+    <button class="button-text" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</div>

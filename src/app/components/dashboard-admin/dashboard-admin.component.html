@@ -1,0 +1,91 @@
+<div class="app-container">
+    <main>
+        <div class="user-logged-in">
+            <app-user-logged-in></app-user-logged-in>
+        </div>
+        <div class="body-container">
+            <h3 class="main-heading">Administrator Dashboard</h3>
+            <!--  shops info-->
+            <div class="shops-info mgy-2">
+                <h3>Available Shops</h3>
+                <div class="grid shops-summary mgy-1">
+                    <div class="grid-item card card-round card-color actionable" (click)="navigateToDestination(shop)" [class.card-color-pri]="index % 3 == 1" [class.card-color-main]="index % 3 == 0" [class.card-color-sec]="index % 3 == 2" *ngFor="let shop of shops;let index = index">
+                        <h5>{{shop.name.split('')[0]}}</h5>
+                        <div class="desc mgy-1">
+                            <p>{{shop.name}}</p>
+                        </div>
+                    </div>
+                    <div class="grid-item actionable" *ngIf="isSuperAdmin" (click)="goToSettings()">
+                        <img src="assets/settings.svg" width="25" alt="">
+                        <div class="desc mgy-1">
+                            <p class="smallest">Shop Settings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shops-info mgy-2" *ngIf="userIsAdmin">
+                <h3>Fleet and Vehicle Management</h3>
+                <div class="grid shops-summary mgy-1">
+                    <div class="grid-item vehicles" *ngFor="let vehicle of vehicles">
+                        <div class="vehicle-card flexed">
+                            <div class="v-image">
+                                <img src="/assets/delivery-truck.svg" width="40" alt="">
+                            </div>
+                            <div class="v-details flexed flexed-column flexed-column-start mgl-1">
+                                <h4>{{vehicle.plateNumber}}</h4>
+                                <p class="bold smallest">{{vehicle.modelType}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          <div class="shops-info mgy-2" *ngIf="userIsAdmin">
+            <h3>Your Customers</h3>
+            <div class="customers-list-summary mgy-1">
+              <div class="customer-record-header bold">
+                <span>#</span>
+                <span>Customer Name</span>
+                <span>Telephone Number</span>
+                <span>Location</span>
+                <span>Sales</span>
+              </div>
+              <div *ngIf="customers.length > 0">
+                <div class="customer-record" *ngFor="let customer of customers">
+                    <span>{{customer.id}}</span>
+                    <span>{{customer.name}}</span>
+                    <span>{{customer.telephone}}</span>
+                    <span>{{customer.location}}</span>
+                    <span>Ksh. {{customer.saleRecords.length}}</span>
+                </div>
+              </div>
+              <div class="full-list smallest mgy-2" >
+                <a [routerLink]="['/dashboard','customers']">Show All Customers</a>
+              </div>
+            </div>
+          </div>
+
+            <div class="flexed flexed-justify mgy-2" *ngIf="userIsAdmin">
+                <div class="shops-info">
+                    <h3>Human Resources</h3>
+                    <div class="hr-container mgy-1">
+                        <a [routerLink]="['/dashboard','user-management']" class="smallest">User Management</a>
+                    </div>
+                </div>
+                <div class="shops-info mgl-1">
+                    <h3>Finance</h3>
+                    <div class="grid shops-summary mgy-1">
+                        <div class="grid-item card card-color actionable" [class.overlay]="index != 0" (click)="navigateToDestination(index)" [class.card-color-pri]="index % 3 == 1" [class.card-color-main]="index % 3 == 0" [class.card-color-sec]="index % 3 == 2" *ngFor="let item of items;let index = index">
+                            <h3>{{item}}</h3>
+                            <div class="desc mgy-1">
+                                <!-- <p>{{shop.category.name}}</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+  </div>
+

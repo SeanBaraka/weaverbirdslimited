@@ -1,0 +1,35 @@
+<div class="app-container" style="padding: 0;">
+    <app-search-print-filter></app-search-print-filter>
+    <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">Product Name</div>
+          <div class="bold">Serial No.</div>
+          <div class="bold">Buying Price</div>
+          <div class="bold">Selling Price</div>
+          <div class="bold">Stock Balance</div>
+          <div class="">Total</div>
+        </div>
+    </div>
+    <div *ngIf="shopProducts.length > 0;else noitems" class="card-list">
+        <div class="card-list-item data-set" *ngFor="let product of shopProducts; let index = index">
+          <div><span class="">{{product.date}}</span></div>
+          <div>{{product.shop.name}}</div>
+          <div><span class="">{{product.receiptNumber}}</span></div>
+          <div><span>Ksh. {{product.saleAmount.toLocaleString()}}</span></div>
+          <div><span class="">Ksh. {{product.balance.toLocaleString()}}</span></div>
+          <div class="flexed">
+            <span>Ksh. {{product.balance.toLocaleString()}}</span>
+          </div>
+        </div>
+    </div>
+    <div class="card-list">
+        <ng-template #noitems>
+            <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+              <div class="content placeholder-text">
+                <h5 class="opaque">Its empty here</h5>
+                <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no invoice sales have been made yet.</p>
+              </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

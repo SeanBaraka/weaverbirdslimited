@@ -1,0 +1,53 @@
+.sale-items-container
+  width: 60%
+  .card-list-item
+    grid-template-columns: auto 50px 50px 75px 75px
+.table-header, .card-list
+  padding: 0
+h4
+  margin-left: 1.5em
+table
+  text-align: left
+  th
+    font-size: 12px
+  td
+    padding: .3em 1em
+    font-weight: 500
+    h4
+      font-size: 12px
+
+.grid
+  grid-template-columns: auto auto auto
+  gap: 1em
+  place-items: center
+  .grid-item
+    position: relative
+    cursor: pointer
+    text-align: center
+    img
+      width: auto
+      position: relative
+      height: 40px
+      &.sm-img
+        width: 50px
+        height: auto
+
+.remove 
+  cursor: pointer
+
+.round 
+  width: 20px
+  height: 20px
+  border-radius: 100%
+  padding: .5em
+  &-red 
+    border: 1px solid red
+    color: red 
+    font-weight: bold
+
+.sm-input
+  max-width: 40px
+  padding: .3em
+  &.hidden 
+    display: none
+  

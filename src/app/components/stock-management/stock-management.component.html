@@ -1,0 +1,128 @@
+<div class="body-container">
+    <h4 class="main-heading">Operating at {{selectedShop.name}}</h4>
+    <!-- Wholesale action buttons -->
+    <div class="action-buttons">
+        <div class="flexed">
+            <button class="button-primary" (click)="launchAddModal()">
+                <span *ngIf="!simpleShop;else shopButton">Receive Products</span>
+                <ng-template #shopButton>
+                  <span>Add new product</span>
+                </ng-template>
+                <span><img src="assets/open.svg" width="15" alt=""></span>
+            </button>
+            <button class="button-secondary" (click)="launchSellModal()" *ngIf="!simpleShop">
+                <span>Make A Sell</span>
+                <span><img src="assets/closed.svg" width="15" alt=""></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Shop action buttons -->
+    <div class="action-buttons" *ngIf="simpleShop">
+      <div class="flexed">
+          <button [class.disabled]="shopOpen == true" class="button-primary" (click)="openShop()">
+              <span>Open Shop</span>
+              <span><img src="assets/open.svg" width="15" alt=""></span>
+          </button>
+          <button [class.disabled]="shopOpen == false" class="button-secondary" (click)="closeShop()">
+              <span>Close Shop</span>
+              <span><img src="assets/closed.svg" width="15" alt=""></span>
+          </button>
+      </div>
+    </div>
+
+    <!-- Items in stock -->
+    <div class="stock-items-container">
+      <div *ngIf="!simpleShop">
+        <h5 class="sub-heading">Stock Information summary</h5>
+        <div class="container mgy-2" *ngIf="stockProducts.length > 0">
+          <div class="grid shops-summary mgy-1">
+            <div class="grid-item card card-color card-flat actionable">
+              <img src="assets/stocks.svg" width="35" alt="">
+              <h5 class="mgy-1">Total Inventory</h5>
+              <div class="desc mgy-1">
+                <span class="small mgy-1">As at {{todayDate}}</span>
+                <h2 class="mgy-1">Ksh. {{getStockTotalAmount().toLocaleString()}}</h2>
+              </div>
+            </div>
+            <div class="grid-item card card-color card-flat actionable">
+              <img src="assets/bank.svg" width="35" alt="">
+              <h5 class="mgy-1">Total Sales</h5>
+              <div class="desc mgy-1">
+                <span class="small mgy-1">As at {{todayDate}}</span>
+                <h2 class="mgy-1">Ksh. {{getTotalSalesAmount().toLocaleString()}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loading" *ngIf="loading">
+        <div class="grid grid-center">
+          <div class="loader" style="text-align: center">
+            <img src="assets/loader.svg" width="50" alt="">
+            <h4 class="opaque">Getting products</h4>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!loading">
+        <div class="table-data" *ngIf="stockProducts.length > 0;else no_products">
+          <div class="flexed flexed-end" style="margin: 1rem 0">
+            <div class="search-input">
+              <label for="search-field" style="font-size: 12px">Search</label>
+              <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterProducts($event.target.value)">
+            </div>
+            <div class="print-option">
+              <button class="button button-text" (click)="printInventory(true)">
+                <span><img src="assets/download.svg" width="10" alt="" style="filter: invert(0)"></span>
+                Print Report
+              </button>
+            </div>
+            <div class="print-option mgl-2">
+              <button class="button button-text" (click)="printInventory(false)">
+                <span><img src="assets/download.svg" width="10" alt="" style="filter: invert(0)"></span>
+                Products list
+              </button>
+            </div>
+          </div>
+          <div class="card-list mgy-1" *ngIf="stockProducts.length > 0">
+            <div class="card-list-item table-header">
+              <div class="bold">Product</div>
+              <div class="bold">Unit Price</div>
+              <div class="bold">Available Units</div>
+              <div></div>
+            </div>
+          </div>
+          <div class="card-list-item data-set" *ngFor="let product of stockProducts; let index = index">
+<!--          <div class="small">{{vehicleInfo.date}}</div>-->
+          <div><span class="small">{{product.name}}</span></div>
+          <div>Ksh. {{product.sellingPrice}}</div>
+          <div><span class="">{{product.quantity}}</span></div>
+          <div class="smallest bold flexed">
+            <div class="move center">
+              <button class="button button-image" (click)="transferProduct(product)"><img src="assets/swap.svg" width="10" alt=""></button>
+              <span class="smallest">Transfer</span>
+            </div>
+            <div class="move center mgl-2">
+              <button class="button button-image" (click)="updateProduct(product)"><img src="assets/add_product.svg" width="10" alt=""></button>
+              <span class="smallest">Update</span>
+            </div>
+            <div class="remove center">
+              <button class="button button-image" (click)="deleteProduct(product.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+              <span class="smallest">Delete</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        <ng-template #no_products>
+          <div class="grid grid-column grid-center">
+            <div class="mgy-1 placeholder">
+              <img src="assets/empty.svg" width="45" alt="">
+              <h4 class="opaque">Oops, no products here at the moment</h4>
+              <h5 class="opaque">Do you mind adding a few products to get everything running ?</h5>
+            </div>
+            <button class="button button-text text-info bordered" (click)="launchAddModal()">Insert Products</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+</div>

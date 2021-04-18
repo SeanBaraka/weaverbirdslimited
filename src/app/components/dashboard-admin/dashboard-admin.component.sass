@@ -1,0 +1,77 @@
+.app-container
+  padding: 1em 1.75em
+
+.grid
+    gap: 3em
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr))
+    padding: 2em 0
+    &-item
+      width: 20px
+      border-radius: 15px
+      height: 20px
+      position: relative
+      padding: 1.2em
+      text-align: center
+      h5
+        font-size: 1.5em
+        text-align: center
+      .desc
+        position: relative
+        bottom: -1em
+        color: #000
+        left: -3.5em
+        width: 100px
+        font-weight: 700
+      &.vehicles
+        width: auto
+        padding: 0
+        height: auto
+        .vehicle-card
+          background: inherit
+          box-shadow: 0 0 1em rgba(0,0,0,.15)
+          box-sizing: border-box
+          padding: .5em
+          border-radius: 15px
+          .v-image
+            background: #e1e1e1
+            border-radius: 10px
+            padding: .5em
+          .v-details
+            padding: .5em 0
+      &.overlay
+          position: relative
+          &::before
+              box-sizing: border-box
+              content: 'Work in Progress'
+              font-family: inherit
+              color: #d6d6d6
+              font-weight: 700
+              pointer-events: none
+              padding: 3.5em 2em
+              position: absolute
+              width: 100%
+              height: 100%
+              top: 0
+              left: 0
+              background-color: #000000b9
+
+h3
+  left: 3.5em
+
+.customers-list-summary
+  padding: .25em
+  width: 540px
+.customer-record
+  display: grid
+  grid-template-columns: 20px auto auto auto auto
+  font-size: .85em
+  gap: 1.5em
+  &-header
+    grid-template-columns: 20px auto auto auto auto
+    font-size: .9em
+    gap: 2.5em
+    span
+      min-width: 100px
+  span
+    min-width: 100px
+    margin: 1em 0

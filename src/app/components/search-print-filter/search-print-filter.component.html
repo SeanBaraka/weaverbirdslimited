@@ -1,0 +1,20 @@
+<div class="flexed flexed-end" style="margin: 1rem 0">
+    <div class="search-input">
+      <label for="search-field" style="font-size: 13px">Search</label>
+      <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterSalesControl($event.target.value)">
+    </div>
+    <div class="export-options mgl-2">
+      <button class="button button-tertiary rounded button-img">
+        <span>
+          <img src="assets/download.svg" alt="" width="10">
+        </span>
+        <span>Print Report</span>
+      </button>
+      <button class="button button-text button-img mgl-2">
+        <span>
+          <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
+        </span>
+        <span>Export Report</span>
+      </button>
+    </div>
+</div>

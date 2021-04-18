@@ -1,0 +1,41 @@
+<div class="body-container">
+  <h3 class="main-heading">Vehicle routes</h3>
+  <div class="product-add-form">
+    <form [formGroup]="vehicleRouteForm" (ngSubmit)="addRoute()" class="form">
+      <div class="form-controls mgy-1">
+        <div class="flexed mgy-1" style="width: 70%">
+          <div class="form-input">
+             <label for="name">Route Name</label>
+             <input type="text" id="name" formControlName="name" placeholder="Machakos - Kitui">
+          </div>
+          <div class="form-input mgl-1">
+             <label for="region">Region of Operations</label>
+             <input type="text" class="" formControlName="region" placeholder="Eastern Region" id="region">
+          </div>
+        </div>
+        <div class="form-button mgy-2">
+          <button class="btn button-primary" type="submit" [class.disabled]="vehicleRouteForm.invalid">
+            <div class="flexed">
+              <span>Add Vehicle Route</span>
+              <span>
+                <img src="assets/add.svg" width="16" alt="">
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<div class="routes-list">
+    <h5 class="sub-heading">Available Designated Routes</h5>
+    <div class="routes grid">
+      <div class="route grid-item" *ngFor="let route of vehicleRoutes;let index = index">
+        <div class="card actionable" [class.card-color-pri]="index%3 == 0" [class.card-color-main]="index%3 == 1" [class.card-color-sec]="index%3 == 2">
+          <h5 class="sub-heading">{{route.name}}</h5>
+          <p class="mgy-1 smallest">{{route.region}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

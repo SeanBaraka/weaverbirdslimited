@@ -1,0 +1,38 @@
+<div class="sales-summary mgy-2" style="max-height: 330px;overflow: auto;">
+    <div class="flexed flexed-end" style="margin: 1rem 0">
+        <div class="search-input">
+          <label for="search-field" style="font-size: 13px">Search</label>
+          <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterSalesControl($event.target.value)">
+        </div>
+    </div>
+    <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">Date</div>
+          <div class="bold">Shop</div>
+          <div class="bold">Receipt</div>
+          <div class="bold">Amount</div>
+          <div class="bold">Balance</div>
+          <div>Actions</div>
+        </div>
+    </div>
+    <div *ngIf="saleRecords.length > 0;else noitems" class="card-list">
+        <div class="card-list-item data-set" *ngFor="let saleInfo of saleRecords; let index = index">
+          <div><span class="">{{saleInfo.date}}</span></div>
+          <div>{{saleInfo.shop}}</div>
+          <div><span class="">{{saleInfo.receiptNumber}}</span></div>
+          <div><span>Ksh. {{saleInfo.saleAmount.toLocaleString()}}</span></div>
+          <div><span class="">Ksh. {{saleInfo.balance.toLocaleString()}}</span></div>
+          <div class="smallest bold" (click)="printSaleReport(saleInfo.id)"><a>View Full</a></div>
+        </div>
+    </div>
+    <div class="card-list">
+        <ng-template #noitems>
+            <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+              <div class="content" style="opacity: .35">
+                <h5 class="opaque">Its empty here</h5>
+                <p class="opaque mgy-1" style="font-size: 80%">First open a shop, then close, for you to have something here</p>
+              </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

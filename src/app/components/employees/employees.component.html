@@ -1,0 +1,11 @@
+<div class="employees-container mgy-1" style="max-height: 750px;overflow: auto">
+  <div *ngIf="employees.length > 0" class="card-list">
+    <div class="card-list-item" *ngFor="let employee of employees; let index = index">
+      <div><span class="block smallest">User Id.</span><span class="bold">{{employee.id}}</span></div>
+      <div><span class="block smallest">First Name</span><span class="bold">{{employee.firstName}}</span></div>
+      <div><span class="block smallest">Last Name</span><span class="bold">{{employee.lastName}}</span></div>
+      <div><span class="block smallest">System Username</span><span class="bold">{{employee.username}}</span></div>
+      <div><span class="smallest block">Role</span><span class="bold">{{employee.role ? employee.role.name : ''}}</span></div>
+    </div>
+  </div>
+</div>

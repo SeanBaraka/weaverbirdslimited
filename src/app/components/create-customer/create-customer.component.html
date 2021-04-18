@@ -1,0 +1,26 @@
+<div class="modal-container">
+  <div class="container">
+    <h2 class="sub-heading">Add new Customer</h2>
+    <div class="form-container">
+      <form [formGroup]="customerForm" (submit)="addCustomer()">
+        <div class="form-group-control flexed flexed-column mgy-1">
+          <label for="name" class="smallest bold">Customer Name</label>
+          <input type="text" id="name" formControlName="name">
+        </div>
+        <div class="flexed mgy-1">
+          <div class="form-group-control flexed flexed-column">
+            <label for="tel" class="bold smallest">Telephone Number</label>
+            <input type="tel" id="tel" formControlName="telephone">
+          </div>
+          <div class="form-group-control mgl-2 flexed flexed-column">
+            <label for="address" class="bold smallest">Physical Address</label>
+            <input type="text" id="address" formControlName="location">
+          </div>
+        </div>
+        <div class="my-1">
+          <button class="button button-tertiary" type="submit">Save Customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

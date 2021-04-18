@@ -1,0 +1,59 @@
+<div class="main-grid" style="width: 100%;margin:0 auto">
+    <div class="body-container">
+        <h4 class="sub-heading mgy-1">User Setup</h4>
+        <div *ngIf="successMessage" class="mgy-1">
+            <div class="alert alert-success">{{successMessage}}</div>
+        </div>
+        <div class="registration-container">
+            <form [formGroup]="registerForm">
+                <fieldset style="padding: .5em 1em">
+                    <legend>
+                        <h5>Personal Details</h5>
+                    </legend>
+                    <div class="flexed mgy-1">
+                        <div class="form-group flexed flexed-column">
+                            <label for="firstname" class="smallest bold">Firstname</label>
+                            <input type="text" class="form-input" id="firstname" formControlName="firstName">
+                        </div>
+                        <div class="form-group flexed flexed-column mgl-1">
+                            <label for="lastname" class="smallest bold">Lastname</label>
+                            <input type="text" class="form-input" id="lastname" formControlName="lastName">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="mgy-2" style="padding: .5em 1em">
+                    <legend>
+                        <h5>System Access</h5>
+                    </legend>
+                    <div class="flexed mgy-1">
+                        <div class="form-group flexed flexed-column">
+                            <label for="username" class="smallest bold">Username</label>
+                            <input type="text" class="form-input" id="username" formControlName="username">
+                        </div>
+                        <div class="form-group flexed flexed-column mgl-1">
+                            <label for="role" class="smallest bold">Role in Organization</label>
+                            <input type="text" class="form-input" list="roles" id="role" formControlName="role">
+                            <datalist id="roles">
+                                <option value="{{role.name}}" *ngFor="let role of userRoles"></option>
+                            </datalist>
+                        </div>
+                        <div class="form-group flexed flexed-column mgl-1">
+                            <label for="password" class="smallest bold">Password</label>
+                            <input type="password" class="form-input" id="password" formControlName="password">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="mgy-2">
+                    <div class="flexed">
+                        <div class="complete">
+                            <button class="button button-sec" [disabled]="registerForm.invalid" (click)="completeRegistration()">Save User</button>
+                        </div>
+                        <div class="cancel mgl-2">
+                            <button class="button button-text small" mat-dialog-close="true" style="cursor: pointer;">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="app-container">
+    <main>
+        <div class="stock-details">
+            <h3 class="main-heading">Stock Management / {{shop.name}}</h3>
+                <!-- Items in stock -->
+            <div class="action-buttons" style="margin: 3em 0;">
+                <div class="flexed">
+                    <button class="button button-text mgy-1" (click)="navigateBack()">
+                        <span>
+                            <img src="assets/back-arrow.svg" width="13" alt="" style="filter: invert(0)">
+                        </span>
+                        <span>Back</span>
+                    </button>
+                    <button class="button-primary" (click)="launchAddModal()">
+                        <span *ngIf="!simpleShop;else shopButton">Receive Products</span>
+                        <ng-template #shopButton>
+                            <span>Add new product</span>
+                        </ng-template>
+                        <span><img src="assets/open.svg" width="15" alt=""></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="stock-items-container">
+                <div *ngIf="!simpleShop">
+                <!-- <h5 class="sub-heading">Stock Information summary</h5>
+                <div class="container mgy-2" *ngIf="stockProducts.length > 0">
+                    <div class="grid shops-summary mgy-1">
+                        <div class="grid-item card card-color card-flat">
+                            <img src="assets/stocks.svg" width="35" alt="">
+                            <h5 class="mgy-1">Total Inventory</h5>
+                            <div class="desc mgy-1">
+                            <span class="small mgy-1">As at {{todayDate}}</span>
+                            <h2 class="mgy-1">Ksh. {{getStockTotalAmount().toLocaleString()}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+                <div class="loading" *ngIf="loading">
+                <div class="grid grid-center">
+                    <div class="loader" style="text-align: center;margin-top: 2em">
+                    <img src="assets/loader.svg" width="50" alt="">
+                    <h4 class="opaque">Getting products</h4>
+                    </div>
+                </div>
+                </div>
+                <div *ngIf="!loading">
+                <div class="table-data" *ngIf="stockProducts.length > 0;else no_products" style="position: relative;">
+                    <div class="flexed flexed-end" style="margin: 0rem 0;position:fixed;background:#fff;padding: 2.5em 0;">
+                        <div class="search-input">
+                            <label for="search-field" style="font-size: 12px">Search</label>
+                            <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterProducts($event.target.value)">
+                        </div>
+                        <div class="print-option">
+                            <button class="button button-text" (click)="printInventory(true)">
+                            <span><img src="assets/download.svg" width="10" alt="" style="filter: invert(0)"></span>
+                            Print Report
+                            </button>
+                        </div>
+                        <div class="print-option mgl-2">
+                            <button class="button button-text" (click)="printInventory(false)">
+                            <span><img src="assets/download.svg" width="10" alt="" style="filter: invert(0)"></span>
+                            Products list
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-list mgy-1" *ngIf="stockProducts.length > 0" style="margin: 7em 0 2em;">
+                        <div class="card-list-item table-header" style="position: fixed">
+                            <div class="bold">Product</div>
+                            <div class="bold">Unit Price</div>
+                            <div class="bold">Available Units</div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="card-list-item data-set" *ngFor="let product of stockProducts; let index = index">
+                    <div><span class="small">{{product.name}}</span></div>
+                    <div>Ksh. {{product.sellingPrice}}</div>
+                    <div><span class="">{{product.quantity}}</span></div>
+                        <div class="smallest bold flexed">
+                            <div class="move center">
+                                <button class="button button-image" (click)="transferProduct(product)"><img src="assets/swap.svg" width="10" alt=""></button>
+                                <span class="smallest">Transfer</span>
+                            </div>
+                            <div class="move center mgl-2">
+                                <button class="button button-image" (click)="updateProduct(product)"><img src="assets/add_product.svg" width="10" alt=""></button>
+                                <span class="smallest">Update</span>
+                            </div>
+                            <div class="remove center">
+                                <button class="button button-image" (click)="deleteProduct(product.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+                                <span class="smallest">Delete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #no_products>
+                    <div class="grid grid-column grid-center">
+                    <div class="mgy-1 placeholder">
+                        <img src="assets/empty.svg" width="45" alt="">
+                        <h4 class="opaque">Oops, no products here at the moment</h4>
+                        <h5 class="opaque">Do you mind adding a few products to get everything running ?</h5>
+                    </div>
+                    <button class="button button-text text-info bordered" (click)="launchAddModal()">Insert Products</button>
+                    </div>
+                </ng-template>
+                </div>
+            </div>
+            </div>
+    </main>
+</div>

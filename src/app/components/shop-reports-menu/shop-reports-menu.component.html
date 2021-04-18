@@ -1,0 +1,100 @@
+<div class="nav-container">
+    <div class="nav-menu">
+        <ul class="nav-menu-links">
+           <li class="nav-menu-links-item">
+            <details open>
+                <summary class="nav-menu-heading"> <span>
+                    <img src="assets/credit-card-machine.svg" width="15" alt="">
+                </span> Sales Reports</summary>
+                <ul class="nav-menu-links">
+                    <li class="nav-menu-links-item" routerLinkActive="active">
+                        <a [routerLink]="['sales', 'all']">
+                            <div class="flexed flexed-inline">
+                                <span>All Sales Report</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-menu-links-item" routerLinkActive="active">
+                        <a [routerLink]="['sales','products']">
+                            <div class="flexed flexed-inline">
+                                <span>Product Sale Report</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-menu-links-item" routerLinkActive="active">
+                        <a [routerLink]="['sales', 'invoices']" [state]="shop">
+                            <div class="flexed flexed-inline">
+                                <span>Invoice Sale Report</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-menu-links-item" routerLinkActive="active">
+                        <a [routerLink]="['sales', 'payments']">
+                            <div class="flexed flexed-inline">
+                                <span>Payment method Report</span>
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </details>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['inventory']" [state]="shop">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/stock-image.svg" width="15" alt="">
+                        <span>Inventory Report</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['product-transfer']" [state]="shop">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/swap.svg" width="15" alt="">
+                        <span>Item Transfer Report</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['purchases']">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/market.svg" width="15" alt="">
+                        <span>Purchases Report</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['suppliers']">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/supply.svg" width="15" alt="">
+                        <span>Suppliers Report</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['evaluation']">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/stock-image.svg" width="15" alt="">
+                        <span>Prod. Evaluation Report</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['tax']">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/money.png" width="15" alt="">
+                        <span>Tax Report</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-menu-links-item" routerLinkActive="active">
+                <a [routerLink]="['finance']">
+                    <div class="flexed flexed-inline">
+                        <img src="assets/money.png" width="15" alt="">
+                        <span>Financial Reports</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
