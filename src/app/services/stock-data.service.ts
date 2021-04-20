@@ -69,4 +69,8 @@ export class StockDataService {
   stockReport(): Observable<any> {
     return this.http.get(`${environment.apiBaseUrl}stock/report`);
   }
+
+  getSuppliers(): Observable<any> {
+    return this.http.get(`${environment.apiBaseUrl}supplier/all`);
+  }
 }

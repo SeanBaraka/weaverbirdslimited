@@ -10,11 +10,14 @@ import {ShopManagerService} from '../../services/shop-manager.service';
 })
 export class PurchasesComponent implements OnInit {
   purchases: any[] = []; // holds a list of all purchases from the database
+  shop: any;
 
   constructor(private dialog: MatDialog, private shopManager: ShopManagerService) { }
 
   ngOnInit(): void {
-    console.log(this.shopManager.getShopSaved());
+    this.shopManager.getShopSaved().subscribe((shop) => {
+      this.shop = shop
+    })
   }
 
   filterPurchases(value: any): void {
@@ -23,7 +26,10 @@ export class PurchasesComponent implements OnInit {
 
   makePurchase(): void {
     this.dialog.open(MakePurchaseComponent, {
-      width: '720px'
+      width: '720px',
+      data: {
+        shopId: this.shop.id
+      }
     });
   }
 }

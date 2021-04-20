@@ -628,7 +628,7 @@ export class ProductsSaleComponent implements OnInit {
                 alignment: this.paymentMethod.invoice ? 'left' : 'center'
               },
               {text: 'Pourtap Limited', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
-              {text: 'P.O. Box 3305-90100 MACHAKOS, KENYA', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'}
+              {text: 'P.O. Box 6782-00200 NAIROBI KENYA', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'}
             ],
             // this is the part of the header that shows customer details
             // it is only available for the invoice payment method
