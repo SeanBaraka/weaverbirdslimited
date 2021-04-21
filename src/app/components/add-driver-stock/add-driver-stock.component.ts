@@ -139,7 +139,7 @@ export class AddDriverStockComponent implements OnInit {
               { text: `Vehicle - ${this.data.plateNumber}`, style: 'textRegular'},
               { text: `Driver - ${this.driverRouteStockForm.get('driver').value}`, style: 'textRegular'},
               { text: `Transport Route - ${this.driverRouteStockForm.get('route').value}`, style: 'textRegular'},
-              {text: 'Pourtap Limited', style: 'textRegular'},
+              {text: 'Weaverbirds Ventures', style: 'textRegular'},
               {text: 'P.O. Box 456-90100', style: 'textRegular'},
               {
                 text: 'Machakos',

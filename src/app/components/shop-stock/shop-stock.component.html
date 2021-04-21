@@ -12,11 +12,31 @@
                         <span>Back</span>
                     </button>
                     <button class="button-primary" (click)="launchAddModal()">
-                        <span *ngIf="!simpleShop;else shopButton">Receive Products</span>
-                        <ng-template #shopButton>
-                            <span>Add new product</span>
-                        </ng-template>
+                        <span>Add New Product</span>
                         <span><img src="assets/open.svg" width="15" alt=""></span>
+                    </button>
+                    <button class="button button-pri-alt" (click)="receiveProducts()">
+                        <span class="button-badge important">{{unreceivedPurchaseOrders.length}}</span>
+                        <span>Receive Products</span>
+                        <span><img src="assets/inbox.svg" width="15" alt="" style="filter: invert(100%);margin-left: 5px;"></span>
+                        <div class="notification-box" *ngIf="showNotification">
+                            <h4>Incoming Purchase Orders</h4>
+                            <div class="notifications">
+                                <ul *ngFor="let order of unreceivedPurchaseOrders">
+                                    <li>
+                                        <div class="purchase-order">
+                                            <h5>Purchase Order Number: #{{order.id}}</h5>
+                                            <p>You have a pending order that needs to be received</p>
+                                            <button class="button-text" (click)="confirmReceived(order.id)">Receive</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </button>
+                    <button class="button button-sec-alt">
+                        <span>Transfer Bulk</span>
+                        <span><img width="15" alt=""></span>
                     </button>
                 </div>
             </div>

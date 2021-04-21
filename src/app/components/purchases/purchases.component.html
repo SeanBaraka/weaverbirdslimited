@@ -10,7 +10,7 @@
         </div>
         <div class="export-options mgl-2">
           <button class="button button-tertiary rounded button-img" (click)="makePurchase()">
-            <span>Make Purchase</span>
+            <span>Create Purchase Order</span>
           </button>
           <button class="button button-text button-img mgl-2">
             <span>
@@ -34,12 +34,13 @@
       </div>
 
       <div class="purchase-record" *ngFor="let purchase of purchases">
-        <span class="smallest">{{purchase.date}}</span>
+        <span class="smallest">{{purchase.id}}</span>
+        <span class="smallest">{{purchase.generatedAt}}</span>
         <span class="smallest">{{purchase.supplier.name}}</span>
-        <span class="smallest">{{purchase.items}}</span>
+        <span class="smallest">{{purchase.products.length}}</span>
         <span class="smallest">{{purchase.orderTotal}}</span>
-        <span class="smallest">{{purchase.deliveryStatus}}</span>
-        <span class="smallest">{{purchase.notes}}</span>
+        <span class="smallest">{{purchase.delivered}}</span>
+        <div class="smallest"></div>
       </div>
 
     </div>

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StockDataService } from 'src/app/services/stock-data.service';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -28,7 +28,8 @@ export class MakePurchaseComponent implements OnInit {
   })
   purchaseForm = this.fb.group({
     supplier: ['', Validators.required],
-    products: []
+    products: [],
+    orderTotal: ['']
 
   })
   supplierAvailable = true;
@@ -41,7 +42,8 @@ export class MakePurchaseComponent implements OnInit {
   constructor(
     private stockService: StockDataService,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public shopData: any
+    @Inject(MAT_DIALOG_DATA) public shopData: any,
+    private dialogRef: MatDialogRef<MakePurchaseComponent>
   ) { }
 
   ngOnInit(): void {
@@ -85,19 +87,44 @@ export class MakePurchaseComponent implements OnInit {
 
   selectProduct(prodInput: any) {
     const product = this.availableProducts.find(x => x.name === prodInput.value);
+    
     const purchaseItem = {
       "serialNumber": product.serialNumber,
       "name": product.name,
+      "price": product.costPrice,
       "quantity": 0
     }
     this.purchaseItems = [...this.purchaseItems, purchaseItem];
     prodInput.value = '';
   }
 
+  getPurchaseItemTotal(serialNumber: number): number {
+    const singlePurchase = this.purchaseItems.find(x => x.serialNumber === serialNumber);
+    const total = singlePurchase.quantity * singlePurchase.price 
+    return total;
+  }
+
+  getOrderTotal(): number {
+    let total = 0;
+    this.purchaseItems.forEach((item) => {
+      total += (item.quantity * item.price)      
+    })
+    return total;
+  }
+
   finalizePurchase(): void {
     this.purchaseForm.get('supplier').setValue(this.currentSupplier.id)
     this.purchaseForm.get('products').setValue(this.purchaseItems)
-    this.generatePurchaseNote();
+    const orderTotal = this.getOrderTotal();
+    
+    this.purchaseForm.get('orderTotal').setValue(orderTotal);
+
+    this.stockService.makePurchase(this.shopData.shopId, this.purchaseForm.value).subscribe(response => {
+      if(response) {
+        this.dialogRef.close(this.shopData.id)
+        this.generatePurchaseNote(response);
+      }
+    });
   }
 
   /** handle supplier search functionality */
@@ -110,7 +137,7 @@ export class MakePurchaseComponent implements OnInit {
     })
   }
 
-  generatePurchaseNote() {
+  generatePurchaseNote(purchaseInfo: any) {
       const documentDefinition = {
         pageSize: { width: 700, height: 1000},
         pageMargins: 25,
@@ -471,7 +498,7 @@ export class MakePurchaseComponent implements OnInit {
                   style: 'textRegular',
                   alignment: 'left'
                 },
-                {text: 'Pourtap Limited', style: 'textRegular', alignment: 'left'},
+                {text: 'Weaverbirds Ventures', style: 'textRegular', alignment: 'left'},
                 {text: 'P.O. Box 6408-00200 NAIROBI, KENYA', style: 'textRegular', alignment: 'left'}
               ],
               // this is the part of the header that shows customer details

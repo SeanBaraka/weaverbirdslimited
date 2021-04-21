@@ -13,8 +13,8 @@
     <div *ngIf="shopInvoices.length > 0;else noitems" class="card-list">
         <div class="card-list-item data-set" *ngFor="let invoice of shopInvoices; let index = index">
           <div><span class="">{{invoice.date}}</span></div>
-          <div>{{invoice.shop.name}}</div>
-          <div><span class="">{{invoice.receiptNumber}}</span></div>
+          <div>{{invoice.receiptNumber}}</div>
+          <div><span class="">{{invoice.customer.name}}</span></div>
           <div><span>Ksh. {{invoice.saleAmount.toLocaleString()}}</span></div>
           <div><span class="">Ksh. {{invoice.balance.toLocaleString()}}</span></div>
           <div class="flexed">

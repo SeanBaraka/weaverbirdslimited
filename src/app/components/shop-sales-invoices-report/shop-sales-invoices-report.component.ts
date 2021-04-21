@@ -21,6 +21,8 @@ export class ShopSalesInvoicesReportComponent implements OnInit {
           invoice.date = new Date(invoice.date).toLocaleDateString('en-GB')
         })
 
+        console.log(invoices)
+
         this.shopInvoices = invoices;
       });
     })

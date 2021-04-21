@@ -115,7 +115,7 @@ export class StockManagementComponent implements OnInit {
           columns: [
             [
               { text: `Date - ${new Date(Date.now()).toLocaleDateString()}`, style: 'textRegular'},
-              {text: 'Pourtap Limited', style: 'textRegular'},
+              {text: 'Weaverbirds Ventures', style: 'textRegular'},
               {text: 'P.O. Box 456-90100', style: 'textRegular'},
               {
                 text: 'Machakos',
@@ -394,7 +394,7 @@ export class StockManagementComponent implements OnInit {
           columns: [
             [
               { text: `Date - ${new Date(Date.now()).toLocaleDateString()}`, style: 'textRegular'},
-              {text: 'Pourtap Limited', style: 'textRegular'},
+              {text: 'Weaverbirds Ventures', style: 'textRegular'},
               {text: 'P.O. Box 456-90100', style: 'textRegular'},
               {
                 text: 'Machakos',

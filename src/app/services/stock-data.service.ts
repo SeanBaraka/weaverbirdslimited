@@ -73,4 +73,16 @@ export class StockDataService {
   getSuppliers(): Observable<any> {
     return this.http.get(`${environment.apiBaseUrl}supplier/all`);
   }
+
+  makePurchase(shopId: number, purchaseOrder: any): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}store/${shopId}/purchases/make/`, purchaseOrder);
+  }
+
+  getShopPurchaseOrders(shopId: number): Observable<any> {
+    return this.http.get(`${environment.apiBaseUrl}store/${shopId}/purchases/list/`);
+  }
+
+  receiveProducts(shopId: number,orderId: number): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}store/${shopId}/receive/products/`, {});
+  }
 }
