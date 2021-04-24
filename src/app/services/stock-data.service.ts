@@ -82,7 +82,7 @@ export class StockDataService {
     return this.http.get(`${environment.apiBaseUrl}store/${shopId}/purchases/list/`);
   }
 
-  receiveProducts(shopId: number,orderId: number): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}store/${shopId}/receive/products/`, {});
+  receiveProducts(shopId: number, orderId: number): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}store/${shopId}/purchase/${orderId}/receive/products/`, {});
   }
 }

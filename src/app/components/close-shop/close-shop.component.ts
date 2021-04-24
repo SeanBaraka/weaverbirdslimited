@@ -76,7 +76,7 @@ export class CloseShopComponent implements OnInit {
           columns: [
             [
               { text: `Date - ${new Date(Date.now()).toLocaleDateString()}`, style: 'textRegular'},
-              {text: 'Weaverbirds Ventures', style: 'textRegular'},
+              {text: 'Pourtap Limited', style: 'textRegular'},
               {text: 'P.O. Box 456-90100', style: 'textRegular'},
               {
                 text: 'Machakos',

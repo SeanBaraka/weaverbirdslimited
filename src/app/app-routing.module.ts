@@ -63,7 +63,8 @@ const routes: Routes = [
           {path: 'all', component: ShopSalesReportAllComponent },
           { path: 'products', component: ShopProductSaleComponent },
           { path: 'payments', component: ShopSalesPaymentsReportComponent},
-          { path: 'invoices', component: ShopSalesInvoicesReportComponent }
+          { path: 'invoices', component: ShopSalesInvoicesReportComponent },
+            {path: 'finance', component: FinanceComponent}
 
         ]},
         { path: 'purchases', component: ShopPurchaseReportComponent},

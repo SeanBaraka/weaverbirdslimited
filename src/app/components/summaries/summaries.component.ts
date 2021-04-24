@@ -99,7 +99,7 @@ export class SummariesComponent implements OnInit {
           columns: [
             [
               { text: `Date - ${currentRecord.date}`, style: 'textRegular'},
-              {text: 'Weaverbirds Ventures', style: 'textRegular'},
+              {text: 'Pourtap Limited', style: 'textRegular'},
               {text: 'P.O. Box 456-90100', style: 'textRegular'},
               {
                 text: 'Machakos',

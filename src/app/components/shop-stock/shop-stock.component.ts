@@ -43,7 +43,7 @@ export class ShopStockComponent implements OnInit {
   getShopStock(): void {
     this.loading = true;
     this.stockData.getShopStock(this.shop.id).subscribe((products) => {
-    
+
       if (products) {
         this.loading = false;
         this.stockProducts = products;
@@ -182,17 +182,18 @@ export class ShopStockComponent implements OnInit {
     this.showNotification = true;
   }
 
-  getNewPurchaseOrders() {
+  getNewPurchaseOrders(): void {
     this.stockData.getShopPurchaseOrders(this.shop.id).subscribe((orders: any[])=> {
       this.unreceivedPurchaseOrders = orders.filter(x => x.delivered === false);
-    })
+    });
   }
 
-  confirmReceived(id: number) {
+  confirmReceived(id: number): void {
     this.stockData.receiveProducts(this.shop.id, id).subscribe((response) => {
       if(response) {
         this.showNotification = false;
         this.getNewPurchaseOrders();
+        this.getShopStock();
       }
     })
   }
@@ -208,7 +209,7 @@ export class ShopStockComponent implements OnInit {
           columns: [
             [
               { text: `Date - ${new Date(Date.now()).toLocaleDateString()}`, style: 'textRegular'},
-              {text: 'Weaverbirds Ventures', style: 'textRegular'},
+              {text: 'Pourtap Limited', style: 'textRegular'},
               {text: 'P.O. Box 456-90100', style: 'textRegular'},
               {
                 text: 'Machakos',

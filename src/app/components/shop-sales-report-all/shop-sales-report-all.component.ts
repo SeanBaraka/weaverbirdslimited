@@ -61,7 +61,7 @@ export class ShopSalesReportAllComponent implements OnInit {
                 style: 'textRegular',
                 alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'
               },
-              {text: 'Weaverbirds Ventures', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'},
+              {text: 'Pourtap Limited', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'},
               {text: 'P.O. Box 3305-90100 NAIROBI KENYA', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'}
             ],
             // this is the part of the header that shows customer details
@@ -80,7 +80,7 @@ export class ShopSalesReportAllComponent implements OnInit {
         } : {
           columns: [
             [
-              {text: 'Weaverbirds Ventures', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'},
+              {text: 'Pourtap Limited', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'},
               // {text: 'P.O. BOX 3305 - 90100, KENYA', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'},
               {text: 'TEL: 0723456789', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'},
               // {text: 'PIN: P051820673J', style: 'textRegular', alignment: sale.paymentMethod === 'INVOICE' ? 'left' : 'center'}

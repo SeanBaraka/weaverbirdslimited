@@ -100,7 +100,7 @@ export class ShopDashboardComponent implements OnInit {
         break;
 
       case 'Cash Summary':
-        this.router.navigate(['dashboard', 'cash-summary'])
+        this.router.navigate(['dashboard', 'finance']);
         break;
 
       case 'Purchases':
