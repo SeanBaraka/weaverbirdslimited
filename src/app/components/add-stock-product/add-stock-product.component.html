@@ -7,36 +7,7 @@
     </div>
     <div class="product-add-form">
       <form [formGroup]="productForm" (submit)="addProduct($event)" class="form">
-        <div *ngIf="!supplierAvailable">
-          <div class="form-controls mgy-1" formGroupName="supplier">
-            <div class="flexed mgy-1">
-              <div class="form-controls">
-                <label>Supplier Name</label>
-                <div class="form-input">
-                  <input type="text" id="supplierName" formControlName="name" placeholder="EABL Wines">
-                </div>
-              </div>
-              <div class="form-controls mgl-1">
-                <label>Telephone</label>
-                <div class="form-input">
-                  <input type="tel" id="supplierTelephone" formControlName="telephone" placeholder="+254 712345">
-                </div>
-              </div>
-            </div>
-            <div class="flexed mgy-1">
-              <div class="form-controls">
-                <label>Email Address</label>
-                <div class="form-input">
-                  <input type="email" id="supplierName" formControlName="email" placeholder="sales@beannsofts.com">
-                </div>
-              </div>
-            </div>
-            <div class="proceed-button mgy-2">
-              <button class="button button-text" [disabled]="productForm.get('supplier').invalid" *ngIf="!supplierAvailable" (click)="proceedToAdd()">Continue</button>
-            </div>
-          </div>
-        </div>
-        <div class="form-controls mgy-1" *ngIf="supplierAvailable">
+        <div class="form-controls mgy-1">
           <h4 class="sub-heading">Add Product to Inventory</h4>
           <div class="flexed mgy-1">
             <div class="form-controls">

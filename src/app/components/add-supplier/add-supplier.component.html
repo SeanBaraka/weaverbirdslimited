@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="form-container mgy-1">
+    <div *ngIf="successMessage">
+      <div class="alert alert-success">
+        {{successMessage}}
+      </div>
+    </div>
+    <div class="product-add-form">
+      <form [formGroup]="supplierForm" (submit)="addSupplier()" class="form">
+        <div class="form-controls mgy-1">
+          <h4 class="sub-heading">Add Supplier</h4>
+          <div class="flexed mgy-1">
+            <div class="form-controls">
+              <label for="sname">Supplier Name</label>
+              <div class="form-input">
+                <input type="text" id="sname" formControlName="name" placeholder="John Doe">
+              </div>
+            </div>
+            <div class="form-controls mgl-1">
+              <label for="tel">Telephone</label>
+              <div class="form-input">
+                <input type="tel" id="tel" formControlName="telephone" placeholder="Tel: +254711111111">
+              </div>
+            </div>
+          </div>
+          <div class="form-controls">
+            <label for="email">Email Address</label>
+            <div class="form-input">
+              <input type="email" id="email" formControlName="email" placeholder="example@mail.com">
+            </div>
+          </div>
+          <div class="form-button mgy-2 flexed">
+            <button class="btn button-primary" [class.disabled]="supplierForm.invalid">
+              <div class="flexed">
+                <span>Save Supplier</span>
+                <span>
+                  <img src="assets/add.svg" width="16" alt="">
+                </span>
+              </div>
+            </button>
+            <button class="btn button-text mgl-1" mat-dialog-close="true">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

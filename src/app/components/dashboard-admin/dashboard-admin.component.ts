@@ -23,7 +23,8 @@ export class DashboardAdminComponent implements OnInit {
   isSuperAdmin: boolean;
   customers: any[] = [];
 
-  departments: any[] = []
+  departments: any[] = [];
+  suppliers: any[] = [];
 
   constructor(private router: Router,
   private shopsService: StockDataService,
@@ -34,11 +35,12 @@ export class DashboardAdminComponent implements OnInit {
   private authservice: AuthService) { }
 
   ngOnInit(): void {
-    this.getAvailableShops()
-    this.getVehicles()
+    this.getAvailableShops();
+    this.getVehicles();
     this.checkAdminStatus();
-    this.checkSuperAdmin()
+    this.checkSuperAdmin();
     this.getTopCustomers(3);
+    this.getSuppliers();
   }
 
   /** checks whether the user is an admin user */
@@ -49,6 +51,12 @@ export class DashboardAdminComponent implements OnInit {
     } else {
       this.userIsAdmin = true;
     }
+  }
+
+  getSuppliers(): void {
+    this.shopsService.getSuppliers().subscribe((response) => {
+      this.suppliers = response;
+    });
   }
 
   checkSuperAdmin(): void {

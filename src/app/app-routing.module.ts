@@ -34,6 +34,7 @@ import { ShopSalesInvoicesReportComponent } from './components/shop-sales-invoic
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import {CustomersListComponent} from './components/customers-list/customers-list.component';
 import { PurchasesComponent} from './components/purchases/purchases.component';
+import {SuppliersComponent} from './components/suppliers/suppliers.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent, children: [
@@ -53,6 +54,7 @@ const routes: Routes = [
       { path: 'routes', component: VehicleRoutesComponent },
       { path: 'personnel', component: PersonnelComponent },
       { path: 'finance', component: FinanceComponent },
+      { path: 'suppliers', component: SuppliersComponent},
       { path: 'settings', component: ConfigSettingsComponent },
       { path: 'user-management', component: UserManagementComponent },
       { path: 'purchases', component: PurchasesComponent },

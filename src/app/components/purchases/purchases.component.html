@@ -10,7 +10,7 @@
         </div>
         <div class="export-options mgl-2">
           <button class="button button-tertiary rounded button-img" (click)="makePurchase()">
-            <span>Create Purchase Order</span>
+            <span>Make Purchase</span>
           </button>
           <button class="button button-text button-img mgl-2">
             <span>
@@ -23,26 +23,45 @@
     </div>
 
     <div class="purchases-list">
-      <div class="purchase-record-header bold">
-        <span class="smallest">#</span>
-        <span class="smallest">Date</span>
-        <span class="smallest">Supplier</span>
-        <span class="smallest">Items</span>
-        <span class="smallest">Items Total</span>
-        <span class="smallest">Delivered</span>
-        <span class="smallest">Notes</span>
+      <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">#</div>
+          <div class="bold">Date</div>
+          <div class="bold">Supplier</div>
+          <div class="bold">Items</div>
+          <div class="bold">Order Total</div>
+          <div class="bold">Delivered</div>
+          <div>Actions</div>
+        </div>
       </div>
 
-      <div class="purchase-record" *ngFor="let purchase of purchases">
-        <span class="smallest">{{purchase.id}}</span>
-        <span class="smallest">{{purchase.generatedAt}}</span>
-        <span class="smallest">{{purchase.supplier.name}}</span>
-        <span class="smallest">{{purchase.products.length}}</span>
-        <span class="smallest">{{purchase.orderTotal}}</span>
-        <span class="smallest">{{purchase.delivered}}</span>
-        <div class="smallest"></div>
+      <div *ngIf="purchases">
+        <div *ngIf="purchases.length > 0;else noitems" class="card-list">
+          <div class="card-list-item data-set" *ngFor="let purchase of purchases; let index = index">
+            <div><span class="">{{purchase.id}}</span></div>
+            <div><span class="">{{purchase.generatedAt}}</span></div>
+            <div><span class="">{{purchase.supplier.name}}</span></div>
+            <div>
+              <span>{{purchase.products.length}}</span>
+            </div>
+            <div><span class="">{{purchase.orderTotal}}</span></div>
+            <div>
+              <span>{{purchase.delivered}}</span>
+            </div>
+            <div class="smallest bold"><a></a></div>
+          </div>
+        </div>
       </div>
-
+      <div class="card-list">
+        <ng-template #noitems>
+          <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+            <div class="content placeholder-text">
+              <h5 class="opaque">Its empty here</h5>
+              <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no purchases have been made yet.</p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

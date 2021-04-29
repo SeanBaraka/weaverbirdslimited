@@ -14,7 +14,7 @@ export class PurchasesComponent implements OnInit {
   shop: any;
 
   constructor(
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private shopManager: ShopManagerService,
     private stockService: StockDataService) { }
 
@@ -45,7 +45,8 @@ export class PurchasesComponent implements OnInit {
         shopId: this.shop.id
       }
     }).afterClosed().subscribe(data => {
-      this.getPurchaseRecords(data)
+      console.log(data)
+      this.getPurchaseRecords(data);
     });
   }
 }

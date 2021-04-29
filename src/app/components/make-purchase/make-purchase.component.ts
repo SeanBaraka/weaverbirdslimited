@@ -121,7 +121,7 @@ export class MakePurchaseComponent implements OnInit {
 
     this.stockService.makePurchase(this.shopData.shopId, this.purchaseForm.value).subscribe(response => {
       if(response) {
-        this.dialogRef.close(this.shopData.id)
+        this.dialogRef.close(this.shopData.shopId);
         this.generatePurchaseNote(response);
       }
     });
@@ -579,10 +579,12 @@ export class MakePurchaseComponent implements OnInit {
           },
           tableHeader: {
             bold: true,
-            margin: [0,5,0,5]
+            margin: [0, 5, 0, 5]
           }
         }
       };
-      pdfMake.createPdf(documentDefinition).print({silent: true}); // print the table data
+      const win = window.open('', 'tempWinForPdf');
+      pdfMake.createPdf(documentDefinition).print({silent: true}, win); // print the table data
+      win.close();
   }
 }

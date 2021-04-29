@@ -24,11 +24,7 @@ export class AddStockProductComponent implements OnInit, AfterViewInit {
     maxPrice: [''],
     sellingPrice: ['', Validators.required],
     shopId: [this.data.shopId],
-    supplier: this.fb.group({
-      name: ['', Validators.required],
-      telephone: ['', Validators.required],
-      email: ['']
-    })
+    supplier: ['']
   });
 
   supplierAvailable = false;
@@ -37,6 +33,7 @@ export class AddStockProductComponent implements OnInit, AfterViewInit {
   selectedProduct;
 
   @ViewChild('serialNumber') myInputField: ElementRef;
+  suppliers: any[];
 
   ngOnInit(): void {
     if (this.data.product) {
@@ -48,18 +45,23 @@ export class AddStockProductComponent implements OnInit, AfterViewInit {
       this.productForm.get('costPrice').setValue(this.selectedProduct.costPrice);
       this.productForm.get('minPrice').setValue(this.selectedProduct.minPrice);
       this.productForm.get('sellingPrice').setValue(this.selectedProduct.sellingPrice);
-      this.productForm.get('maxPrice').setValue(this.selectedProduct.maxPrice); this.productForm.get('serialNumber').setValue(this.selectedProduct.serialNumber);
-      this.productForm.get('qty').setValue(this.selectedProduct.quantity);
-      this.productForm.get('name').setValue(this.selectedProduct.name);
-      this.productForm.get('costPrice').setValue(this.selectedProduct.costPrice);
+      this.productForm.get('maxPrice').setValue(this.selectedProduct.maxPrice);
       this.productForm.get('minPrice').setValue(this.selectedProduct.minPrice);
       this.productForm.get('sellingPrice').setValue(this.selectedProduct.sellingPrice);
       this.productForm.get('maxPrice').setValue(this.selectedProduct.maxPrice);
     }
-   
+    this.getSuppliers();
   }
   ngAfterViewInit(): void {
     this.myInputField.nativeElement.focus();
+  }
+
+  // get registered suppliers.
+  getSuppliers(): void {
+    this.stockData.getSuppliers().subscribe((resp) => {
+      this.suppliers = resp;
+      console.log(resp);
+    });
   }
 
   addProduct(event: any): void {
@@ -67,7 +69,7 @@ export class AddStockProductComponent implements OnInit, AfterViewInit {
       this.loading = true;
       this.productForm.get('shopId').setValue(this.data.shopId);
       this.stockData.addNewProduct(this.productForm.value).subscribe((response) => {
-        
+
         if (response) {
           this.loading = false;
           this.productForm.reset();

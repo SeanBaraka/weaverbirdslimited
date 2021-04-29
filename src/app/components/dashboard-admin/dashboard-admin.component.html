@@ -66,6 +66,31 @@
             </div>
           </div>
 
+
+          <div class="shops-info mgy-2" *ngIf="userIsAdmin">
+            <h3>Suppliers</h3>
+            <div class="customers-list-summary mgy-1">
+              <div class="customer-record-header bold">
+                <span>#</span>
+                <span>Name</span>
+                <span>Telephone</span>
+                <span>Email</span>
+              </div>
+              <div *ngIf="suppliers.length > 0">
+                <div class="customer-record" *ngFor="let customer of customers">
+                  <span>{{customer.id}}</span>
+                  <span>{{customer.name}}</span>
+                  <span>{{customer.telephone}}</span>
+                  <span>{{customer.location}}</span>
+                  <span>Ksh. {{customer.saleRecords.length}}</span>
+                </div>
+              </div>
+              <div class="full-list smallest mgy-2" >
+                <a [routerLink]="['/dashboard','suppliers']">Show all Suppliers</a>
+              </div>
+            </div>
+          </div>
+
             <div class="flexed flexed-justify mgy-2" *ngIf="userIsAdmin">
                 <div class="shops-info">
                     <h3>Human Resources</h3>
