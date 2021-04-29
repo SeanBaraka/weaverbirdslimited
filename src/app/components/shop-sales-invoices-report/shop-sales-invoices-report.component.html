@@ -1,5 +1,6 @@
 <div class="app-container" style="padding: 0;">
     <app-search-print-filter></app-search-print-filter>
+    <app-sort-filter [listItems]="shopInvoices" (filterEmitter)="updateInvoices($event)"></app-sort-filter>
     <div class="card-list">
         <div class="card-list-item table-header">
           <div class="bold">Date</div>

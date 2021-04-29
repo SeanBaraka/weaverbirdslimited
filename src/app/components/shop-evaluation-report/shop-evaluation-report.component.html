@@ -1,1 +1,13 @@
-<p>shop-evaluation-report works!</p>
+<div class="container">
+  <h4 class="sub-title"></h4>
+  <div class="flexed">
+    <button class="button-pri-alt" (click)="selectDateBTW()">BtoW</button>
+    <button class="button-sec-alt" (click)="selectDatePS()">Psales Report</button>
+  </div>
+  <div class="date-container" *ngIf="dateSelected">
+    <label for="" class="bold smallest">{{message}}. Choose Date</label> <br>
+    <input type="date">
+    <input type="date">
+    <button class="button button-tert-alt">Today</button>
+  </div>
+</div>

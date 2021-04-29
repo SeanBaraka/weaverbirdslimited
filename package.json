@@ -38,6 +38,7 @@
     "@types/electron": "^1.6.10",
     "@types/socket.io-client": "^1.4.34",
     "html-to-pdfmake": "^2.1.2",
+    "moment": "^2.29.1",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.5.5",
     "socket.io-client": "^3.0.4",

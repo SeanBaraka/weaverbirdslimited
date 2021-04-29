@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StockDataService} from '../../services/stock-data.service';
 
 @Component({
   selector: 'app-shop-suppliers-report',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopSuppliersReportComponent implements OnInit {
 
-  constructor() { }
+  suppliers: [] = []
+  constructor(
+    private shopData: StockDataService
+  ) { }
 
   ngOnInit(): void {
+    this.getSupplierList();
   }
 
+  getSupplierList(): void {
+    this.shopData.getSuppliers().subscribe((suppliers) => {
+      this.suppliers = suppliers;
+    });
+  }
+
+  updateSupplier(supplier: any): void {
+
+  }
+
+  removeSupplier(id: any): void{
+
+  }
 }

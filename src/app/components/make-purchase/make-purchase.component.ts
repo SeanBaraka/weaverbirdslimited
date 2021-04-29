@@ -87,7 +87,7 @@ export class MakePurchaseComponent implements OnInit {
 
   selectProduct(prodInput: any) {
     const product = this.availableProducts.find(x => x.name === prodInput.value);
-    
+
     const purchaseItem = {
       "serialNumber": product.serialNumber,
       "name": product.name,
@@ -100,14 +100,14 @@ export class MakePurchaseComponent implements OnInit {
 
   getPurchaseItemTotal(serialNumber: number): number {
     const singlePurchase = this.purchaseItems.find(x => x.serialNumber === serialNumber);
-    const total = singlePurchase.quantity * singlePurchase.price 
+    const total = singlePurchase.quantity * singlePurchase.price
     return total;
   }
 
   getOrderTotal(): number {
     let total = 0;
     this.purchaseItems.forEach((item) => {
-      total += (item.quantity * item.price)      
+      total += (item.quantity * item.price)
     })
     return total;
   }
@@ -116,7 +116,7 @@ export class MakePurchaseComponent implements OnInit {
     this.purchaseForm.get('supplier').setValue(this.currentSupplier.id)
     this.purchaseForm.get('products').setValue(this.purchaseItems)
     const orderTotal = this.getOrderTotal();
-    
+
     this.purchaseForm.get('orderTotal').setValue(orderTotal);
 
     this.stockService.makePurchase(this.shopData.shopId, this.purchaseForm.value).subscribe(response => {
@@ -137,7 +137,7 @@ export class MakePurchaseComponent implements OnInit {
     })
   }
 
-  generatePurchaseNote(purchaseInfo: any) {
+  generatePurchaseNote(purchaseInfo: any): void {
       const documentDefinition = {
         pageSize: { width: 700, height: 1000},
         pageMargins: 25,

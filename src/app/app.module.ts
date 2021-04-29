@@ -64,6 +64,7 @@ import { MakePurchaseComponent } from './components/make-purchase/make-purchase.
 import { PurchasesComponent } from './components/purchases/purchases.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { EmployeeHireComponent } from './components/employee-hire/employee-hire.component';
+import { SortFilterComponent } from './components/sort-filter/sort-filter.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import { EmployeeHireComponent } from './components/employee-hire/employee-hire.
     MakePurchaseComponent,
     PurchasesComponent,
     EmployeesComponent,
-    EmployeeHireComponent
+    EmployeeHireComponent,
+    SortFilterComponent
   ],
   imports: [
     BrowserModule,

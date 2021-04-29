@@ -311,7 +311,7 @@ export class ProductsSaleComponent implements OnInit {
             ]
           ]
         },
-        this.paymentMethod.invoice != true ? {
+        this.paymentMethod.invoice !== true ? {
           columns: [
             [
               {text: `CASH SALE #${this.receiptNumber}`, style: 'textRegular', alignment: 'left'},
@@ -494,7 +494,7 @@ export class ProductsSaleComponent implements OnInit {
         }
       }
     };
-    pdfMake.createPdf(documentDefinition).print({silent: true}); // print the table data
+    pdfMake.createPdf(documentDefinition).open(); // print the table data
   }
 
   invoicePayment(): void {

@@ -1,0 +1,9 @@
+<div class="sort-container flexed">
+  <button class="button button-sec-alt" (click)="filterData('1day')">Today</button>
+  <button class="button button-tert-alt" (click)="filterData('7day')">Weekly</button>
+  <button class="button button-prel-alt" (click)="filterData('define')">Date</button>
+  <div class="date-container" *ngIf="dateSelected">
+    <input class="input-date" type="datetime-local" id="startDate">
+    <input class="input-date" type="datetime-local" id="endDate">
+  </div>
+</div>

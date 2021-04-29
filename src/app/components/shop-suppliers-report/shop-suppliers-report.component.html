@@ -1,1 +1,23 @@
-<p>shop-suppliers-report works!</p>
+<div class="suppliers-container">
+  <h3 class="heading">Suppliers</h3>
+  <div *ngIf="suppliers.length > 0" class="card-list">
+    <div class="card-list-item" *ngFor="let supplier of suppliers; let index = index">
+      <div><span class="block smallest">User Id.</span><span class="bold">{{supplier.id}}</span></div>
+      <div><span class="block smallest">Supplier Name</span><span class="bold">{{supplier.name}}</span></div>
+      <div><span class="block smallest">Telephone</span><span class="bold">{{supplier.telephone}}</span></div>
+      <div><span class="smallest block">Email</span><span class="bold">{{supplier.email}}</span></div>
+      <div>
+        <div class="smallest bold flexed">
+          <div class="move center mgl-2">
+            <button class="button button-image" (click)="updateSupplier(supplier)"><img src="assets/add_product.svg" width="10" alt=""></button>
+            <span class="smallest">Update</span>
+          </div>
+          <div class="remove center">
+            <button class="button button-image" (click)="removeSupplier(supplier.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+            <span class="smallest">Delete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

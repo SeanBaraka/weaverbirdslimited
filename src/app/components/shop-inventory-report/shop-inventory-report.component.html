@@ -12,13 +12,13 @@
     </div>
     <div *ngIf="shopProducts.length > 0;else noitems" class="card-list">
         <div class="card-list-item data-set" *ngFor="let product of shopProducts; let index = index">
-          <div><span class="">{{product.date}}</span></div>
-          <div>{{product.shop.name}}</div>
-          <div><span class="">{{product.receiptNumber}}</span></div>
-          <div><span>Ksh. {{product.saleAmount.toLocaleString()}}</span></div>
-          <div><span class="">Ksh. {{product.balance.toLocaleString()}}</span></div>
+          <div><span class="">{{product.name}}</span></div>
+          <div>{{product.serialNumber}}</div>
+          <div><span class="">Ksh. {{product.costPrice.toLocaleString()}}</span></div>
+          <div><span>Ksh. {{product.sellingPrice.toLocaleString()}}</span></div>
+          <div><span class="">{{product.quantity}}</span></div>
           <div class="flexed">
-            <span>Ksh. {{product.balance.toLocaleString()}}</span>
+            <span>Ksh. {{getStockTotal(product.id)}}</span>
           </div>
         </div>
     </div>

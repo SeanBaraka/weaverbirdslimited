@@ -27,9 +27,9 @@ export class FinanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getAccountBalance((response) => {
-      this.mpesaBalance = response
+      this.mpesaBalance = response;
     });
-    this.getSales()
+    this.getSales();
   }
 
   /** we create a list that holds the sales transaction of a particular payment method */
@@ -41,29 +41,29 @@ export class FinanceComponent implements OnInit {
 
 
   /** a list of all sales recorded */
-  allSales: any[]
+  allSales: any[];
   // getting all sales and assigning them to our list of all sales.
   getSales(): void {
     this.salesService.getAllSales().subscribe((response: any[]) => {
       response.forEach((sale) => {
         sale.date = new Date(sale.date).toLocaleDateString('en-GB')
-        sale.shop = sale.shop.name
-      })
-      this.allSales = response
+        sale.shop = sale.shop.name;
+      });
+      this.allSales = response;
       this.cashTransactions = this.filterSales('CASH', this.allSales)
       this.mpesaTransactions = this.filterSales('MOBILE', this.allSales)
       this.invoiceTransactions = this.filterSales('INVOICE', this.allSales)
       this.cashSales = this.computeTotalSales(this.cashTransactions)
-      this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
+      // this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
       this.invoices = this.computeTotalSales(this.invoiceTransactions)
-      this.toggleAccount('CASH')
+      this.toggleAccount('CASH');
     });
   }
 
   // filter sales based on the payment method.
   filterSales(method: string, saleRecords?: any[]): any[] {
     const sales = saleRecords.filter(sale => sale.paymentMethod.toLowerCase() === method.toLowerCase())
-    
+
     return sales;
   }
 
@@ -75,7 +75,7 @@ export class FinanceComponent implements OnInit {
         break;
       case 'MOBILE':
         this.transactionSales = this.mpesaTransactions
-        break;    
+        break;
       default:
         this.transactionSales = this.cashTransactions
         break;
@@ -85,9 +85,16 @@ export class FinanceComponent implements OnInit {
   computeTotalSales(sales: any[]): number {
     const amounts = []
     sales.forEach((sale) => amounts.push(sale.saleAmount))
-    
-    return amounts.reduce((a, b) => a + b)
+
+    return amounts.reduce((a, b) => a + b);
   }
 
 
+  updateSales(event: any[]): void {
+    this.allSales = event;
+    this.cashTransactions = this.filterSales('CASH', this.allSales);
+    this.mpesaTransactions = this.filterSales('MOBILE', this.allSales);
+    this.invoiceTransactions = this.filterSales('INVOICE', this.allSales);
+    this.cashSales = this.computeTotalSales(this.cashTransactions);
+  }
 }

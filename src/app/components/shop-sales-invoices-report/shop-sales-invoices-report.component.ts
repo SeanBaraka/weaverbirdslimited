@@ -18,20 +18,18 @@ export class ShopSalesInvoicesReportComponent implements OnInit {
     this.shopService.getShopSaved().subscribe((shop) => {
       this.salesService.getInvoiceSales(shop.id).subscribe((invoices: any[]) => {
         invoices.forEach((invoice) => {
-          invoice.date = new Date(invoice.date).toLocaleDateString('en-GB')
-        })
-
-        console.log(invoices)
-
+          invoice.date = new Date(invoice.date).toLocaleDateString('en-GB');
+        });
         this.shopInvoices = invoices;
       });
-    })
+    });
   }
 
   ngOnInit(): void {
     this.getInvoices();
   }
 
-
-
+  updateInvoices($event: any[]): void {
+    this.shopInvoices = $event;
+  }
 }

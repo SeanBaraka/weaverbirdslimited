@@ -1,21 +1,22 @@
 <div class="app-container" style="padding: 0;">
     <app-search-print-filter></app-search-print-filter>
+    <app-sort-filter></app-sort-filter>
     <div class="card-list">
         <div class="card-list-item table-header">
-          <div class="bold">Rank</div>
+          <div class="bold">Product Id</div>
           <div class="bold">Product</div>
-          <div class="bold">Sale Amount</div>
-          <div class="bold">Sales</div>
-          <div class="bold">Total Sales</div>
+          <div class="bold">Selling Price</div>
+          <div class="bold">Sold Units</div>
+          <div class="bold">Total</div>
         </div>
     </div>
     <div *ngIf="productSales.length > 0;else noitems" class="card-list">
         <div class="card-list-item data-set" *ngFor="let products of productSales; let index = index">
-          <div><span class="">{{products.date}}</span></div>
-          <div>{{products.shop.name}}</div>
-          <div><span class="">{{products.receiptNumber}}</span></div>
-          <div><span>Ksh. {{products.saleAmount.toLocaleString()}}</span></div>
-          <div><span class="">Ksh. {{products.balance.toLocaleString()}}</span></div>
+          <div><span class="">{{products.id}}</span></div>
+          <div>{{products.name}}</div>
+          <div><span class="">Ksh. {{products.sellingPrice}}</span></div>
+          <div><span>{{products.quantity}}</span></div>
+          <div><span class="">Ksh. </span></div>
         </div>
     </div>
     <div class="card-list">

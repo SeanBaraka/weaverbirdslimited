@@ -25,5 +25,6 @@
         </div>
     </div>
     <h4 class="sales-summaries mgy-2">Sales Records</h4>
-    <app-sales-summaries [saleRecords]="transactionSales"></app-sales-summaries>
+    <app-sort-filter [listItems]="allSales" (filterEmitter)="updateSales($event)"></app-sort-filter>
+<!--    <app-sales-summaries [saleRecords]="transactionSales"></app-sales-summaries>-->
 </div>

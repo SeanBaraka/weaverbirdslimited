@@ -1,1 +1,23 @@
-<p>shop-purchase-report works!</p>
+<div class="container">
+  <app-sort-filter [listItems]="purchases" (filterEmitter)="updatePurchases($event)"></app-sort-filter>
+  <div class="card-list">
+    <div class="card-list-item table-header">
+      <div class="bold">Date</div>
+      <div class="bold">Supplier</div>
+      <div class="bold">Order Total</div>
+      <div class="bold">Number of Items</div>
+      <div>Actions</div>
+    </div>
+  </div>
+  <div *ngIf="purchases">
+    <div *ngIf="purchases.length > 0;else noitems" class="card-list">
+      <div class="card-list-item data-set" *ngFor="let purchase of purchases; let index = index">
+        <div><span class="">{{purchase.date}}</span></div>
+        <div><span class="">{{purchase.supplier.name}}</span></div>
+        <div><span class="">Ksh. {{purchase.orderTotal}}</span></div>
+        <div><span>{{purchase.products.length}}</span></div>
+        <div class="smallest bold" (click)="reprintOrder(purchase.id)"><a>Reprint</a></div>
+      </div>
+    </div>
+  </div>
+</div>

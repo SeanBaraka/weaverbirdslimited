@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop-evaluation-report.component.sass']
 })
 export class ShopEvaluationReportComponent implements OnInit {
+  dateSelected = false;
+  message: any;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  selectDateBTW(): void {
+    this.dateSelected = true;
+    this.message = 'Best to Worst Summary.';
+  }
+
+  selectDatePS(): void {
+    this.dateSelected = true;
+    this.message = 'Profit Sale Summary.';
+  }
 }
