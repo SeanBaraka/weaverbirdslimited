@@ -18,9 +18,14 @@ export class CustomerService {
   }
 
   /** insert a new customer to the database
-   * @param { } - the customer details object
+   * @param customerDetails - the customer details object
+   * @param customerId - an optional number passed with the request
    */
-  saveCustomer(customerDetails: any): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}customer/add`, customerDetails);
+  saveCustomer(customerDetails: any, customerId?: number): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}customer/add/${customerId}`, customerDetails);
+  }
+
+  removeCustomer(customerId: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}customer/remove/${customerId}`);
   }
 }

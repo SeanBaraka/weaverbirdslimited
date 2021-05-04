@@ -15,16 +15,17 @@ export class CreateCustomerComponent implements OnInit {
     location: ['']
   });
 
-  constructor(private fb: FormBuilder,
-              private customerService: CustomerService,
-              private dialogRef: MatDialogRef<CreateCustomerComponent>) { }
+  constructor(
+    private fb: FormBuilder,
+    private customerService: CustomerService,
+    private dialogRef: MatDialogRef<CreateCustomerComponent>) { }
 
   ngOnInit(): void {
   }
 
   addCustomer(): void {
     const customerData = this.customerForm.value;
-    this.customerService.saveCustomer(customerData).subscribe((response) => {
+    this.customerService.saveCustomer(customerData, -1).subscribe((response) => {
       if (response) {
         this.dialogRef.close('success');
         this.customerForm.reset();

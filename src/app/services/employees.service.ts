@@ -12,14 +12,20 @@ export class EmployeesService {
 
   /** hire employee.
    * @param personalInfo - personal details
+   * @param employeeId - employee details
    */
-  hireEmployee(personalInfo: any): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}employees/hire/`, personalInfo);
+  hireEmployee(personalInfo: any, employeeId?: number): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}employees/hire/${employeeId}`, personalInfo);
   }
 
   /** get all employee records */
   getEmployees(): Observable<any> {
     return this.http.get(`${environment.apiBaseUrl}employees`);
+  }
+
+  /** remove employee */
+  removeEmployee(employeeId: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}employees/remove/${employeeId}`);
   }
 
 }

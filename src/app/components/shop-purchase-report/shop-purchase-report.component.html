@@ -19,5 +19,15 @@
         <div class="smallest bold" (click)="reprintOrder(purchase.id)"><a>Reprint</a></div>
       </div>
     </div>
+    <div class="card-list">
+      <ng-template #noitems>
+        <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+          <div class="content placeholder-text">
+            <h5 class="opaque">Its empty here</h5>
+            <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no purchases have been made yet.</p>
+          </div>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>

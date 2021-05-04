@@ -26,36 +26,69 @@
                                     <li>
                                         <div class="purchase-order">
                                             <h5>Purchase Order Number: #{{order.id}}</h5>
-                                            <p>You have a pending order that needs to be received</p>
-                                            <button class="button-text" (click)="confirmReceived(order.id)">Receive</button>
+                                            <p>Items: {{order.products.length}}</p>
+                                            <button class="button-text" (click)="confirmReceived(order.id)" [disabled]="receiveLoading">
+                                              <span *ngIf="!receiveLoading;else loading">Receive</span>
+                                              <ng-template #loading>Please Wait...</ng-template>
+                                            </button>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </button>
-                    <button class="button button-sec-alt">
-                        <span>Transfer Bulk</span>
+                    <button class="button button-sec-alt" (click)="showNotes()">
+                        <span *ngIf="!showReceivedNotes;else showStock">Received Products</span>
+                        <ng-template #showStock>Show Stock</ng-template>
                         <span><img width="15" alt=""></span>
                     </button>
                 </div>
             </div>
 
-            <div class="stock-items-container">
+          <div class="purchases-list" *ngIf="showReceivedNotes">
+            <div class="card-list">
+              <div class="card-list-item received table-header">
+                <div class="bold">#</div>
+                <div class="bold">Date</div>
+                <div class="bold">Supplier</div>
+                <div class="bold">Items</div>
+                <div class="bold">Order Total</div>
+                <div class="bold">Delivered</div>
+                <div>Actions</div>
+              </div>
+            </div>
+
+            <div *ngIf="purchases">
+              <div *ngIf="purchases.length > 0;else noitems" class="card-list">
+                <div class="card-list-item received data-set" *ngFor="let purchase of purchases; let index = index">
+                  <div><span class="">{{purchase.id}}</span></div>
+                  <div><span class="">{{purchase.generatedAt}}</span></div>
+                  <div><span class="">{{purchase.supplier.name}}</span></div>
+                  <div>
+                    <span>{{purchase.products.length}}</span>
+                  </div>
+                  <div><span class="">{{purchase.orderTotal}}</span></div>
+                  <div>
+                    <span>{{purchase.delivered}}</span>
+                  </div>
+                  <div class="smallest bold" (click)="printReceiveNote(purchase)"><a>Reprint Note</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-list">
+              <ng-template #noitems>
+                <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+                  <div class="content placeholder-text">
+                    <h5 class="opaque">Its empty here</h5>
+                    <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no purchases have been made yet.</p>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+
+            <div class="stock-items-container" *ngIf="!showReceivedNotes">
                 <div *ngIf="!simpleShop">
-                <!-- <h5 class="sub-heading">Stock Information summary</h5>
-                <div class="container mgy-2" *ngIf="stockProducts.length > 0">
-                    <div class="grid shops-summary mgy-1">
-                        <div class="grid-item card card-color card-flat">
-                            <img src="assets/stocks.svg" width="35" alt="">
-                            <h5 class="mgy-1">Total Inventory</h5>
-                            <div class="desc mgy-1">
-                            <span class="small mgy-1">As at {{todayDate}}</span>
-                            <h2 class="mgy-1">Ksh. {{getStockTotalAmount().toLocaleString()}}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 </div>
                 <div class="loading" *ngIf="loading">
                 <div class="grid grid-center">

@@ -23,20 +23,56 @@
     </div>
 
     <div class="customer-list">
-      <div class="customer-record bold smallest">
-        <span class="smallest">#</span>
-        <span class="smallest">Customer Name</span>
-        <span class="smallest">Location</span>
-        <span class="smallest">Telephone</span>
-        <span class="smallest">Sale Records</span>
+      <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">#</div>
+          <div class="bold">Name</div>
+          <div class="bold">Location</div>
+          <div class="bold">Telephone</div>
+          <div class="bold">Sales Records</div>
+          <div>Actions</div>
+        </div>
       </div>
 
-      <div class="customer-record" *ngFor="let customer of customers">
-        <span class="smallest">{{customer.id}}</span>
-        <span class="smallest">{{customer.name}}</span>
-        <span class="smallest">{{customer.location}}</span>
-        <span class="smallest">{{customer.telephone}}</span>
-        <span class="smallest">{{customer.saleRecords}}</span>
+      <div *ngIf="customers">
+        <div *ngIf="customers.length > 0;else noitems" class="card-list">
+          <div class="card-list-item data-set" *ngFor="let customer of customers; let index = index">
+            <div><span class="">{{customer.id}}</span></div>
+            <div><span class="">{{customer.name}}</span></div>
+            <div>
+              <span class="" *ngIf="customer.location !== null || customer.location !== ''; else nolocation">{{customer.location}}</span>
+              <ng-template #nolocation>
+                NA
+              </ng-template>
+            </div>
+            <div><span class="">{{customer.telephone}}</span></div>
+            <div>
+              <span>{{customer.saleRecords}}</span>
+            </div>
+            <div class="smallest bold">
+              <div class="smallest bold flexed">
+                <div class="move center mgl-2">
+                  <button class="button button-image" (click)="updateCustomer(customer)"><img src="assets/add_product.svg" width="10" alt=""></button>
+                  <span class="smallest">Update</span>
+                </div>
+                <div class="remove center">
+                  <button class="button button-image" (click)="deleteCustomer(customer.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+                  <span class="smallest">Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-list">
+        <ng-template #noitems>
+          <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+            <div class="content placeholder-text">
+              <h5 class="opaque">Its empty here</h5>
+              <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no customers yet.</p>
+            </div>
+          </div>
+        </ng-template>
       </div>
 
     </div>

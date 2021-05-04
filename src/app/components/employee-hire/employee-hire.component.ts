@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {EmployeesService} from '../../services/employees.service';
 import {AuthService} from '../../services/auth.service';
 import {StockDataService} from '../../services/stock-data.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-hire',
@@ -21,7 +21,8 @@ export class EmployeeHireComponent implements OnInit {
     private employeeService: EmployeesService,
     private authService: AuthService,
     private shopsService: StockDataService,
-    private employeeHireDialog: MatDialogRef<EmployeeHireComponent>
+    private employeeHireDialog: MatDialogRef<EmployeeHireComponent>,
+    @Inject(MAT_DIALOG_DATA) private userInfo: any
   ) { }
 
   // form object, I can't remember what they are called in angular
@@ -40,6 +41,12 @@ export class EmployeeHireComponent implements OnInit {
   ngOnInit(): void {
     this.getAvailableRoles();
     this.getAvailableShops();
+
+    if (this.userInfo !== null) {
+      this.registerForm.get('firstName').setValue(this.userInfo.firstName);
+      this.registerForm.get('lastName').setValue(this.userInfo.lastName);
+      this.registerForm.get('username').setValue(this.userInfo.username);
+    }
   }
 
   // while registering, populate the list of available user roles
@@ -52,10 +59,12 @@ export class EmployeeHireComponent implements OnInit {
   }
   // after one has finished creating the user account, proceed to register.
   completeRegistration(): void {
+    let employeeId;
+    this.userInfo !== null ? employeeId = this.userInfo.id : employeeId = -1;
     this.loading = true;
-    const shop = this.shops.find(x => x.name == this.registerForm.get('shopId').value);
-    this.registerForm.get('shopId').setValue(shop.id)
-    this.employeeService.hireEmployee(this.registerForm.value).subscribe((response) => {
+    const shop = this.shops.find(x => x.name === this.registerForm.get('shopId').value);
+    this.registerForm.get('shopId').setValue(shop.id);
+    this.employeeService.hireEmployee(this.registerForm.value, employeeId).subscribe((response) => {
       if (response) {
         this.successMessage = response.success;
         this.loading = false;
@@ -70,7 +79,7 @@ export class EmployeeHireComponent implements OnInit {
     this.shopsService.getShops().subscribe((response) => {
       if (response) {
         response.departments = [
-          {"name": "POS"},
+          { "name" : "POS" },
           {"name": "Accounting"}
         ]
         this.shops = response;

@@ -67,6 +67,7 @@ import { EmployeeHireComponent } from './components/employee-hire/employee-hire.
 import { SortFilterComponent } from './components/sort-filter/sort-filter.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
+import { ClearInvoiceComponent } from './components/clear-invoice/clear-invoice.component';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { AddSupplierComponent } from './components/add-supplier/add-supplier.com
     EmployeeHireComponent,
     SortFilterComponent,
     SuppliersComponent,
-    AddSupplierComponent
+    AddSupplierComponent,
+    ClearInvoiceComponent
   ],
   imports: [
     BrowserModule,

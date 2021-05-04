@@ -244,9 +244,9 @@ export class ProductsSaleComponent implements OnInit {
             this.finalizeSale(amount, transactionCode);
             this.thisDialog.close();
           }
-        })
+        });
       }
-    })
+    });
   }
 
   mobilePayment(): void {
@@ -286,6 +286,7 @@ export class ProductsSaleComponent implements OnInit {
                 alignment: this.paymentMethod.invoice ? 'left' : 'center'
               },
               {text: 'Pourtap Limited', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
+              {text: `${this.data.shopName}`, style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
               {text: 'P.O. Box 3305-90100 NAIROBI KENYA', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'}
             ],
             // this is the part of the header that shows customer details
@@ -305,7 +306,7 @@ export class ProductsSaleComponent implements OnInit {
           columns: [
             [
               {text: 'Pourtap Limited', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
-              // {text: 'P.O. BOX 3305 - 90100, KENYA', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
+              {text: `${this.data.shopName}`, style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
               {text: 'TEL: 0723456789', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'},
               // {text: 'PIN: P051820673J', style: 'textRegular', alignment: this.paymentMethod.invoice ? 'left' : 'center'}
             ]
@@ -315,8 +316,7 @@ export class ProductsSaleComponent implements OnInit {
           columns: [
             [
               {text: `CASH SALE #${this.receiptNumber}`, style: 'textRegular', alignment: 'left'},
-              {text: `DATE TIME: ${new Date(Date.now()).toLocaleDateString()}`, style: 'textRegular', alignment: 'left'},
-              {text: `SHOP NAME: ${this.data.shopName.toUpperCase()}`, style: 'textRegular', alignment: 'left'}
+              {text: `DATE TIME: ${new Date(Date.now()).toLocaleDateString()}`, style: 'textRegular', alignment: 'left'}
             ]
           ]
         } : {
@@ -490,11 +490,13 @@ export class ProductsSaleComponent implements OnInit {
         },
         tableHeader: {
           bold: true,
-          margin: [0,5,0,5]
+          margin: [0, 5, 0, 5]
         }
       }
     };
-    pdfMake.createPdf(documentDefinition).open(); // print the table data
+    const win = window.open('', 'winTempForPdf');
+    pdfMake.createPdf(documentDefinition).print({ silent: true }, win);
+    win.close(); // print the table data
   }
 
   invoicePayment(): void {

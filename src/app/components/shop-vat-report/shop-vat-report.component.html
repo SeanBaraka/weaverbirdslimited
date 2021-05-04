@@ -1,1 +1,62 @@
-<p>shop-vat-report works!</p>
+<div class="app-container" style="padding: 0;">
+  <div class="flexed flexed-end" style="margin: 1rem 0">
+    <div class="search-input">
+      <label for="search-field" style="font-size: 13px">Search</label>
+      <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterProductSales($event.target.value)">
+    </div>
+    <div class="export-options mgl-2">
+      <button class="button button-tertiary rounded button-img" (click)="printSalesReport(sales)">
+          <span>
+            <img src="assets/download.svg" alt="" width="10">
+          </span>
+        <span>Print Report</span>
+      </button>
+      <button class="button button-text button-img mgl-2">
+          <span>
+            <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
+          </span>
+        <span>Export Report</span>
+      </button>
+    </div>
+  </div>
+  <app-sort-filter [listItems]="sales" (filterEmitter)="updateTaxSales($event)"></app-sort-filter>
+  <div class="card-list">
+    <div class="card-list-item table-header">
+      <div class="bold">Date</div>
+      <div class="bold">Receipt No.</div>
+      <div class="bold">Mode of Payment</div>
+      <div class="bold">Sale Amount</div>
+      <div class="bold">Tax (16%)</div>
+    </div>
+  </div>
+  <div *ngIf="sales">
+    <div *ngIf="sales.length > 0;else noitems" class="card-list">
+      <div class="card-list-item data-set" *ngFor="let saleInfo of sales; let index = index">
+        <div><span class="">{{saleInfo.date}}</span></div>
+        <div><span class="">{{saleInfo.receiptNumber}}</span></div>
+        <div><span class="">{{saleInfo.paymentMethod}}</span></div>
+        <div><span>Ksh. {{saleInfo.saleAmount.toLocaleString()}}</span></div>
+        <div><span>Ksh. {{saleInfo.totalTax.toFixed(2)}}</span></div>
+      </div>
+    </div>
+    <div class="card-listk">
+      <div class="card-list-item no-shadow data-set">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="bold"><span>Total Tax</span></div>
+        <div class="bold"><span>Ksh. {{totalTax.toFixed(2)}}</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-list">
+    <ng-template #noitems>
+      <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+        <div class="content placeholder-text">
+          <h5 class="opaque">Its empty here</h5>
+          <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no sales have been made yet. Could not get a tax report</p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

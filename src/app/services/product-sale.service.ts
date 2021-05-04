@@ -32,6 +32,10 @@ export class ProductSaleService {
     return this.http.get(`${environment.apiBaseUrl}shop/${shopId}/sales/invoices`)
   }
 
+  clearInvoiceSale(invoiceNumber: number, paymentDetails: any): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}sales/invoices/clear/${invoiceNumber}`, paymentDetails);
+  }
+
   /** gets mpesa transaction details */
   mobilePaymentConfirmation(paymentInfo: any): boolean {
     let success:boolean;

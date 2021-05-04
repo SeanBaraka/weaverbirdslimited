@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomerService} from '../../services/customer.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CreateCustomerComponent} from '../create-customer/create-customer.component';
+import {DataDeleteComponent} from '../data-delete/data-delete.component';
 
 @Component({
   selector: 'app-customers-list',
@@ -11,8 +12,10 @@ import {CreateCustomerComponent} from '../create-customer/create-customer.compon
 export class CustomersListComponent implements OnInit {
   customers: any[] = [];
 
-  constructor(private customerService: CustomerService,
-              private dialog: MatDialog) { }
+  constructor(
+    private customerService: CustomerService,
+    private dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.getCustomerList();
@@ -40,6 +43,24 @@ export class CustomersListComponent implements OnInit {
       height: 'auto'
     }).afterClosed().subscribe((data) => {
       this.getCustomerList();
+    });
+  }
+
+  updateCustomer(customer: any): void {
+
+  }
+
+  deleteCustomer(id: number): void {
+    this.dialog.open(DataDeleteComponent, {
+      width: '540px',
+      data: {
+        itemId: id,
+        item: 'customer'
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result === 'deleted') {
+        this.getCustomerList();
+      }
     });
   }
 }

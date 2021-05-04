@@ -14,7 +14,11 @@ export class SupplierService {
     return this.http.get(`${environment.apiBaseUrl}supplier/all`)
   }
 
-  addSupplier(supplierInfo: any): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}supplier/add`, supplierInfo);
+  addSupplier(supplierInfo: any, supplierId?: number): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}supplier/add/${supplierId}`, supplierInfo);
+  }
+
+  removeSupplier(supplierId: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}supplier/remove/${supplierId}`);
   }
 }

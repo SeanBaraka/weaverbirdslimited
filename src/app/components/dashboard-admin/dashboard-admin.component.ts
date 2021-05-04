@@ -26,13 +26,14 @@ export class DashboardAdminComponent implements OnInit {
   departments: any[] = [];
   suppliers: any[] = [];
 
-  constructor(private router: Router,
-  private shopsService: StockDataService,
-  private vehicleService: VehicleService,
-  private customerService: CustomerService,
-  private shopManageService: ShopManagerService,
-  private dialog: MatDialog,
-  private authservice: AuthService) { }
+  constructor(
+    private router: Router,
+    private shopsService: StockDataService,
+    private vehicleService: VehicleService,
+    private customerService: CustomerService,
+    private shopManageService: ShopManagerService,
+    private dialog: MatDialog,
+    private authservice: AuthService) { }
 
   ngOnInit(): void {
     this.getAvailableShops();
@@ -62,7 +63,7 @@ export class DashboardAdminComponent implements OnInit {
   checkSuperAdmin(): void {
     const userData = this.authservice.getUserData();
     if (userData.issa) {
-      this.isSuperAdmin = true
+      this.isSuperAdmin = true;
     }
   }
 
@@ -71,14 +72,13 @@ export class DashboardAdminComponent implements OnInit {
    */
   getTopCustomers(items: number): void {
     this.customerService.getCustomers().subscribe((customersResponse: any[]) => {
-      if(customersResponse) {
+      if (customersResponse.length > 0) {
         customersResponse.forEach((customer) => {
           if (customer.saleRecords == null) {
             customer.saleRecords = [];
           }
         });
-        this.customers = customersResponse;
-        this.customers.length = items;
+        this.customers = customersResponse.splice(0, 2);
       }
     });
   }

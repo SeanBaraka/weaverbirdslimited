@@ -29,31 +29,42 @@
       <div>Actions</div>
     </div>
   </div>
-    <div *ngIf="suppliers">
-      <div *ngIf="suppliers.length > 0;else noitems" class="card-list">
-        <div class="card-list-item data-set" *ngFor="let supplier of suppliers; let index = index">
-          <div><span class="">{{supplier.id}}</span></div>
-          <div><span class="">{{supplier.name}}</span></div>
-          <div><span class="">{{supplier.telephone}}</span></div>
-          <div>
-            <span *ngIf="supplier.email;else noemail">{{supplier.email}}</span>
-            <ng-template #noemail>
-              NA
-            </ng-template>
+  <div *ngIf="suppliers">
+    <div *ngIf="suppliers.length > 0;else noitems" class="card-list">
+      <div class="card-list-item data-set" *ngFor="let supplier of suppliers; let index = index">
+        <div><span class="">{{supplier.id}}</span></div>
+        <div><span class="">{{supplier.name}}</span></div>
+        <div><span class="">{{supplier.telephone}}</span></div>
+        <div>
+          <span *ngIf="supplier.email;else noemail">{{supplier.email}}</span>
+          <ng-template #noemail>
+            NA
+          </ng-template>
+        </div>
+        <div class="smallest bold">
+          <div class="smallest bold flexed">
+            <div class="move center mgl-2">
+              <button class="button button-image" (click)="updateSupplier(supplier)"><img src="assets/add_product.svg" width="10" alt=""></button>
+              <span class="smallest">Update</span>
+            </div>
+            <div class="remove center">
+              <button class="button button-image" (click)="deleteSupplier(supplier.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+              <span class="smallest">Delete</span>
+            </div>
           </div>
-          <div class="smallest bold"><a></a></div>
         </div>
       </div>
     </div>
-    <div class="card-list">
-      <ng-template #noitems>
-        <div class="grid grid-center" style="text-align: center;padding: 2em 0">
-          <div class="content placeholder-text">
-            <h5 class="opaque">Its empty here</h5>
-            <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no suppliers yet.</p>
-          </div>
+  </div>
+  <div class="card-list">
+    <ng-template #noitems>
+      <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+        <div class="content placeholder-text">
+          <h5 class="opaque">Its empty here</h5>
+          <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no suppliers yet.</p>
         </div>
-      </ng-template>
-    </div>
+      </div>
+    </ng-template>
+  </div>
 
 </div>

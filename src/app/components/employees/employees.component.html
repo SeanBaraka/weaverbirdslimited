@@ -1,11 +1,41 @@
 <div class="employees-container mgy-1" style="max-height: 750px;overflow: auto">
-  <div *ngIf="employees.length > 0" class="card-list">
-    <div class="card-list-item" *ngFor="let employee of employees; let index = index">
-      <div><span class="block smallest">User Id.</span><span class="bold">{{employee.id}}</span></div>
-      <div><span class="block smallest">First Name</span><span class="bold">{{employee.firstName}}</span></div>
-      <div><span class="block smallest">Last Name</span><span class="bold">{{employee.lastName}}</span></div>
-      <div><span class="block smallest">System Username</span><span class="bold">{{employee.username}}</span></div>
-      <div><span class="smallest block">Role</span><span class="bold">{{employee.role ? employee.role.name : ''}}</span></div>
+  <div class="card-list">
+    <div class="card-list-item table-header">
+      <div class="bold">Full name</div>
+      <div class="bold">System username</div>
+      <div>Actions</div>
     </div>
+  </div>
+  <div *ngIf="employees">
+    <div *ngIf="employees.length > 0;else noitems" class="card-list">
+      <div class="card-list-item data-set" *ngFor="let employee of employees; let index = index">
+        <div><span class="">{{employee.firstName}} {{employee.lastName}}</span></div>
+        <div>
+          <span class="">{{employee.username}}</span>
+        </div>
+        <div class="smallest bold">
+          <div class="smallest bold flexed">
+            <div class="move center mgl-2">
+              <button class="button button-image" (click)="updateUser(employee)"><img src="assets/add_product.svg" width="10" alt=""></button>
+              <span class="smallest">Update</span>
+            </div>
+            <div class="remove center">
+              <button class="button button-image" (click)="deleteUser(employee.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+              <span class="smallest">Delete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-list">
+    <ng-template #noitems>
+      <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+        <div class="content placeholder-text">
+          <h5 class="opaque">Its empty here</h5>
+          <p class="opaque mgy-1" style="font-size: 80%">OOPs, It seems that no employees yet.</p>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

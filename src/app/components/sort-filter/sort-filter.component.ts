@@ -33,9 +33,10 @@ export class SortFilterComponent implements OnInit {
           const dateArray = item.date.split('/');
           const date = new Date(dateArray[2], dateArray[1], dateArray[0]);
           item.date = date;
+
         });
 
-        console.log(this.listItems[0]);
+        console.log(this.listItems[0].date);
         break;
       case 'define':
         this.dateSelected = true;

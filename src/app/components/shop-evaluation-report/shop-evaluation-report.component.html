@@ -4,10 +4,78 @@
     <button class="button-pri-alt" (click)="selectDateBTW()">BtoW</button>
     <button class="button-sec-alt" (click)="selectDatePS()">Psales Report</button>
   </div>
-  <div class="date-container" *ngIf="dateSelected">
+  <div class="date-container app-container" *ngIf="dateSelected">
     <label for="" class="bold smallest">{{message}}. Choose Date</label> <br>
     <input type="date">
     <input type="date">
     <button class="button button-tert-alt">Today</button>
+  </div>
+  <div class="p-sales" *ngIf="psales">
+    <div class="card-list" style="margin-top: 2em">
+      <div class="card-list-item table-header">
+        <div class="bold">Product Id</div>
+        <div class="bold">Product</div>
+        <div class="bold">Cost Price</div>
+        <div class="bold">Selling Price</div>
+        <div class="bold">Sold Units</div>
+        <div class="bold">Total Sales</div>
+        <div class="bold">Profit</div>
+      </div>
+    </div>
+
+    <div *ngIf="productSales.length > 0;else noitems" class="card-list">
+      <div class="card-list-item data-set" *ngFor="let products of productSales; let index = index">
+        <div><span class="">{{products.id}}</span></div>
+        <div>{{products.name}}</div>
+        <div><span class="">Ksh. {{products.costPrice}}</span></div>
+        <div><span>Ksh. {{products.sellingPrice}}</span></div>
+        <div><span class="">{{products.quantity}}</span></div>
+        <div><span class="">Ksh. {{(products.sellingPrice * products.quantity)}}</span></div>
+        <div><span>{{(products.sellingPrice * products.quantity) - (products.costPrice * products.quantity)}}</span></div>
+      </div>
+    </div>
+    <div class="card-list">
+      <ng-template #noitems>
+        <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+          <div class="content placeholder-text">
+            <h5 class="opaque">Its empty here</h5>
+            <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no sales have been made yet.</p>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="p-sales" *ngIf="btow">
+    <div class="app-container" style="padding: 0;">
+      <div class="card-list">
+        <div class="card-list-item table-header">
+          <div class="bold">Rank</div>
+          <div class="bold">Product</div>
+          <div class="bold">Selling Price</div>
+          <div class="bold">Sold Units</div>
+          <div class="bold">Total</div>
+        </div>
+      </div>
+      <div *ngIf="productSales.length > 0;else noitems" class="card-list">
+        <div class="card-list-item data-set" *ngFor="let products of productSales; let index = index">
+          <div><span class="">{{index + 1}}</span></div>
+          <div>{{products.name}}</div>
+          <div><span class="">Ksh. {{products.sellingPrice}}</span></div>
+          <div><span>{{products.quantity}}</span></div>
+          <div><span class="">Ksh. {{(products.sellingPrice * products.quantity)}}</span></div>
+        </div>
+      </div>
+      <div class="card-list">
+        <ng-template #noitems>
+          <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+            <div class="content placeholder-text">
+              <h5 class="opaque">Its empty here</h5>
+              <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no sales have been made yet.</p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </div>
 </div>

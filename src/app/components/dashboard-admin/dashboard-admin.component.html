@@ -52,8 +52,8 @@
                 <span>Sales</span>
               </div>
               <div *ngIf="customers.length > 0">
-                <div class="customer-record" *ngFor="let customer of customers">
-                    <span>{{customer.id}}</span>
+                <div class="customer-record" *ngFor="let customer of customers;let index = index">
+                    <span>{{index + 1}}</span>
                     <span>{{customer.name}}</span>
                     <span>{{customer.telephone}}</span>
                     <span>{{customer.location}}</span>

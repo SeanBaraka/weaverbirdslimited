@@ -51,6 +51,8 @@
 
 .card-list-item
   grid-template-columns: 220px 100px 100px 100px
+.card-list-item.received
+  grid-template-columns: auto auto auto auto auto auto auto
 
 .table-data
   height: 360px !important
@@ -64,7 +66,7 @@
 input
   padding: .35em 1em
 
-.button 
+.button
   position: relative
   .button-badge
     display: inline-block
@@ -75,7 +77,7 @@ input
     right: 10px
     background: #ff1fad
     color: #000000
-  .notification-box 
+  .notification-box
     position: fixed
     background-color: #fff
     box-shadow: 0 0 1em rgba(0,0,0,0.2)
@@ -91,7 +93,14 @@ input
     h4
       border-bottom: .5px solid #c3c3c3
       text-align: left
-    ul 
+    ul
       list-style-type: none
       li
         margin: 1em 0
+
+
+.purchase-order
+  color: #0a0903
+
+.purchases-list
+  min-width: 720px

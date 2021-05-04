@@ -83,16 +83,18 @@ export class FinanceComponent implements OnInit {
   }
 
   computeTotalSales(sales: any[]): number {
-    const amounts = []
+    if (sales.length <= 0) {
+      return 0;
+    }
+    const amounts = [];
     sales.forEach((sale) => amounts.push(sale.saleAmount))
 
     return amounts.reduce((a, b) => a + b);
   }
 
-
   updateSales(event: any[]): void {
     this.allSales = event;
-    this.cashTransactions = this.filterSales('CASH', this.allSales);
+    this.cashTransactions = this.filterSales('CASH', event);
     this.mpesaTransactions = this.filterSales('MOBILE', this.allSales);
     this.invoiceTransactions = this.filterSales('INVOICE', this.allSales);
     this.cashSales = this.computeTotalSales(this.cashTransactions);

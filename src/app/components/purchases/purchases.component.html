@@ -12,7 +12,7 @@
           <button class="button button-tertiary rounded button-img" (click)="makePurchase()">
             <span>Make Purchase</span>
           </button>
-          <button class="button button-text button-img mgl-2">
+          <button class="button button-text button-img mgl-2" (click)="printPurchases(purchases)">
             <span>
               <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
             </span>
@@ -31,7 +31,6 @@
           <div class="bold">Items</div>
           <div class="bold">Order Total</div>
           <div class="bold">Delivered</div>
-          <div>Actions</div>
         </div>
       </div>
 
@@ -48,7 +47,6 @@
             <div>
               <span>{{purchase.delivered}}</span>
             </div>
-            <div class="smallest bold"><a></a></div>
           </div>
         </div>
       </div>

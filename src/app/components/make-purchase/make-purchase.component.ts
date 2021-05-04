@@ -506,7 +506,7 @@ export class MakePurchaseComponent implements OnInit {
               [
                 { text: `SUPPLIER INFORMATION:`, style: 'textRegular', alignment: 'right', bold: true},
                 {
-                  text: `Purchase Order Note`,
+                  text: `Purchase Note`,
                   style: 'textRegular',
                   alignment: 'right'
                 },
@@ -516,7 +516,7 @@ export class MakePurchaseComponent implements OnInit {
             ]
           }          ,
           {
-            text: 'PURCHASE ORDER',
+            text: 'PURCHASE',
             bold: true,
             style: 'subHeading',
             alignment: 'left'
@@ -533,7 +533,7 @@ export class MakePurchaseComponent implements OnInit {
                 }
               },
               body: [
-                [{text:'Item Name', style: 'tableHeader'}, {text: 'Serial Number', style: 'tableHeader'}, {text: 'Quantity', style: 'tableHeader'}],
+                [{text: 'Item Name', style: 'tableHeader'}, {text: 'Serial Number', style: 'tableHeader'}, {text: 'Quantity', style: 'tableHeader'}],
                 ...this.purchaseItems.map((p => (
                   [
                     {text: p.name, style: 'textRegular', margin: [0,5,0,5]},

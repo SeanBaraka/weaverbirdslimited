@@ -1,0 +1,14 @@
+<div class="app-container">
+  <div class="logo">
+    <img src="assets/Logo.png" alt="Pourtap Limited" width="200">
+  </div>
+  <div class="billing-address">
+    <ul>
+      <li>Invoice Status <span class="bold text-success">PAID</span></li>
+      <li class="bold">Customer Details</li>
+      <li>{{invoice.customer.name}}</li>
+      <li>Tel: {{invoice.customer.telephone}}</li>
+      <li>Date: {{invoice.generatedAt}}</li>
+    </ul>
+  </div>
+</div>

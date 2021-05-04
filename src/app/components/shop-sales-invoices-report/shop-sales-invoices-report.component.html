@@ -1,5 +1,24 @@
 <div class="app-container" style="padding: 0;">
-    <app-search-print-filter></app-search-print-filter>
+  <div class="flexed flexed-end" style="margin: 1rem 0">
+    <div class="search-input">
+      <label for="search-field" style="font-size: 13px">Search</label>
+      <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterSalesControl($event.target.value)">
+    </div>
+    <div class="export-options mgl-2">
+      <button class="button button-tertiary rounded button-img" (click)="printSalesReport(shopInvoices)">
+          <span>
+            <img src="assets/download.svg" alt="" width="10">
+          </span>
+        <span>Print Report</span>
+      </button>
+      <button class="button button-text button-img mgl-2">
+          <span>
+            <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
+          </span>
+        <span>Export Report</span>
+      </button>
+    </div>
+  </div>
     <app-sort-filter [listItems]="shopInvoices" (filterEmitter)="updateInvoices($event)"></app-sort-filter>
     <div class="card-list">
         <div class="card-list-item table-header">
@@ -18,10 +37,14 @@
           <div><span class="">{{invoice.customer.name}}</span></div>
           <div><span>Ksh. {{invoice.saleAmount.toLocaleString()}}</span></div>
           <div><span class="">Ksh. {{invoice.balance.toLocaleString()}}</span></div>
-          <div class="flexed">
-            <span>Clear</span>
+          <div class="flexed smallest">
+            <span>
+              <button class="button button-text" (click)="clearInvoice(invoice)">
+                <span>Clear Invoice</span>
+              </button>
+            </span>
             <span class="mgl-2">
-              <button class="button button-text">
+              <button class="button button-text" (click)="reprintInvoice(invoice)">
                 <span>
                   <img src="assets/download.svg" width="10" alt="" style="filter: invert(0)">
                 </span>
