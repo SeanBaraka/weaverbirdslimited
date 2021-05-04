@@ -158,7 +158,7 @@ export class ProductsSaleComponent implements OnInit {
     if (cartItems != null && cartItems.length > 0) {
       let subTotals = [];
       cartItems.forEach(e => {
-        const itemTotal = e.quantity * e.sellingPrice;
+        const itemTotal = this.data.invoice ? e.quantity * e.minPrice : e.quantity * e.sellingPrice;
         subTotals = [...subTotals, itemTotal];
       });
       return subTotals.reduce((a, b) => a + b, 0);

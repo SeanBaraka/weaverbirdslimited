@@ -20,12 +20,12 @@ export class ShopDashboardComponent implements OnInit {
     {title: 'POS', image: 'credit-card-machine.svg'},
     {title: 'Invoices', image: 'invoice.svg'},
     {title: 'Purchases', image: 'supply.svg'},
-    {title: 'Quotations', image: 'payment.svg'},
+    {title: 'Customer Management', image: 'payment.svg'},
     {title: 'Stock', image: 'stock-image.svg'},
     {title: 'Reports', image: 'report.svg'},
     {title: 'Cash Summary', image: 'money.png'},
     {title: 'Expenses & Gifts', image: 'market.svg'}
-  ]
+  ];
 
   constructor(
     private router: Router,

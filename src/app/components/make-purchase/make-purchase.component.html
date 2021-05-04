@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="sub-heading mgy-1">Purchase Order</h3>
+  <h3 class="sub-heading mgy-1">Purchase</h3>
   <div class="mgy-1">
     <form [formGroup]="purchaseForm">
       <div *ngIf="!supplierAvailable">
@@ -72,7 +72,7 @@
       </div>
       <div class="mgy-2">
         <div class="flexed flexed-column mgy-1">
-          <button class="button button-tertiary" (click)="finalizePurchase()" [class.disabled]="purchaseForm.invalid" >Make Purchase Order</button>
+          <button class="button button-tertiary" (click)="finalizePurchase()" [class.disabled]="purchaseForm.invalid" >Finalize</button>
         </div>
       </div>
     </div>
