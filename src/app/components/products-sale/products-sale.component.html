@@ -68,7 +68,7 @@
               <label for="amount" class="small bold mgy-1">Total Amount</label>
               <input type="text" formControlName="amount" id="amount" value="{{cartTotal}}" readonly>
             </div> -->
-            <h1>Till No: 5060027</h1>
+            <h1>Till No: 4067985</h1>
             <!-- <p class="bold small mgy-1">Acc. No: WEAVERBIRDS</p> -->
           </div>
         </form>
@@ -78,6 +78,18 @@
             <div class="grid-item" (click)="cashPayment()">
               <img src="assets/dollar.png" alt="">
               <p class="smallest bold">Cash</p>
+            </div>
+            <div class="grid-item" (click)="cashPayment()">
+              <img src="assets/bank.png" alt="">
+              <p class="smallest bold">Cheque</p>
+            </div>
+            <div class="grid-item" (click)="cashPayment()">
+              <img src="assets/lipa.jpg" alt="">
+              <p class="smallest bold">Till Number</p>
+            </div>
+            <div class="grid-item" (click)="cashPayment()">
+              <img src="assets/credit-card-machine.svg" alt="">
+              <p class="smallest bold">EFT</p>
             </div>
             <div class="grid-item" [class.disabled]="!paymentMethod.mobile" (click)="mobilePayment()">
               <img src="assets/mpesa.png" alt="">

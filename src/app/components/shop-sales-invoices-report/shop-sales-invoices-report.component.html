@@ -38,18 +38,11 @@
           <div><span>Ksh. {{invoice.saleAmount.toLocaleString()}}</span></div>
           <div><span class="">Ksh. {{invoice.balance.toLocaleString()}}</span></div>
           <div class="flexed smallest">
-            <span>
-              <button class="button button-text" (click)="clearInvoice(invoice)">
-                <span>Clear Invoice</span>
-              </button>
+            <span class="button button-text" (click)="clearInvoice(invoice)">
+             Clear Invoice
             </span>
-            <span class="mgl-2">
-              <button class="button button-text" (click)="reprintInvoice(invoice)">
-                <span>
-                  <img src="assets/download.svg" width="10" alt="" style="filter: invert(0)">
-                </span>
-                <span>Reprint</span>
-              </button>
+            <span class="button button-text" (click)="reprintInvoice(invoice)">
+              Reprint
             </span>
           </div>
         </div>

@@ -1,14 +1,63 @@
 <div class="app-container">
   <div class="logo">
-    <img src="assets/Logo.png" alt="Pourtap Limited" width="200">
+    <img src="assets/Logo.png" alt="Weaverbirds Limited" width="200">
   </div>
   <div class="billing-address">
     <ul>
-      <li>Invoice Status <span class="bold text-success">PAID</span></li>
+      <li>Invoice Status - 
+        <span class="bold text-success" *ngIf="invoice.balance === 0">PAID</span>
+        <span class="bold text-danger" *ngIf="invoice.balance < invoice.saleAmount">NOT PAID</span>
+      </li>
       <li class="bold">Customer Details</li>
       <li>{{invoice.customer.name}}</li>
       <li>Tel: {{invoice.customer.telephone}}</li>
       <li>Date: {{invoice.generatedAt}}</li>
+      <li>
+        <h5>Invoice Number: #{{invoice.receiptNumber}}</h5>
+      </li>
     </ul>
+    <div class="mgy-2">
+      <h5>Sale Amount : &nbsp; Ksh. {{invoice.saleAmount}}</h5>
+      <h5>Balance : &nbsp; Ksh. {{invoice.balance}}</h5>
+    </div>
+    <div class="the-payment-methods mgy-1">
+      <div class="grid grid-center" style="max-width: 300px">
+        <div class="grid-item" (click)="cashPayment()">
+          <img src="assets/dollar.png" alt="">
+          <p class="smallest bold">Cash</p>
+        </div>
+        <div class="grid-item" [class.disabled]="!paymentMethod.mobile" (click)="mobilePayment()">
+          <img src="assets/mpesa.png" alt="">
+          <p class="smallest bold">Mobile</p>
+        </div>
+      </div>
+    </div>
+    <div class="payment-complete mgy-2">
+      <div class="cash-payment" *ngIf="paymentMethod.cash">
+        <div class="flexed flexed-column">
+          <p class="smallest mgy-1 bold">Received Amount</p>
+          <form [formGroup]="cashForm">
+            <input type="number" formControlName="cashReceived" min="1" class="short">
+          </form>
+          <div class="mgy-1">
+            <p class="small">Balance: <span class="bold">Ksh. {{cashBalance}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="cash-payment" *ngIf="paymentMethod.mobile && checkingStatus == false; else awaitingTransactionStatus">
+        <div class="flexed flexed-column mgy-1">
+          <button class="button button-text button-info bordered" (click)="confirmMobilePayment()">Confirm Payment</button>
+        </div>
+      </div>
+      <ng-template #awaitingTransactionStatus>
+        <div class="flexed flexed-column mgy-1" *ngIf="checkingStatus">
+          <p class="smallest bold mgy-1">Checking Transaction ....</p>
+        </div>
+      </ng-template>
+      <div class="mgy-2">
+        <div class="flexed flexed-column mgy-1">
+          <button class="button button-tertiary" (click)="finalizeSale()" [class.disabled]="cashForm.invalid" mat-dialog-close="true">Finalise Sale</button>
+        </div>
+      </div>
   </div>
 </div>
