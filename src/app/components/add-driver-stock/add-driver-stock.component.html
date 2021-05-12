@@ -14,7 +14,7 @@
             </div>
             <div class="form-input mgl-1">
                <label for="route">Select Route</label>
-               <input type="text" class="" list="routes" [readOnly]="vehicleAssignedDriver" formControlName="route" placeholder="Machakos - Nairobi" id="route">
+               <input type="text" class="" list="routes" [readOnly]="vehicleAssignedDriver" formControlName="route" placeholder="Nairobi - Nairobi" id="route">
                 <datalist id="routes">
                   <option value="{{route.name}}" *ngFor="let route of vroutes"></option>
                 </datalist>

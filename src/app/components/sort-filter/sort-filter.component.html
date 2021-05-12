@@ -1,9 +1,15 @@
-<div class="sort-container flexed">
+<div class="sort-container flexed flexed-align-center">
   <button class="button button-sec-alt" (click)="filterData('1day')">Today</button>
-  <button class="button button-tert-alt" (click)="filterData('7day')">Weekly</button>
-  <button class="button button-prel-alt" (click)="filterData('define')">Date</button>
-  <div class="date-container" *ngIf="dateSelected">
-    <input class="input-date" type="datetime-local" id="startDate">
-    <input class="input-date" type="datetime-local" id="endDate">
+  <!-- <button class="button button-tert-alt" (click)="filterData('7day')">Weekly</button> -->
+  <button class="button button-prel-alt">Choose Date</button>
+  <div class="date-container flexed" *ngIf="dateSelected">
+    <div class="flexed flexed-column">
+      <label for="startDate" class="smallest bold">Start Date</label>
+      <input class="input-date" type="date" (change)="setStartDate($event.target.value)"  id="startDate">
+    </div>
+    <div class="flexed flexed-column mgl-1">
+      <label for="endDate" class="smallest bold">End Date</label>
+      <input class="input-date" type="date" (change)="setEndDate($event.target.value)" id="endDate">
+    </div>
   </div>
 </div>

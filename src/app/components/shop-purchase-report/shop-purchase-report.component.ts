@@ -399,7 +399,7 @@ export class ShopPurchaseReportComponent implements OnInit {
                 style: 'textRegular',
                 alignment: 'left'
               },
-              {text: 'Weaverbirds Limited', style: 'textRegular', alignment: 'left'},
+              {text: 'Pourtap Limited', style: 'textRegular', alignment: 'left'},
               {text: 'P.O. Box 6408-00200 NAIROBI, KENYA', style: 'textRegular', alignment: 'left'}
             ],
             // this is the part of the header that shows customer details

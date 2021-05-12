@@ -3,6 +3,7 @@ import { ProductSaleService } from 'src/app/services/product-sale.service';
 import {RealTimeDataService} from "../../services/real-time-data.service";
 import { io } from 'socket.io-client'
 import { environment } from 'src/environments/environment';
+import { ShopManagerService } from 'src/app/services/shop-manager.service';
 
 @Component({
   selector: 'app-finance',
@@ -13,9 +14,15 @@ export class FinanceComponent implements OnInit {
 
   constructor(
     private dataService: RealTimeDataService,
-    private salesService: ProductSaleService
-  ) { }
+    private salesService: ProductSaleService,
+    private shopManager: ShopManagerService
+  ) {
+    shopManager.getShopSaved().subscribe((result) => {
+      this.shop = result;
+    })
+   }
 
+  shop: any;
   cashSales = 0;
   mobileSales = 0;
   invoices = 0;
@@ -44,9 +51,10 @@ export class FinanceComponent implements OnInit {
   allSales: any[];
   // getting all sales and assigning them to our list of all sales.
   getSales(): void {
-    this.salesService.getAllSales().subscribe((response: any[]) => {
+    this.salesService.getSales(this.shop.id).subscribe((response: any[]) => {
+      
       response.forEach((sale) => {
-        sale.date = new Date(sale.date).toLocaleDateString('en-GB')
+        sale.date = new Date(sale.date)
         sale.shop = sale.shop.name;
       });
       this.allSales = response;
@@ -54,7 +62,7 @@ export class FinanceComponent implements OnInit {
       this.mpesaTransactions = this.filterSales('MOBILE', this.allSales)
       this.invoiceTransactions = this.filterSales('INVOICE', this.allSales)
       this.cashSales = this.computeTotalSales(this.cashTransactions)
-      // this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
+      this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
       this.invoices = this.computeTotalSales(this.invoiceTransactions)
       this.toggleAccount('CASH');
     });
@@ -92,11 +100,13 @@ export class FinanceComponent implements OnInit {
     return amounts.reduce((a, b) => a + b);
   }
 
-  updateSales(event: any[]): void {
+  updateSales(event: any[]): void {    
     this.allSales = event;
     this.cashTransactions = this.filterSales('CASH', event);
-    this.mpesaTransactions = this.filterSales('MOBILE', this.allSales);
-    this.invoiceTransactions = this.filterSales('INVOICE', this.allSales);
+    this.mpesaTransactions = this.filterSales('MOBILE', event);
+    this.invoiceTransactions = this.filterSales('INVOICE', event);
     this.cashSales = this.computeTotalSales(this.cashTransactions);
+    this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
+    this.invoices = this.computeTotalSales(this.invoiceTransactions)
   }
 }

@@ -12,7 +12,9 @@ export class SortFilterComponent implements OnInit {
 
   @Input() listItems: any[];
   @Output() filterEmitter = new EventEmitter<any[]>();
-  dateSelected = false;
+  dateSelected = true;
+  startDate: Date;
+  endDate: Date;
   constructor() { }
 
   ngOnInit(): void {
@@ -35,15 +37,26 @@ export class SortFilterComponent implements OnInit {
           item.date = date;
 
         });
-
-        console.log(this.listItems[0].date);
         break;
       case 'define':
-        this.dateSelected = true;
+        // this.dateSelected = true;
+        filteredItems = this.listItems.filter((item) => moment(item.date).isBetween(this.startDate, this.endDate))
+        console.log(filteredItems);
+        
         break;
     }
 
     this.filterEmitter.emit(filteredItems);
   }
 
+  setStartDate(startDate: any): void {
+    this.startDate = startDate
+  }
+
+  setEndDate(endDate: any): void {
+    this.endDate = endDate
+    
+    const filteredItems = this.listItems.filter((item) => moment(item.date || item.generatedAt).isBetween(this.startDate, this.endDate, 'days', '[]'))
+    this.filterEmitter.emit(filteredItems)
+  }
 }

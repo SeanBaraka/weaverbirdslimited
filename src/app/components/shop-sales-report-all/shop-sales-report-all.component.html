@@ -33,7 +33,7 @@
     <div *ngIf="sales">
       <div *ngIf="sales.length > 0;else noitems" class="card-list">
         <div class="card-list-item data-set" *ngFor="let saleInfo of sales; let index = index">
-          <div><span class="">{{saleInfo.date}}</span></div>
+          <div><span class="">{{saleInfo.date.toLocaleDateString('en-GB')}}</span></div>
           <div><span class="">{{saleInfo.receiptNumber}}</span></div>
           <div><span class="">{{saleInfo.paymentMethod}}</span></div>
           <div><span>Ksh. {{saleInfo.saleAmount.toLocaleString()}}</span></div>

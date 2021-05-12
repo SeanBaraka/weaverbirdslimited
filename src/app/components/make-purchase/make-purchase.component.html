@@ -59,7 +59,10 @@
       <div class="table-data" style="height: 230px;max-height: 230px">
         <div class="card-list-item table-header padded-list-item" *ngFor="let purchaseItem of purchaseItems;let index">
           <div class="item">{{purchaseItem.name}}</div>
-          <div class="item">{{purchaseItem.price}}</div>
+          <div class="item">
+            <input [class.hidden]="!changingPrice" [value]="purchaseItem.price" class="sm-input shorter" (input)="changePrice(purchaseItem.id, $event.target.value)">
+              <span [class.hidden]="changingPrice">{{purchaseItem.price}}</span>
+          </div>
           <div class="item" contenteditable="true">
             <input (input)="changeQuantity(purchaseItem.serialNumber,$event.target.value)" [class.hidden]="!changingQuantity" class="sm-input shorter" name="changeQty">
             <span [class.hidden]="changingQuantity">{{purchaseItem.quantity}}</span>
@@ -71,8 +74,9 @@
         </div>
       </div>
       <div class="mgy-2">
-        <div class="flexed flexed-column mgy-1">
+        <div class="flexed flexed-row mgy-1">
           <button class="button button-tertiary" (click)="finalizePurchase()" [class.disabled]="purchaseForm.invalid" >Finalize</button>
+          <button class="button button-secondary mgl-1" (click)="getQuote()" [class.disabled]="purchaseForm.invalid" >Request Quotation</button>
         </div>
       </div>
     </div>

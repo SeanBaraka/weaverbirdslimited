@@ -17,7 +17,7 @@ export class MakePurchaseComponent implements OnInit {
   availableProducts: any[] = []; // an array that stores all the products available in the repository
   purchaseItems: any[] = []; // an array that holds (acts as a cart) items that are being purchased
   changingQuantity = true; // a boolean value that changes when one is editing the quantity of items
-  changingPrice = false; // a boolean value that changes when one is editing the price of an item
+  changingPrice = true; // a boolean value that changes when one is editing the price of an item
   purchaseTotal: any; // holds the total value of the items being purchased
   // the purchase form responsible for holding all the details of the purchase.
   // It will be posted for further processing of the purchase order
@@ -39,6 +39,8 @@ export class MakePurchaseComponent implements OnInit {
   currentSupplier: any;
   poNumber = 23456;
 
+  
+
   constructor(
     private stockService: StockDataService,
     private fb: FormBuilder,
@@ -59,6 +61,11 @@ export class MakePurchaseComponent implements OnInit {
     purchaseItem.quantity = value;
   }
 
+  changePrice(index: any, value: string): void {
+    const cartItem = this.purchaseItems.find(x => x.id === index )
+    
+    cartItem.price = value;
+  }
   /**
    * removes the item from the specified index from the list of purchase items
    * @param index - the index of the item to be removed
@@ -107,6 +114,7 @@ export class MakePurchaseComponent implements OnInit {
   getOrderTotal(): number {
     let total = 0;
     this.purchaseItems.forEach((item) => {
+      
       total += (item.quantity * item.price)
     })
     return total;
@@ -127,6 +135,10 @@ export class MakePurchaseComponent implements OnInit {
     });
   }
 
+  getQuote(): void {
+    this.generatePurchaseNote(this.purchaseForm.value)
+  }
+
   /** handle supplier search functionality */
   getSuppliersList(): void {
     this.stockService.getSuppliers().subscribe((response: any[]) => {
@@ -137,7 +149,7 @@ export class MakePurchaseComponent implements OnInit {
     })
   }
 
-  generatePurchaseNote(purchaseInfo: any): void {
+  generatePurchaseNote(purchaseInfo: any, quote?:boolean): void {
       const documentDefinition = {
         pageSize: { width: 700, height: 1000},
         pageMargins: 25,
@@ -498,7 +510,7 @@ export class MakePurchaseComponent implements OnInit {
                   style: 'textRegular',
                   alignment: 'left'
                 },
-                {text: 'Weaverbirds Limited', style: 'textRegular', alignment: 'left'},
+                {text: 'Pourtap Limited', style: 'textRegular', alignment: 'left'},
                 {text: 'P.O. Box 6408-00200 NAIROBI, KENYA', style: 'textRegular', alignment: 'left'}
               ],
               // this is the part of the header that shows customer details
@@ -516,7 +528,7 @@ export class MakePurchaseComponent implements OnInit {
             ]
           }          ,
           {
-            text: 'PURCHASE',
+            text: quote ? 'Quotation' : 'PURCHASE',
             bold: true,
             style: 'subHeading',
             alignment: 'left'
@@ -585,6 +597,6 @@ export class MakePurchaseComponent implements OnInit {
       };
       const win = window.open('', 'tempWinForPdf');
       pdfMake.createPdf(documentDefinition).print({silent: true}, win); // print the table data
-      win.close();
+      // win.close();
   }
 }
