@@ -49,8 +49,8 @@ export class StockDataService {
   }
 
   /** add new product to the selected store */
-  addNewProduct(product: any): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}products/inventory/add`, product);
+  addNewProduct(product: any, shopId?: any): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}products/inventory/add/${shopId}`, product);
   }
 
   /** get shop categories */

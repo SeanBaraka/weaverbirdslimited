@@ -109,7 +109,7 @@ export class ShopStockComponent implements OnInit {
 
   updateProduct(product: any): void {
     this.dialog.open(AddStockProductComponent, {
-      width: '680px',
+      width: '840px',
       height: '300px',
       data: {
         product
@@ -167,7 +167,7 @@ export class ShopStockComponent implements OnInit {
 
   launchAddModal(): void {
     this.dialog.open(AddStockProductComponent, {
-      width: '680px',
+      width: '840px',
       height: '300px',
       data: {
         shopId: this.shop.id
@@ -690,7 +690,13 @@ export class ShopStockComponent implements OnInit {
         {
           table: {
             headerRows: 1,
-            widths: ['auto', 150, detailed === true ? 'auto' : 0, 'auto', 'auto', detailed === true ? 'auto' : 100, 'auto', detailed === true ? 'auto' : 150],
+            widths: [
+              'auto', 150,
+            detailed === true ? 'auto' : 0,
+            detailed === true ? 'auto' : 0, 
+            'auto', 'auto', 
+            detailed === true ? 'auto' : 100, 
+            'auto', detailed === true ? 'auto' : 150],
             heights: (row) => {
               if (row === 0) {
                 return 0;
@@ -699,20 +705,23 @@ export class ShopStockComponent implements OnInit {
               }
             },
             body: [
-              ['Serial Number', 'Product Name', detailed === true ? 'Quantity' : '', detailed === true ? 'Cost Price' : 'Wholesale Price', detailed === true ? 'Total Cost' : 'Retail Price', detailed === true ? 'Selling Price' : '', detailed === true ? 'Total selling' : '', detailed === true ? 'Est. Profit' : ''],
+              ['Serial Number', 'Product Name',
+              detailed === true ? 'Stock Quantity' : '',
+               detailed === true ? 'Ava. Quantity' : '', detailed === true ? 'Cost Price' : 'Wholesale Price', detailed === true ? 'Total Cost' : 'Retail Price', detailed === true ? 'Selling Price' : '', detailed === true ? 'Total selling' : '', detailed === true ? 'Est. Profit' : ''],
               ...this.stockProducts.map((p => (
                 [
                   p.serialNumber, p.name,
+                  detailed === true ? p.physicalStock : '',
                   detailed === true ? p.quantity : '', 
                   detailed === true ? p.costPrice : p.minPrice,  
-                  detailed === true ? (p.quantity * p.costPrice).toFixed(2) : p.sellingPrice,
+                  detailed === true ? (p.physicalStock * p.costPrice).toFixed(2) : p.sellingPrice,
                   detailed === true ? p.sellingPrice : '', detailed === true ? (p.sellingPrice * p.quantity).toFixed(2) : '',
-                  detailed === true ? ((p.quantity * p.sellingPrice) - (p.quantity * p.costPrice)).toFixed(2) : ''
+                  detailed === true ? ((p.physicalStock * p.sellingPrice) - (p.physicalStock * p.costPrice)).toFixed(2) : ''
                 ]))),
               [
                 {
                   text: detailed === true ? 'Total' : '', fontSize: 8, bold: true, colspan: 6
-                }, {}, {}, {}, {}, {}, {}, detailed === true ? this.getStockTotalAmount().toFixed(2) : ''
+                }, {}, {}, {}, {}, {}, {}, {}, detailed === true ? this.getStockTotalAmount().toFixed(2) : ''
               ]
             ]
           },

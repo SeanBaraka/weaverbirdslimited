@@ -16,6 +16,18 @@
                   <p class="small mgy-1">Working Balance: {{mpesaBalance}}</p>
                 </div>
             </div>
+            <div class="grid-item card card-color actionable card-color-tertiary" (click)="toggleAccount('MOBILE')">
+              <h5>Bank Payments</h5>
+              <div class="desc mgy-1">
+                <h2>Ksh. {{bankSales.toLocaleString()}}</h2>
+              </div>
+          </div>
+          <div class="grid-item card card-color actionable card-color-pri" (click)="toggleAccount('MOBILE')">
+            <h5>Cheques</h5>
+            <div class="desc mgy-1">
+              <h2>Ksh. {{chequeSales.toLocaleString()}}</h2>
+            </div>
+        </div>
             <div class="grid-item card card-color actionable card-color-main"(click)="toggleAccount('INVOICE')">
                 <h5>Invoices</h5>
                 <div class="desc mgy-1">

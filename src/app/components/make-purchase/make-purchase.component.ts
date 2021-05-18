@@ -62,8 +62,7 @@ export class MakePurchaseComponent implements OnInit {
   }
 
   changePrice(index: any, value: string): void {
-    const cartItem = this.purchaseItems.find(x => x.id === index )
-    
+    const cartItem = this.purchaseItems.find(x => x.serialNumber === index )
     cartItem.price = value;
   }
   /**

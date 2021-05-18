@@ -75,23 +75,23 @@
         <h5 class="mgy-2">Payment Methods</h5>
         <div class="the-payment-methods mgy-1">
           <div class="grid grid-center">
-            <div class="grid-item" (click)="cashPayment()" *ngIf="!data.invoice">
+            <div class="grid-item" (click)="cashPayment()">
               <img src="assets/dollar.png" alt="">
               <p class="smallest bold">Cash</p>
             </div>
-            <div class="grid-item" (click)="cashPayment()" *ngIf="!data.invoice">
+            <div class="grid-item" (click)="cashPayment()">
               <img src="assets/bank.png" alt="">
               <p class="smallest bold">Cheque</p>
             </div>
-            <div class="grid-item" (click)="cashPayment()" *ngIf="!data.invoice">
+            <div class="grid-item" (click)="cashPayment()">
               <img src="assets/lipa.jpg" alt="">
               <p class="smallest bold">Till Number</p>
             </div>
-            <div class="grid-item" (click)="cashPayment()" *ngIf="!data.invoice">
+            <div class="grid-item" (click)="bankPayment()">
               <img src="assets/credit-card-machine.svg" alt="">
-              <p class="smallest bold">EFT</p>
+              <p class="smallest bold">PDQ</p>
             </div>
-            <div class="grid-item" [class.disabled]="!paymentMethod.mobile" (click)="mobilePayment()" *ngIf="!data.invoice">
+            <div class="grid-item" [class.disabled]="!paymentMethod.mobile" (click)="mobilePayment()">
               <img src="assets/mpesa.png" alt="">
               <p class="smallest bold">Mobile</p>
             </div>
@@ -125,7 +125,7 @@
               </div>
             </form>
             <div class="flexed flexed-column mgy-1">
-              <button class="button button-text button-info bordered" (click)="confirmMobilePayment()" [class.disabled]="mpesaForm.invalid">Confirm Payment</button>
+              <button class="button button-text button-info bordered" (click)="confirmMobilePayment()" [class.disabled]="mpesaForm.invalid" mat-dialog-close="true">Confirm Payment</button>
             </div>
           </div>
           <ng-template #awaitingTransactionStatus>
@@ -133,6 +133,20 @@
               <p class="smallest bold mgy-1">Checking Transaction ....</p>
             </div>
           </ng-template>
+          <div class="cash-payment" *ngIf="paymentMethod.bank">
+            <div class="flexed flexed-column">
+              <form [formGroup]="bankForm">
+                <div class="form-controls mgy-1 flexed flexed-column">
+                  <label for="cname" class="smallest bold">Bank Name</label>
+                  <input type="text" formControlName="bankName" id="bankname" value="Cooperative Bank" readonly>
+                </div>
+                <div class="form-controls mgy-1 flexed flexed-column">
+                  <label for="tel" class="smallest bold">Amount Received</label>
+                  <input type="text" formControlName="bankAmount" id="tel">
+                </div>
+              </form>
+            </div>
+          </div>
           <div class="cash-payment" *ngIf="paymentMethod.invoice">
             <div class="flexed flexed-column">
               <form [formGroup]="invoiceForm">
@@ -152,7 +166,7 @@
           </div>
           <div class="mgy-2">
             <div class="flexed flexed-row mgy-1">
-              <button class="button button-tertiary" (click)="finalizeSale()" [class.disabled]="cashForm.invalid && invoiceForm.invalid" mat-dialog-close="true">Finalise Sale</button>
+              <button class="button button-tertiary" (click)="finalizeSale()" [class.disabled]="cashForm.invalid && invoiceForm.invalid && bankForm.invalid" mat-dialog-close="true">Finalise Sale</button>
               <button class="button button-tertiary mgl-1" *ngIf="paymentMethod.invoice || paymentMethod.quotation" (click)="generateQuote()" mat-dialog-close="true">Generate Quote</button>
             </div>
           </div>

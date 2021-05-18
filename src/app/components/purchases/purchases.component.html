@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="purchases-list">
+    <div class="purchases-likst">
       <div class="card-list">
         <div class="card-list-item table-header">
           <div class="bold">#</div>
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div *ngIf="purchases">
+      <div *ngIf="purchases" class="purchases-list">
         <div *ngIf="purchases.length > 0;else noitems" class="card-list">
           <div class="card-list-item data-set" *ngFor="let purchase of purchases; let index = index">
             <div><span class="">{{purchase.id}}</span></div>

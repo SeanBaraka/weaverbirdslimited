@@ -33,7 +33,7 @@ export class PurchasesComponent implements OnInit {
       orders.forEach((item) => {
         item.generatedAt = new Date(item.generatedAt).toLocaleDateString();
       });
-      this.purchases = orders;
+      this.purchases = orders.reverse();
     });
   }
 

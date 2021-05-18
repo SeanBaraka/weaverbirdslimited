@@ -25,6 +25,8 @@ export class FinanceComponent implements OnInit {
   shop: any;
   cashSales = 0;
   mobileSales = 0;
+  bankSales = 0;
+  chequeSales = 0;
   invoices = 0;
   mpesaBalance = 0;
 
@@ -45,6 +47,7 @@ export class FinanceComponent implements OnInit {
   mpesaTransactions: any[];
   invoiceTransactions: any[];
   cashTransactions: any[];
+  bankTransactions: any[];
 
 
   /** a list of all sales recorded */
@@ -57,13 +60,16 @@ export class FinanceComponent implements OnInit {
         sale.date = new Date(sale.date)
         sale.shop = sale.shop.name;
       });
+      
       this.allSales = response;
       this.cashTransactions = this.filterSales('CASH', this.allSales)
       this.mpesaTransactions = this.filterSales('MOBILE', this.allSales)
       this.invoiceTransactions = this.filterSales('INVOICE', this.allSales)
+      this.bankTransactions = this.filterSales('BANK', this.allSales)
       this.cashSales = this.computeTotalSales(this.cashTransactions)
       this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
       this.invoices = this.computeTotalSales(this.invoiceTransactions)
+      this.bankSales = this.computeTotalSales(this.bankTransactions)
       this.toggleAccount('CASH');
     });
   }
@@ -83,6 +89,9 @@ export class FinanceComponent implements OnInit {
         break;
       case 'MOBILE':
         this.transactionSales = this.mpesaTransactions
+        break;
+      case 'BANK':
+        this.transactionSales = this.bankTransactions
         break;
       default:
         this.transactionSales = this.cashTransactions
@@ -105,8 +114,10 @@ export class FinanceComponent implements OnInit {
     this.cashTransactions = this.filterSales('CASH', event);
     this.mpesaTransactions = this.filterSales('MOBILE', event);
     this.invoiceTransactions = this.filterSales('INVOICE', event);
+    this.bankTransactions = this.filterSales('BANK', event);
     this.cashSales = this.computeTotalSales(this.cashTransactions);
     this.mobileSales = this.computeTotalSales(this.mpesaTransactions)
     this.invoices = this.computeTotalSales(this.invoiceTransactions)
+    this.bankSales = this.computeTotalSales(this.bankTransactions)
   }
 }

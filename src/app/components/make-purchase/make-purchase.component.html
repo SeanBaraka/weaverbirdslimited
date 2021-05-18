@@ -60,7 +60,7 @@
         <div class="card-list-item table-header padded-list-item" *ngFor="let purchaseItem of purchaseItems;let index">
           <div class="item">{{purchaseItem.name}}</div>
           <div class="item">
-            <input [class.hidden]="!changingPrice" [value]="purchaseItem.price" class="sm-input shorter" (input)="changePrice(purchaseItem.id, $event.target.value)">
+            <input [class.hidden]="!changingPrice" [value]="purchaseItem.price" class="sm-input shorter" (input)="changePrice(purchaseItem.serialNumber, $event.target.value)">
               <span [class.hidden]="changingPrice">{{purchaseItem.price}}</span>
           </div>
           <div class="item" contenteditable="true">

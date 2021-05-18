@@ -32,7 +32,9 @@ export class ProductsSaleComponent implements OnInit {
     cash: false,
     mobile: false,
     invoice: false,
-    quotation: false
+    quotation: false,
+    cheque: false,
+    bank: false,
   };
 
   private receiptNumber: string;
@@ -71,6 +73,12 @@ export class ProductsSaleComponent implements OnInit {
     customerName: ['', Validators.required],
     customerTel: ['', Validators.required]
   });
+
+  bankForm = this.fb.group({
+    bankName: ['Cooperative Bank'],
+    bankAmount: ['', Validators.required]
+  })
+  
 
   ngOnInit(): void {
     this.paymentMethod.cash = true;
@@ -206,6 +214,12 @@ export class ProductsSaleComponent implements OnInit {
       }
     }
 
+    switch (this.paymentMethod.bank) {
+      case true: {
+        paymentMethod = 'BANK';
+      }
+    }
+
     switch (this.paymentMethod.invoice) {
       case true: {
         paymentMethod = 'INVOICE';
@@ -216,7 +230,12 @@ export class ProductsSaleComponent implements OnInit {
 
     const cart = this.cartProducts;
     const sellAmount = this.cartTotal;
-    const amountTendered = this.cashForm.get('cashReceived').value;
+    let amountTendered = 0;
+    if (this.paymentMethod.cash) {
+      amountTendered = this.cashForm.get('cashReceived').value
+    } else if (this.paymentMethod.bank) {
+      amountTendered = this.bankForm.get('bankAmount').value
+    }
     const balanceToReturn = amountTendered - sellAmount;
     let amountReceived = amount ? amount : 0;
 
@@ -237,7 +256,7 @@ export class ProductsSaleComponent implements OnInit {
     this.saleService.makeSale(shopId, sellOrder).subscribe((response) => {
       if (response) {
         this.receiptNumber = response.receiptNumber;
-        this.printReceipt(this.paymentMethod.cash ? this.cashForm.get('cashReceived').value : amount);
+        this.printReceipt(sellOrder.amountReceived);
       }
     });
   }
@@ -284,6 +303,14 @@ export class ProductsSaleComponent implements OnInit {
     this.paymentMethod.cash = true;
     this.paymentMethod.mobile = !this.paymentMethod.cash;
     this.paymentMethod.invoice = !this.paymentMethod.cash;
+  }
+
+  bankPayment(): void {
+    this.paymentMethod.bank = true
+    this.paymentMethod.cash = false
+    this.paymentMethod.cheque, this.paymentMethod.invoice, this.paymentMethod.mobile, this.paymentMethod.quotation = false
+    console.log(this.paymentMethod);
+    
   }
 
   receivePayment(): void {
@@ -458,7 +485,7 @@ export class ProductsSaleComponent implements OnInit {
             }
           ]
         },
-        this.paymentMethod.invoice ? {} : {
+        this.paymentMethod.cash !== true ? {} : {
           columns: [
             {
               text: 'CHANGE: ', style: 'textRegularLarge', bold: true, colspan: 6
