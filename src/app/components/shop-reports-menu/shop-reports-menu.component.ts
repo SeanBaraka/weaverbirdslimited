@@ -10,7 +10,7 @@ export class ShopReportsMenuComponent implements OnInit {
 
   @Input() shop: any;
   constructor(
-    private shopManager: ShopManagerService
+    private shopManager: ShopManagerService,
   ) {
     // this.shop = history.state.shop
   }

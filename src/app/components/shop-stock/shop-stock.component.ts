@@ -9,6 +9,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ProductSaleService } from 'src/app/services/product-sale.service';
 import { ProductsSaleComponent } from '../products-sale/products-sale.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -20,6 +21,7 @@ export class ShopStockComponent implements OnInit {
 
   simpleShop: boolean;
   shop: any;
+  user: any;
   stockProducts: any[] = []
   loading = false;
   todayDate = `${new Date(Date.now()).toLocaleDateString('en-GB')} ${new Date(Date.now()).toLocaleTimeString()}`;
@@ -34,7 +36,10 @@ export class ShopStockComponent implements OnInit {
   constructor(private stockData: StockDataService,
     private dialog: MatDialog,
     private salesService: ProductSaleService,
-    private router: Router) { }
+    private userManager: AuthService,
+    private router: Router) {
+      this.user = userManager.getUserData();
+     }
 
   ngOnInit(): void {
     this.shop = history.state.shop;
@@ -710,7 +715,7 @@ export class ShopStockComponent implements OnInit {
                detailed === true ? 'Ava. Quantity' : '', detailed === true ? 'Cost Price' : 'Wholesale Price', detailed === true ? 'Total Cost' : 'Retail Price', detailed === true ? 'Selling Price' : '', detailed === true ? 'Total selling' : '', detailed === true ? 'Est. Profit' : ''],
               ...this.stockProducts.map((p => (
                 [
-                  p.serialNumber, p.name,
+                  { text: p.serialNumber, color: p.quantity < 2 ? '#ff0000' : ''}, p.name,
                   detailed === true ? p.physicalStock : '',
                   detailed === true ? p.quantity : '', 
                   detailed === true ? p.costPrice : p.minPrice,  

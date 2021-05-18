@@ -68,6 +68,7 @@ import { SortFilterComponent } from './components/sort-filter/sort-filter.compon
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ClearInvoiceComponent } from './components/clear-invoice/clear-invoice.component';
+import { RestockDialogComponent } from './components/restock-dialog/restock-dialog.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import { ClearInvoiceComponent } from './components/clear-invoice/clear-invoice.
     SortFilterComponent,
     SuppliersComponent,
     AddSupplierComponent,
-    ClearInvoiceComponent
+    ClearInvoiceComponent,
+    RestockDialogComponent
   ],
   imports: [
     BrowserModule,

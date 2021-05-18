@@ -6,6 +6,7 @@ import { StockDataService } from 'src/app/services/stock-data.service';
 import { ProductsSaleComponent } from '../products-sale/products-sale.component';
 import {AddStockProductComponent} from '../add-stock-product/add-stock-product.component';
 import {MakePurchaseComponent} from '../make-purchase/make-purchase.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-shop-dashboard',
@@ -26,12 +27,25 @@ export class ShopDashboardComponent implements OnInit {
     {title: 'Cash Summary', image: 'money.png'},
     {title: 'Expenses & Gifts', image: 'market.svg'}
   ];
+  user: any
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private stockData: StockDataService,
-    private shopManagerService: ShopManagerService) { }
+    private userManager: AuthService,
+    private shopManagerService: ShopManagerService) {
+      this.user = userManager.getUserData()
+      if (!this.user.isa) {
+        this.items = [
+          {title: 'POS', image: 'credit-card-machine.svg'},
+          {title: 'Invoices', image: 'invoice.svg'},
+          {title: 'Customer Management', image: 'payment.svg'},
+          {title: 'Stock', image: 'stock-image.svg'},
+          {title: 'Cash Summary', image: 'money.png'},
+        ]
+      }
+     }
 
   ngOnInit(): void {
     // this.shop = history.state.shop;

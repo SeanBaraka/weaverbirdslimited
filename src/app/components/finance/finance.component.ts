@@ -4,6 +4,7 @@ import {RealTimeDataService} from "../../services/real-time-data.service";
 import { io } from 'socket.io-client'
 import { environment } from 'src/environments/environment';
 import { ShopManagerService } from 'src/app/services/shop-manager.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-finance',
@@ -15,7 +16,7 @@ export class FinanceComponent implements OnInit {
   constructor(
     private dataService: RealTimeDataService,
     private salesService: ProductSaleService,
-    private shopManager: ShopManagerService
+    private shopManager: ShopManagerService,
   ) {
     shopManager.getShopSaved().subscribe((result) => {
       this.shop = result;
@@ -48,6 +49,7 @@ export class FinanceComponent implements OnInit {
   invoiceTransactions: any[];
   cashTransactions: any[];
   bankTransactions: any[];
+  user: any
 
 
   /** a list of all sales recorded */

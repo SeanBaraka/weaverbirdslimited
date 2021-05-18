@@ -38,11 +38,14 @@ export class ShopProductSaleComponent implements OnInit {
     let productsList: any[] = [];
     let productItemList: any[] = []; // will hold the product ids, and the number of times that they appear;
     this.productService.getSales(this.shop.id).subscribe((receipts: any[]) => {
+       
       receipts.forEach((item) => {
         // we are getting the total sale items from the receipts
         item.saleItems = Array.from(JSON.parse(item.saleItems));
         item.saleItems.forEach((product) => {
-          productsList = [...productsList, product];
+          // productsList = [...productsList, product];
+          product.quantity = parseInt(product.quantity)
+          productsList.push(product)
         });
       });
       // find one product from the list of products obtained above
@@ -51,16 +54,16 @@ export class ShopProductSaleComponent implements OnInit {
         if (itemExists === -1) {
           productItemList.push(prod);
         } else {
-          productItemList.find(x => x.id === prod.id).quantity ++;
+          productItemList.find(x => x.id === prod.id).quantity += prod.quantity;
         }
       });
-      this.productSales = productItemList;
+      this.productSales = productItemList.sort();
     });
 
   }
 
   filterProductSales(value: any): void {
-
+    
   }
 
   printReport(productSales: any[]): void {

@@ -11,7 +11,7 @@
                         </span>
                         <span>Back</span>
                     </button>
-                    <button class="button-primary" (click)="launchAddModal()">
+                    <button class="button-primary" (click)="launchAddModal()" *ngIf="user.isa || user.issa">
                         <span>Add New Product</span>
                         <span><img src="assets/open.svg" width="15" alt=""></span>
                     </button>
@@ -123,27 +123,27 @@
                             <div class="bold">Product</div>
                             <div class="bold">Unit Price</div>
                             <div class="bold">Available Units</div>
-                            <div></div>
+                            <div *ngIf="user.isa || user.issa"></div>
                         </div>
                     </div>
-                    <div class="card-list-item data-set" *ngFor="let product of stockProducts; let index = index">
+                    <div class="card-list-item data-set" [class.text-danger]="product.quantity < 2" [class.bold]="product.quantity < 2" *ngFor="let product of stockProducts; let index = index">
                     <div><span class="small">{{product.name}}</span></div>
                     <div>Ksh. {{product.sellingPrice}}</div>
                     <div><span class="">{{product.quantity}}</span></div>
-                        <div class="smallest bold flexed">
-                            <div class="move center">
-                                <button class="button button-image" (click)="transferProduct(product)"><img src="assets/swap.svg" width="10" alt=""></button>
-                                <span class="smallest">Transfer</span>
-                            </div>
-                            <div class="move center mgl-2">
-                                <button class="button button-image" (click)="updateProduct(product)"><img src="assets/add_product.svg" width="10" alt=""></button>
-                                <span class="smallest">Update</span>
-                            </div>
-                            <div class="remove center">
-                                <button class="button button-image" (click)="deleteProduct(product.id)"><img src="assets/trash.svg" width="10" alt=""></button>
-                                <span class="smallest">Delete</span>
-                            </div>
+                    <div class="smallest bold flexed" *ngIf="user.isa || user.issa">
+                        <div class="move center">
+                            <button class="button button-image" (click)="transferProduct(product)"><img src="assets/swap.svg" width="10" alt=""></button>
+                            <span class="smallest">Transfer</span>
                         </div>
+                        <div class="move center mgl-2">
+                            <button class="button button-image" (click)="updateProduct(product)"><img src="assets/add_product.svg" width="10" alt=""></button>
+                            <span class="smallest">Update</span>
+                        </div>
+                        <div class="remove center">
+                            <button class="button button-image" (click)="deleteProduct(product.id)"><img src="assets/trash.svg" width="10" alt=""></button>
+                            <span class="smallest">Delete</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <ng-template #no_products>

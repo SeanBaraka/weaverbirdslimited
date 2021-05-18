@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://178.32.191.159:3055/',
-  socketUrl: 'http://178.32.191.159:3055/',
-  // apiBaseUrl: 'http://149.202.2.83:3055/',
-  // socketUrl: 'http://149.202.2.83:3055/',
+  // apiBaseUrl: 'http://178.32.191.159:3055/',
+  // socketUrl: 'http://178.32.191.159:3055/',
+  apiBaseUrl: 'http://149.202.2.83:3055/',
+  socketUrl: 'http://149.202.2.83:3055/',
   recipients: ['+254727275739']
 };
 

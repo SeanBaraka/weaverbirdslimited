@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {filter} from 'rxjs/operators';
 import {any} from 'codelyzer/util/function';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sort-filter',
@@ -11,11 +12,16 @@ import {any} from 'codelyzer/util/function';
 export class SortFilterComponent implements OnInit {
 
   @Input() listItems: any[];
+  user: any;
   @Output() filterEmitter = new EventEmitter<any[]>();
   dateSelected = true;
   startDate: Date;
   endDate: Date;
-  constructor() { }
+  constructor(
+    private userManager: AuthService
+  ) { 
+    this.user = userManager.getUserData()
+  }
 
   ngOnInit(): void {
   }
@@ -26,7 +32,7 @@ export class SortFilterComponent implements OnInit {
     switch (duration) {
       case '1day':
         filterDuration = new Date(Date.now()).toLocaleDateString('en-GB');
-        filteredItems = this.listItems.filter((item) => item.date === filterDuration);
+        filteredItems = this.listItems.filter((item) => moment(item.date || item.generatedAt).format('DDMMYYYY') === moment().format('DDMMYYYY'));
         break;
       case '7day':
         const week = moment().week();
@@ -35,13 +41,11 @@ export class SortFilterComponent implements OnInit {
           const dateArray = item.date.split('/');
           const date = new Date(dateArray[2], dateArray[1], dateArray[0]);
           item.date = date;
-
         });
         break;
       case 'define':
         // this.dateSelected = true;
         filteredItems = this.listItems.filter((item) => moment(item.date).isBetween(this.startDate, this.endDate))
-        console.log(filteredItems);
         
         break;
     }

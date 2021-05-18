@@ -46,14 +46,14 @@ export class AuthLoginComponent implements OnInit {
   loginAttempt(): void {
     this.loading = true;
     this.authService.authenticate(this.authLogin.value).subscribe((response) => {
-      console.log(response)
+      
       if (response) {
         this.authLogin.reset();
         this.loading = false;
         if (response.token) {
           this.authService.saveUser(response.token);
           const userData = this.authService.getUserData();
-          console.log(userData);
+          
           if (userData.isa || userData.issa) {
             this.router.navigate(['admin']);
           }
@@ -63,7 +63,6 @@ export class AuthLoginComponent implements OnInit {
         }
       }
     }, (error) => {
-      console.log('err', error);
 
       if (error.status !== 404) {
         this.loading = false;

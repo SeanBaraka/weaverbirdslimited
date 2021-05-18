@@ -8,6 +8,7 @@ import {ProductSaleService} from "../../services/product-sale.service";
 import { RealTimeDataService } from 'src/app/services/real-time-data.service';
 import {CustomerService} from '../../services/customer.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { RestockDialogComponent } from '../restock-dialog/restock-dialog.component';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -107,20 +108,28 @@ export class ProductsSaleComponent implements OnInit {
 
     if (product == null) {
       product = stockedProducts.filter(x => x.name.toLowerCase() === searchParam.toLowerCase()).pop();
+      if (product.quantity <= 0) {
+          this.dialog.open(RestockDialogComponent, {
+            width: '400px'
+          }).afterClosed().subscribe(result => {
+            this.searchProduct.reset()
+          })
+      } else {
+        // if the product exists in the cart, increment the quantity, else add the new item
+        // into the cart for checkout
+        if (this.cartProducts.find((x) => x.serialNumber === product.serialNumber)) {
+          const existingItem = this.cartProducts.find((x) => x.serialNumber === product.serialNumber);
+          existingItem.quantity ++;
+        } else {
+          product.quantity = 1;
+          this.cartProducts = [...this.cartProducts, product];
+        }
+        this.cartTotal = this.computeCartTotal(this.cartProducts);
+        this.taxTotal = this.cartTotal * 0.16
+        this.searchProduct.reset();
+      }
     }
 
-    // if the product exists in the cart, increment the quantity, else add the new item
-    // into the cart for checkout
-    if (this.cartProducts.find((x) => x.serialNumber === product.serialNumber)) {
-      const existingItem = this.cartProducts.find((x) => x.serialNumber === product.serialNumber);
-      existingItem.quantity ++;
-    } else {
-      product.quantity = 1;
-      this.cartProducts = [...this.cartProducts, product];
-    }
-    this.cartTotal = this.computeCartTotal(this.cartProducts);
-    this.taxTotal = this.cartTotal * 0.16
-    this.searchProduct.reset();
   }
 
   /** one should be able to remove an item or a list of items from the cart

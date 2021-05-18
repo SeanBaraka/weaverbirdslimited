@@ -1,26 +1,27 @@
 <div class="app-container" style="padding: 0;">
-  <div class="flexed flexed-end" style="margin: 1rem 0">
-    <div class="search-input">
-      <label for="search-field" style="font-size: 13px">Search</label>
-      <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterProductSales($event.target.value)">
-    </div>
-    <div class="export-options mgl-2">
-      <button class="button button-tertiary rounded button-img" (click)="printReport(productSales)">
-          <span>
-            <img src="assets/download.svg" alt="" width="10">
-          </span>
-        <span>Print Report</span>
-      </button>
-      <button class="button button-text button-img mgl-2">
-          <span>
-            <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
-          </span>
-        <span>Export Report</span>
-      </button>
-    </div>
-  </div>
-    <app-sort-filter></app-sort-filter>
-    <div class="card-list">
+    <div class="list-head">
+      <div class="flexed flexed-end" style="margin: 1rem 0">
+        <div class="search-input">
+          <label for="search-field" style="font-size: 13px">Search</label>
+          <input type="search" name="search-field" class="mgl-1" id="search-field" (input)="filterProductSales($event.target.value)">
+        </div>
+        <div class="export-options mgl-2">
+          <button class="button button-tertiary rounded button-img" (click)="printReport(productSales)">
+              <span>
+                <img src="assets/download.svg" alt="" width="10">
+              </span>
+            <span>Print Report</span>
+          </button>
+          <button class="button button-text button-img mgl-2">
+              <span>
+                <img src="assets/download.svg" alt="" width="10" style="filter: invert(0)">
+              </span>
+            <span>Export Report</span>
+          </button>
+        </div>
+      </div>
+      <app-sort-filter [listItems]="productSales"></app-sort-filter>
+      <div class="card-list">
         <div class="card-list-item table-header">
           <div class="bold">Product Id</div>
           <div class="bold">Product</div>
@@ -28,24 +29,27 @@
           <div class="bold">Sold Units</div>
           <div class="bold">Total</div>
         </div>
+      </div>
     </div>
-    <div *ngIf="productSales.length > 0;else noitems" class="card-list">
-        <div class="card-list-item data-set" *ngFor="let products of productSales; let index = index">
-          <div><span class="">{{products.id}}</span></div>
-          <div>{{products.name}}</div>
-          <div><span class="">Ksh. {{products.sellingPrice}}</span></div>
-          <div><span>{{products.quantity}}</span></div>
-          <div><span class="">Ksh. {{(products.sellingPrice * products.quantity)}}</span></div>
-        </div>
-    </div>
-    <div class="card-list">
-        <ng-template #noitems>
-            <div class="grid grid-center" style="text-align: center;padding: 2em 0">
-              <div class="content placeholder-text">
-                <h5 class="opaque">Its empty here</h5>
-                <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no sales have been made yet.</p>
+    <div class="table-content">
+      <div *ngIf="productSales.length > 0;else noitems" class="card-list">
+          <div class="card-list-item data-set" *ngFor="let products of productSales; let index = index">
+            <div><span class="">{{products.id}}</span></div>
+            <div>{{products.name}}</div>
+            <div><span class="">Ksh. {{products.sellingPrice}}</span></div>
+            <div><span>{{products.quantity}}</span></div>
+            <div><span class="">Ksh. {{(products.sellingPrice * products.quantity)}}</span></div>
+          </div>
+      </div>
+      <div class="card-list">
+          <ng-template #noitems>
+              <div class="grid grid-center" style="text-align: center;padding: 2em 0">
+                <div class="content placeholder-text">
+                  <h5 class="opaque">Its empty here</h5>
+                  <p class="opaque mgy-1" style="font-size: 80%">OOps, It seems that no sales have been made yet.</p>
+                </div>
               </div>
-            </div>
-        </ng-template>
+          </ng-template>
+      </div>
     </div>
 </div>
