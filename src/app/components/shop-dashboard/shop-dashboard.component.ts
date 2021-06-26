@@ -36,12 +36,23 @@ export class ShopDashboardComponent implements OnInit {
     private userManager: AuthService,
     private shopManagerService: ShopManagerService) {
       this.user = userManager.getUserData()
-      if (!this.user.isa) {
+      if (this.user.isa || this.user.issa || this.user.user === 'weaver') {
+        this.items = [
+          {title: 'POS', image: 'credit-card-machine.svg'},
+          {title: 'Invoices', image: 'invoice.svg'},
+          {title: 'Purchases', image: 'supply.svg'},
+          {title: 'Customer Management', image: 'payment.svg'},
+          {title: 'Stock', image: 'stock-image.svg'},
+          {title: 'Reports', image: 'report.svg'},
+          {title: 'Cash Summary', image: 'money.png'},
+          {title: 'Expenses & Gifts', image: 'market.svg'}
+        ];
+      } else {
         this.items = [
           {title: 'POS', image: 'credit-card-machine.svg'},
           {title: 'Invoices', image: 'invoice.svg'},
           {title: 'Customer Management', image: 'payment.svg'},
-          {title: 'Stock', image: 'stock-image.svg'},
+          // {title: 'Stock', image: 'stock-image.svg'},
           {title: 'Cash Summary', image: 'money.png'},
         ]
       }

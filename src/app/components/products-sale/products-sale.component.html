@@ -16,6 +16,7 @@
       <div class="card-list mgy-2">
         <div class="card-list-item table-header">
           <div class="bold">Product</div>
+          <div class="bold">Aval. Bal</div>
           <div class="bold">Qty</div>
           <div class="bold">@</div>
           <div class="bold">Total</div>
@@ -24,6 +25,7 @@
       <div class="table-data" style="height: 230px;max-height: 230px">
          <div class="card-list-item table-header padded-list-item" *ngFor="let cartItem of cartProducts;let index">
             <div class="item">{{cartItem.name}}</div>
+            <div class="item bold text-danger">{{cartItem.availableBalance}}</div>
             <div class="item" contenteditable="true" (click)="toggleInput()">
               <input (input)="changeQuantity(cartItem.id,$event.target.value)" [class.hidden]="!changingQuantity" class="sm-input shorter" name="changeQty" [value]="cartItem.quantity">
               <span [class.hidden]="changingQuantity">{{cartItem.quantity}}</span>
@@ -68,8 +70,8 @@
               <label for="amount" class="small bold mgy-1">Total Amount</label>
               <input type="text" formControlName="amount" id="amount" value="{{cartTotal}}" readonly>
             </div> -->
-            <h1>Till No: 5060027</h1>
-            <!-- <p class="bold small mgy-1">Acc. No: WEAVERBIRDS</p> -->
+            <h1>Paybill Number: 4067985</h1>
+            <p class="bold small mgy-1">Acc. No: WEAVERBIRDS</p>
           </div>
         </form>
         <h5 class="mgy-2">Payment Methods</h5>
@@ -83,10 +85,6 @@
               <img src="assets/bank.png" alt="">
               <p class="smallest bold">Cheque</p>
             </div>
-            <div class="grid-item" (click)="cashPayment()">
-              <img src="assets/lipa.jpg" alt="">
-              <p class="smallest bold">Till Number</p>
-            </div>
             <div class="grid-item" (click)="bankPayment()">
               <img src="assets/credit-card-machine.svg" alt="">
               <p class="smallest bold">PDQ</p>
@@ -94,6 +92,10 @@
             <div class="grid-item" [class.disabled]="!paymentMethod.mobile" (click)="mobilePayment()">
               <img src="assets/mpesa.png" alt="">
               <p class="smallest bold">Mobile</p>
+            </div>
+            <div class="grid-item" (click)="splitPayment()">
+              <img src="assets/split.png" width="20" alt="">
+              <p class="smallest bold">Split Payment</p>
             </div>
             <div class="grid-item" (click)="invoicePayment()">
               <img src="assets/invoice.svg" width="20" alt="">
@@ -112,6 +114,18 @@
                 <p class="small">Balance: <span class="bold">Ksh. {{cashBalance}}</span></p>
               </div>
             </div>
+          </div>
+          <div class="cash-payment" *ngIf="paymentMethod.split">
+            <form [formGroup]="splitOptions">
+              <div class="form-controls mgy-1 flexed flexed-column">
+                <label for="split-cash" class="smallest bold">Cash</label>
+                <input type="number" class="short" formControlName="cash" min="1" id="split-cash">
+              </div>
+              <div class="form-controls mgy-1 flexed flexed-column">
+                <label for="split-cash" class="smallest bold">Mpesa</label>
+                <input type="number" formControlName="mpesa" id="split-mpesa">
+              </div>
+            </form>
           </div>
           <div class="cash-payment" *ngIf="paymentMethod.mobile && checkingStatus == false; else awaitingTransactionStatus">
             <form [formGroup]="mpesaForm">
@@ -166,7 +180,7 @@
           </div>
           <div class="mgy-2">
             <div class="flexed flexed-row mgy-1">
-              <button class="button button-tertiary" (click)="finalizeSale()" [class.disabled]="cashForm.invalid && invoiceForm.invalid && bankForm.invalid" mat-dialog-close="true">Finalise Sale</button>
+              <button class="button button-tertiary" (click)="finalizeSale()" [class.disabled]="cashForm.invalid && invoiceForm.invalid && bankForm.invalid && splitOptions.invalid" mat-dialog-close="true">Finalise Sale</button>
               <button class="button button-tertiary mgl-1" *ngIf="paymentMethod.invoice || paymentMethod.quotation" (click)="generateQuote()" mat-dialog-close="true">Generate Quote</button>
             </div>
           </div>
