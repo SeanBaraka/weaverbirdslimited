@@ -310,13 +310,13 @@ export class ProductsSaleComponent implements OnInit {
   }
 
   confirmMobilePayment(): void {
-    // this.checkingStatus = true;
+    this.checkingStatus = true;
     const amount = this.mpesaForm.get('cashReceived').value;
     const transactionCode = this.mpesaForm.get('transactionId').value
            
     // this.finalizeSale(amount, transactionCode);
     this.realTimeService.getTransactionDetails((success) => {
-      this.checkingStatus = false;
+      this.checkingStatus = false; // FIXME: was false
       if (success) {
         this.dialog.open(ConfirmPaymentComponent, {
           width: '400px',
@@ -338,7 +338,7 @@ export class ProductsSaleComponent implements OnInit {
 
   mobilePayment(): void {
     this.paymentMethod.mobile = true;
-    this.checkingStatus = false;
+    this.checkingStatus = false; // FIXME: initially false .. ????
     this.paymentMethod.cash = !this.paymentMethod.mobile
     this.paymentMethod.bank = !this.paymentMethod.mobile
     this.paymentMethod.invoice = !this.paymentMethod.mobile

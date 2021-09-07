@@ -127,7 +127,7 @@
               </div>
             </form>
           </div>
-          <div class="cash-payment" *ngIf="paymentMethod.mobile && checkingStatus == false; else awaitingTransactionStatus">
+          <!-- <div class="cash-payment" *ngIf="paymentMethod.mobile && checkingStatus == false; else awaitingTransactionStatus">
             <form [formGroup]="mpesaForm">
               <div class="form-controls mgy-1 flexed flexed-column">
                 <label for="tel" class="smallest bold">Amount</label>
@@ -141,6 +141,9 @@
             <div class="flexed flexed-column mgy-1">
               <button class="button button-text button-info bordered" (click)="confirmMobilePayment()" [class.disabled]="mpesaForm.invalid" mat-dialog-close="true">Confirm Payment</button>
             </div>
+          </div> -->
+          <div class="flexed flexed-column mgy-1" *ngIf="paymentMethod.mobile && checkingStatus == false; else awaitingTransactionStatus">
+            <button class="button button-text button-info bordered" (click)="confirmMobilePayment()" >Confirm Payment</button>
           </div>
           <ng-template #awaitingTransactionStatus>
             <div class="flexed flexed-column mgy-1" *ngIf="checkingStatus">
