@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiBaseUrl: 'http://178.32.191.159:3035/',
-  // socketUrl: 'http://178.32.191.159:3035/',
-  apiBaseUrl: 'https://api-v2.weaverbirdsupplies.co.ke/',
-  socketUrl: 'https://api-v2.weaverbirdsupplies.co.ke/',
+  apiBaseUrl: 'http://161.97.82.232:3037/',
+  socketUrl: 'http://161.97.82.232:3037/',
   recipients: ['+254727275739']
 };
 

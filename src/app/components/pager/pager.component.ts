@@ -9,19 +9,19 @@ export class PagerComponent implements OnInit {
 
   constructor() { }
 
-  current: 1
+  currentPage: 1
 
   ngOnInit(): void {
   }
 
   // Load the previous page items
   showPrevious() {
-
+    this.currentPage --
   }
 
   // load the next page Items
   showNext() {
-
+    this.currentPage ++
   }
 
 }
