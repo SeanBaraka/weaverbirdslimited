@@ -69,6 +69,7 @@ import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { AddSupplierComponent } from './components/add-supplier/add-supplier.component';
 import { ClearInvoiceComponent } from './components/clear-invoice/clear-invoice.component';
 import { RestockDialogComponent } from './components/restock-dialog/restock-dialog.component';
+import { PagerComponent } from './components/pager/pager.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import { RestockDialogComponent } from './components/restock-dialog/restock-dial
     SuppliersComponent,
     AddSupplierComponent,
     ClearInvoiceComponent,
-    RestockDialogComponent
+    RestockDialogComponent,
+    PagerComponent
   ],
   imports: [
     BrowserModule,
